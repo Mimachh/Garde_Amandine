@@ -85,24 +85,50 @@ public function store(Request  $request)
 {
    
 
-   $validated = $this->validate([
-        'nom' => 'required',
-        'personnalité' => 'nullable',
-        'espece' => 'required',
-        'race' => 'required',
-        'chiens' => 'nullable',
-        'chiennes' => 'nullable',
-        'chats' => 'nullable',
-        'chattes' => 'nullable',
-        'rongeurs' => 'nullable',
-        'rongeuses' => 'nullable',
-        'birds' => 'nullable',
-        'reptiles' => 'nullable',
-        'user_id' => 'required',
-        'photo' => 'image',
-        'age' => 'nullable',
+   $validated = $this->validate(
+    [
+        'nom' => 'required|max:60',
+        'personnalité' => 'required|max:255',
+        'espece' => 'required|integer',
+        'race' => 'required|integer',
+        'chiens' => 'nullable|integer',
+        'chiennes' => 'nullable|integer',
+        'chats' => 'nullable|integer',
+        'chattes' => 'nullable|integer',
+        'rongeurs' => 'nullable|integer',
+        'rongeuses' => 'nullable|integer',
+        'birds' => 'nullable|integer',
+        'reptiles' => 'nullable|integer',
+        'user_id' => 'required|integer',
+        'photo' => 'required|image|max:2048|mimes:jpg,jpeg,png',
+        'age' => 'required|integer',
       
-   ]);
+    ],
+    [
+        'nom.required' => 'Un nom est obligatoire !',
+        'nom.max' => 'Le nom est trop long ! Mettez un surnom plus court :)',
+        'personnalité.required' => 'La personnalité est obligatoire !',
+        'personnalité.max' => 'La personnalité est trop longue !',
+        'espece.required' => 'L\'espece est obligatoire !',
+        'espece.integer' => 'La valeur d\'espèce n\'est pas bonne !',
+        'race.required' => 'La race est obligatoire !',
+        'race.integer' => 'La valeur de la race n\'est pas bonne !',
+        'chiens.integer' => 'La valeur de chiens mâles n\'est pas bonne !',
+        'chienne.integer' => 'La valeur de chiens femelles n\'est pas bonne !',
+        'chats.integer' => 'La valeur de chats mâles n\'est pas bonne !',
+        'chattes.integer' => 'La valeur de chats femelles n\'est pas bonne !',
+        'rongeurs.integer' => 'La valeur de rongeurs mâles n\'est pas bonne !',
+        'rongeuses.integer' => 'La valeur de rongeurs femelles n\'est pas bonne !',
+        'birds.integer' => 'La valeur de oiseaux n\'est pas bonne !',
+        'reptiles.integer' => 'La valeur de reptiles n\'est pas bonne !',
+        'age.required' => 'L\'âge est obligatoire !',
+        'age.integer' => 'La valeur de l\'âge n\'est pas bonne !',
+        'photo.required' => 'Une photo est obligatoire !',
+        'photo.image' => 'Le format du fichier photo n\'est pas accepté',
+        'photo.max' => 'La photo est trop lourde !',
+        'photo.mimes' => 'Le type du fichier photo n\'est pas accepté !',
+    ]);
+
 
    $name_file = md5($this->photo . microtime()).'.'.$this->photo->extension();
    $this->photo->storeAs('animals_photos', $name_file);

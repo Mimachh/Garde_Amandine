@@ -11,7 +11,6 @@
 
 <main class="bg-gray-100">
 
-        <x-jet-validation-errors class="mb-4 text-center" />
         <div class="py-5">
             <h2 class="text-center font-bold">Créer la fiche de mon animal</h2>
             <p class="text-center mb-10 py-5">Ses informations permettront au Pet-Sitter d'en savoir plus sur votre animal. <br>
@@ -22,6 +21,25 @@
     <div class="mt-10 sm:mt-2">
         <div class="md:grid md:grid-cols-6 md:gap-4 ">
             <div class="mt-5  md:col-start-2 md:col-span-4 md:mt-0">
+
+                <!-- Messages d'erreur -->
+                <div class="text-center mb-5">
+                    @error('nom') <span class="italic block text-red-600 text-sm">{{ $message }}</span> @enderror
+                    @error('personnalité') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                    @error('espece') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                    @error('race') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                    @error('chiens') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                    @error('chiennes') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                    @error('chats') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                    @error('chattes') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                    @error('rongeurs') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                    @error('rongeuses') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                    @error('birds') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                    @error('reptiles') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                    @error('photo') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                    @error('age') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                </div>
+                <!-- Fin messages d'erreur -->
                 <form wire:submit.prevent="store">
                     <div class="overflow-hidden shadow sm:rounded-md mb-10 ">
                         <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
@@ -58,7 +76,6 @@
                             <!-- Barre de selection espèces et races -->
                             <div>
                                 <x-jet-label for="type" value="{{ __('Espèce de mon animal') }}" class="pb-3"/>
-                                <!--<p wire:loading></p>-->
                                 <div>
                                     <select class="block px-3 py-1.5 text-base font-normal text-gray-700 
                                                 bg-whiteborder border-solid border-gray-300 rounded transition ease-in-out m-0
@@ -182,7 +199,8 @@
                                     <button wire:click='goToPreviousPages' type="button" id="buttonback">Retour</button>
                                 @endif
                                 @if ($currentPage === count($pages))
-                                    <button type="submit" id="buttonsubmit">Valider</button>
+                                    <button type="submit" name="submit" id="buttonsubmit">Valider</button>
+                                    <div wire:loading wire:target="submit" class="text-sm text-gray-500 italic">Chargement...</div>
                                 @else
                                     <button wire:click="goToNextPages" type="button" id="buttonnext">Suivant</button>
                                 @endif
