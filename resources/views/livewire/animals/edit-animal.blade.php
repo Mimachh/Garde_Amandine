@@ -49,7 +49,6 @@
                             <div>
                                 <x-jet-label class="mb-1" for="name" value="{{ __('Nom de mon animal') }}" />
                                 <input name="name" type="text" class="block w-64 rounded" wire:model="nom"/>
-                                <x-jet-input-error for="name" class="mt-2" />
                             </div>
 
                             <!-- Photo de l'animal -->
@@ -76,7 +75,6 @@
                             <!-- Barre de selection espèces et races -->
                             <div>
                                 <x-jet-label for="type" value="{{ __('Espèce de mon animal') }}" class="pb-3"/>
-                                <!--<p wire:loading></p>-->
                                 <div>
                                     <select class="block px-3 py-1.5 text-base font-normal text-gray-700 
                                                 bg-whiteborder border-solid border-gray-300 rounded transition ease-in-out m-0
@@ -109,7 +107,6 @@
                             <div>
                                 <x-jet-label for="personnality" value="{{ __('Sa personnalité') }}" />
                                 <textarea name="personnality" type="text"  class="rounded mt-2 block w-full" wire:model="personnalité" placeholder="Décrivez en quelques mots votre animal pour informer le pet-sitter"></textarea>
-                                <x-jet-input-error for="personnality" class="mt-2"/>
                             </div>
 
                             @elseif($currentPage === 2)   

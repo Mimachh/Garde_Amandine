@@ -49,7 +49,6 @@
                             <div>
                                 <x-jet-label class="mb-1" for="name" value="{{ __('Nom de mon animal') }}" />
                                 <input name="name" type="text" class="block w-64 rounded" wire:model="nom"/>
-                                <x-jet-input-error for="name" class="mt-2" />
                             </div>
 
                             <!-- Photo de l'animal -->
@@ -107,7 +106,6 @@
                             <div>
                                 <x-jet-label for="personnality" value="{{ __('Sa personnalité') }}" />
                                 <textarea name="personnality" type="text"  class="rounded mt-2 block w-full" wire:model="personnalité" placeholder="Décrivez en quelques mots votre animal pour informer le pet-sitter"></textarea>
-                                <x-jet-input-error for="personnality" class="mt-2"/>
                             </div>
 
                             @elseif($currentPage === 2)   

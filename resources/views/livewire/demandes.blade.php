@@ -24,7 +24,7 @@
                                     <option value="{{ $g->id }}">{{ $g->garde }}</option>
                                 @endforeach
                             </select>
-                            @error('garde_id') <span class="error mt-2 text-red-600 text-sm">Le champ doit être renseigné</span> @enderror
+                            @error('garde_id') <span class="error mt-2 text-red-600 text-sm">{{$message}}</span> @enderror
                         </div>
                     
 
@@ -36,9 +36,13 @@
                             <label class="block text-sm font-medium text-gray-700" for="number_visit">
                                 Nombre de visite par jour (en cas de garde à votre domicile :
                             </label>
-                            <input wire:model="number_visit" type="number" id="number_visit" name="number_visit"
-                                min="0" max="10"
-                                class="mt-4 block w-32 rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">  
+                            <select wire:model="number_visit" name="number_visit" id="number_visit">
+                                <option value=""> -- </option>
+                                <option value="1"> 1 </option>
+                                <option value="2"> 2 </option>
+                                <option value="3"> 3 </option>
+                            </select>
+                            @error('number_visit') <span class="error mt-2 text-red-600 text-sm">{{$message}}</span> @enderror    
                         </div>
                     <!-- Fin garde -->
 
@@ -46,16 +50,15 @@
                         <div class="col-span-6 sm:col-span-6 lg:col-span-3">
                             <label for="start_watch" class="block text-sm font-medium text-gray-700">Du : </label>
                             <x-jet-input id="start_date" wire:model="start_date" name="start_date" type="date"/>
-                            @error('start_date') <span class="block error mt-2 text-red-600 text-sm">Une date de début doit être renseigné</span> @enderror 
+                            @error('start_date') <span class="block error mt-2 text-red-600 text-sm">{{$message}}</span> @enderror 
                         </div>
 
                         <div class="col-span-6 sm:col-span-3 lg:col-span-3">
                             <label for="sendwatch" class="block text-sm font-medium text-gray-700">Au : </label>
                             <x-jet-input id="end_date" wire:model="end_date" name="end_date" type="date"/> 
-                            @error('end_date') <span class="block error mt-2 text-red-600 text-sm">Une date de fin doit être renseigné</span> @enderror 
+                            @error('end_date') <span class="block error mt-2 text-red-600 text-sm">{{$message}}</span> @enderror 
                         </div>
                     <!-- Fin date -->
-
 
                 </div>
             </div>
@@ -95,7 +98,7 @@
                                                     <option value="{{ $animal->id }}">{{ $animal->animal_name }}</option>
                                                 @endforeach
                                             </select>
-                                            @error('first_animal_id') <span class="error mt-2 text-red-600 text-sm">Au moins un animal doit être renseigné</span> @enderror 
+                                            @error('first_animal_id') <span class="error mt-2 text-red-600 text-sm">{{$message}}</span> @enderror 
                                         </div>
                                         <div x-data="{ open: false }">
                                             <label for="second_animal_id" class="block text-sm font-medium text-gray-700">
@@ -107,6 +110,7 @@
                                                     <option value="{{ $animal->id }}">{{ $animal->animal_name }}</option>
                                                 @endforeach
                                             </select>
+                                            @error('second_animal_id') <span class="error mt-2 text-red-600 text-sm">{{$message}}</span> @enderror 
                                         </div>
                                         <div x-data="{ open: false }">
                                             <label for="third_animal_id" class="block text-sm font-medium text-gray-700">
@@ -118,12 +122,11 @@
                                                     <option value="{{ $animal->id }}">{{ $animal->animal_name }}</option>
                                                 @endforeach
                                             </select>
+                                            @error('third_animal_id') <span class="error mt-2 text-red-600 text-sm">{{$message}}</span> @enderror 
                                         </div>
                                     @endif
                                         <p class="mt-2 text-sm font-medium text-gray-700">Vous pouvez ajouter un animal en cliquant <a class="text-blue-600" href="{{ route('animals.create') }}">ici.</a></p> 
-                                    
                                     </div>
-
                             </div>
                         </div>
 
@@ -159,6 +162,7 @@
                         <div class="col-span-6 sm:col-span-4">
                             <label for="phone" class="block text-sm font-medium text-gray-700">Votre numéro de téléphone</label>
                             <input wire:model="phone" type="text" name="phone" id="phone" autocomplete="phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                            @error('phone') <span class="error mt-2 text-red-600 text-sm">{{$message}}</span> @enderror 
                         </div>
                     <!-- Fin telephone -->
                 </div>

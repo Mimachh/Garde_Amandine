@@ -120,7 +120,8 @@ class CreateAnnonce extends Component
   public function store()
   {   
     $this->validate(
-      [ 'description' => 'required|max:60',
+      [ 
+        'description' => 'required|max:60',
         'garde' => 'required|integer',
         'ville' => 'required|integer',
         'hab' => 'required|integer',
