@@ -133,7 +133,7 @@
 
             <script src="{{ asset('js/app_perso.js') }}" defer></script>
 
-            @vite(['resources/js/app.js', 'resources/js/app_perso.js'])
+            @vite(['resources/js/app.js', 'resources/js/perso.js'])
     <!-- FIN SCRIPTS -->
     </body>
 </html>
