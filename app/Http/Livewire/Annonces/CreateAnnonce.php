@@ -136,6 +136,7 @@ class CreateAnnonce extends Component
         'reptiles' => 'nullable|integer',
         'ferme' => 'nullable|integer',
         'autre' => 'nullable|integer',
+        'prix' => 'required|integer',
       ],
       [
         'description.max' => 'La description ne doit pas dépasser 60 caractères !',
@@ -155,13 +156,15 @@ class CreateAnnonce extends Component
         'start_watch.date' => 'La date de début doit être une date !',
         'end_watch.date' => 'La date de fin doit être une date !',
         'chats.integer' => 'La valeur du champs chats n\'est pas acceptée !',
-        'chiens' => 'La valeur du champs chats n\'est pas acceptée !',
-        'poissons' => 'La valeur du champs chiens n\'est pas acceptée !', 
-        'rongeurs' => 'La valeur du champs rongeurs n\'est pas acceptée !',
-        'oiseaux' => 'La valeur du champs oiseaux n\'est pas acceptée !',
-        'reptiles' => 'La valeur du champs reptiles n\'est pas acceptée !', 
-        'ferme' => 'La valeur du champs ferme n\'est pas acceptée !', 
-        'autre' => 'La valeur du champs autre n\'est pas acceptée !',
+        'chiens.integer' => 'La valeur du champs chats n\'est pas acceptée !',
+        'poissons.integer' => 'La valeur du champs chiens n\'est pas acceptée !', 
+        'rongeurs.integer' => 'La valeur du champs rongeurs n\'est pas acceptée !',
+        'oiseaux.integer' => 'La valeur du champs oiseaux n\'est pas acceptée !',
+        'reptiles.integer' => 'La valeur du champs reptiles n\'est pas acceptée !', 
+        'ferme.integer' => 'La valeur du champs ferme n\'est pas acceptée !', 
+        'autre.integer' => 'La valeur du champs autre n\'est pas acceptée !',
+        'prix.integer' => 'La valeur du champs prix n\'est pas acceptée !',
+        'prix.required' => 'Le prix est obligatoire !',
 
       ]
     );
@@ -170,12 +173,13 @@ class CreateAnnonce extends Component
     $user_id = auth()->user()->id;
     
     /* Image */
-    $prix = $this->prix * 100;
-    $name_file = md5($this->photo . microtime()).'.'.$this->photo->extension();
-    $this->photo->storeAs('annonces_photos', $name_file);
-    $img = Image::make(public_path("/storage/annonces_photos/{$name_file}"))->fit(1795, 1200);
-    $img->save();
+      $prix = $this->prix * 100;
+      $name_file = md5($this->photo . microtime()).'.'.$this->photo->extension();
+      $this->photo->storeAs('annonces_photos', $name_file);
+      $img = Image::make(public_path("/storage/annonces_photos/{$name_file}"))->fit(1795, 1200);
+      $img->save();
 
+    
     $annonces=Annonce::create([
          
         'garde_id' => $this->garde,

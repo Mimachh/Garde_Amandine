@@ -18,7 +18,7 @@
 
                     <!-- Messages d'erreur -->
                         <div class="text-center mb-5">
-                            @error('description') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                            @error('description') <span class="italic block text-red-600 text-sm">{{ $message }}</span> @enderror
                             @error('garde') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
                             @error('ville') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
                             @error('hab') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror

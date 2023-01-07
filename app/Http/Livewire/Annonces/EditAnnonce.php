@@ -89,33 +89,6 @@ class EditAnnonce extends Component
             /* Fin animaux */    
         }
 
-        protected function rules()
-
-        {
-    
-            return [
-    
-            'garde' =>'required',
-            'chats' => 'nullable',
-            'chiens' => 'nullable',
-            'poissons' => 'nullable',
-            'rongeurs' => 'nullable',
-            'oiseaux' => 'nullable',
-            'reptiles' => 'nullable',
-            'ferme' => 'nullable',
-            'autre' => 'nullable',
-            'description' => 'required',
-            'prix' => 'required',
-            'start_watch' => 'nullable',
-            'end_watch' => 'nullable',
-            'photo' => 'nullable|image',
-            'ville' => 'required',
-            'hab' => 'required',
-            'ext' => 'required',
-    
-            ];
-    
-        }
 
         /* Affichage des anciennes valeurs */
 
@@ -214,7 +187,54 @@ class EditAnnonce extends Component
             }
         /* Fin checkbox */   
 
-        $this->validate();
+        $this->validate(
+            [ 'description' => 'required|max:60',
+              'garde' => 'required|integer',
+              'ville' => 'required|integer',
+              'hab' => 'required|integer',
+              'ext' => 'required|integer',
+              'photo' => 'nullable|image|max:2048|mimes:jpg,jpeg,png',
+              'start_watch' => 'nullable|date',
+              'end_watch' => 'nullable|date',
+              'chats' => 'nullable|integer',
+              'chiens' => 'nullable|integer',
+              'poissons' => 'nullable|integer',
+              'rongeurs' => 'nullable|integer',
+              'oiseaux' => 'nullable|integer',
+              'reptiles' => 'nullable|integer',
+              'ferme' => 'nullable|integer',
+              'autre' => 'nullable|integer',
+              'prix' => 'required|integer',
+            ],
+            [
+              'description.max' => 'La description ne doit pas dépasser 60 caractères !',
+              'description.required' => 'La description est obligatoire !',
+              'garde.required' => 'Un type de garde est obligatoire !',
+              'garde.integer' => 'La valeur renseignée n\'est pas bonne !',
+              'ville.required' => 'Une ville est obligatoire !',
+              'ville.integer' => 'La valeur renseignée n\'est pas bonne !',
+              'hab.required' => 'Un type d\'habitation est obligatoire !',
+              'hab.integer' => 'La valeur renseignée n\'est pas bonne !',
+              'ext.required' => 'Un extérieur est obligatoire !',
+              'ext.integer' => 'La valeur renseignée n\'est pas bonne !',
+              'photo.image' => 'Le format du fichier photo n\'est pas accepté',
+              'photo.max' => 'La photo est trop lourde !',
+              'photo.mimes' => 'Le type du fichier photo n\'est pas accepté !',
+              'start_watch.date' => 'La date de début doit être une date !',
+              'end_watch.date' => 'La date de fin doit être une date !',
+              'chats.integer' => 'La valeur du champs chats n\'est pas acceptée !',
+              'chiens.integer' => 'La valeur du champs chats n\'est pas acceptée !',
+              'poissons.integer' => 'La valeur du champs chiens n\'est pas acceptée !', 
+              'rongeurs.integer' => 'La valeur du champs rongeurs n\'est pas acceptée !',
+              'oiseaux.integer' => 'La valeur du champs oiseaux n\'est pas acceptée !',
+              'reptiles.integer' => 'La valeur du champs reptiles n\'est pas acceptée !', 
+              'ferme.integer' => 'La valeur du champs ferme n\'est pas acceptée !', 
+              'autre.integer' => 'La valeur du champs autre n\'est pas acceptée !',
+              'prix.integer' => 'La valeur du champs prix n\'est pas acceptée !',
+              'prix.required' => 'Le prix est obligatoire !',
+      
+            ]
+          );
 
         $update = Annonce::find($ids)->update([
             'garde_id' => $this->garde,

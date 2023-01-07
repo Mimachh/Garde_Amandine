@@ -10,7 +10,7 @@
         @livewire('previous-page')
     </x-slot>
 
-    <div class="mr-12 ml-8 mb-4 grid grid-cols-1 gap-4 lg:grid-cols-3 sm:grid-cols-2">
+    <div class="mt-4 mr-12 ml-8 mb-4 grid grid-cols-1 gap-4 lg:grid-cols-3 sm:grid-cols-2">
         @forelse($annonces as $annonce)
             <div class="w-full px-4 max-h-62 lg:px-0">
                 <div class="p-3 bg-white rounded shadow-md hover:shadow-2xl">

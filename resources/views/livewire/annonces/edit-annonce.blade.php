@@ -1,6 +1,6 @@
 <x-slot name="header">
-    <h1 class="font-semibold text-xl text-gray-200 leading-tight">
-        {{ __('Créer mon annonce de pet-sitter') }}
+    <h1 class="font-semibold text-center text-xl text-gray-200 leading-tight">
+        {{ __('Modifier mon annonce') }}
     </h1>
 </x-slot>
 
@@ -8,9 +8,9 @@
 <main class="bg-indigo-50 pt-5 rounded-3xl ">
     
 
-        <x-jet-validation-errors class="mb-4 text-center" />
+        
 
-        <h2 class="text-center mb-10 py-5 font-semibold">Créer mon annonce de pet-sitter</h2>
+        <h2 class="text-center mb-10 py-5 font-semibold">Modifer mon annonce</h2>
 
 
         <!-- Début du formulaire  -->
@@ -21,8 +21,22 @@
             <div class="md:grid md:grid-cols-6 md:gap-4 ">
         
                 <div class="mt-5  md:col-start-2 md:col-span-4 md:mt-0">
+
+                    <!-- Messages d'erreur -->
+                    <div class="text-center mb-5">
+                            @error('description') <span class="italic block text-red-600 text-sm">{{ $message }}</span> @enderror
+                            @error('garde') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                            @error('ville') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                            @error('hab') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                            @error('ext') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                            @error('photo') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+                            @error('prix') <span class="italic block mt-2 text-red-600 text-sm">{{ $message }}</span> @enderror
+
+                        </div>
+                    <!-- Fin messages d'erreur -->
+
                     <form wire:submit.prevent="update">
-                    <input type="hidden" wire:model="ids">
+                        <input type="hidden" wire:model="ids">
                         <div class="overflow-hidden shadow sm:rounded-md mb-10 ">
                             <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
                             
