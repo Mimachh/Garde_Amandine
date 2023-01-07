@@ -10,6 +10,7 @@ use Livewire\Component;
 use Illuminate\Http\Request;
 use Livewire\WithFileUploads;
 use App\View\Components\Flash;
+use Intervention\Image\Facades\Image;
 
 
 class CreateAnimal extends Component
@@ -129,9 +130,11 @@ public function store(Request  $request)
         'photo.mimes' => 'Le type du fichier photo n\'est pas accepté !',
     ]);
 
-
-   $name_file = md5($this->photo . microtime()).'.'.$this->photo->extension();
-   $this->photo->storeAs('animals_photos', $name_file);
+    /* Image */
+        $name_file = md5($this->photo . microtime()).'.'.$this->photo->extension();
+        $this->photo->storeAs('animals_photos', $name_file);
+        $img = Image::make(public_path("/storage/animals_photos/{$name_file}"))->fit(1795, 1200);
+        $img->save();
   
 
    $animals = Animal::create([
