@@ -1,52 +1,14 @@
-<x-app-layout>
+<div>
+<input type="search" wire:model="search">
+<input type="checkbox" wire:model="chats">
+<input type="checkbox" wire:model="reptiles"> reptiles
 
-    <x-slot name="header">
-        <h1 class="font-semibold text-xl text-gray-200 leading-tight text-center">
-            {{ __('Les annonces en ligne') }}
-        </h1>
-    </x-slot>
+<select name="" id="" wire:model="location">
 
-    <x-slot name="buttonBack">
-        @livewire('previous-page')
-    </x-slot>
-    <!-- Sort By -->
-    <div class="flex justify-end mr-8">
-        <div class="relative">
-            <input type="checkbox" id="sortbox" class="hidden absolute">
-            <label for="sortbox" class="flex items-center space-x-1 cursor-pointer">
-                <span class="text-lg">Trier par</span>
-                <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
-            </label>
-            <div id="sortboxmenu" class="absolute mt-1 right-1 top-full min-w-max shadow rounded opacity-0 bg-gray-300 border border-gray-400 transition delay-75 ease-in-out z-10">
-                <ul class="space-y-1 px-2 block text-right">
-                    <li>
-                        <a class="text-blue-500" href="?sortBy=price&direction={{ request('direction') === 'desc' ? 'asc' : 'asc'}}&page={{$annonces->currentPage() }}">
-                        Prix Croissant
-                        </a>
-                    </li>
-                    <li>
-                        <a class="text-blue-500" href="?sortBy=price&direction={{ request('direction') === 'asc' ? 'desc' : 'desc'}}&page={{$annonces->currentPage() }}">
-                        Prix Décroissant
-                        </a>
-                    </li>
-                    <li>
-                        <a class="text-blue-500" href="?sortBy=likes&direction={{ request('direction') === 'desc' ? 'asc' : 'asc'}}&page={{$annonces->currentPage() }}">
-                        Le - de Likes
-                        </a>
-                    </li>
-                    <li>
-                        <a class="text-blue-500" href="?sortBy=likes&direction={{ request('direction') === 'asc' ? 'desc' : 'desc'}}&page={{$annonces->currentPage() }}">
-                        Le + de Likes
-                        </a>
-                    </li>   
-                </ul>
-            </div>
-        </div>       
-    </div>
-@livewire('search-annonces')
-    <div class="mt-4 mr-12 ml-8 mb-4 grid grid-cols-1 gap-4 lg:grid-cols-3 sm:grid-cols-2">
+    @foreach($locations as $location)
+    <option value="{{ $location->id }}">{{ $location->ville_nom }}</option>
+    @endforeach
+</select>
 @forelse($annonces as $annonce)
     <div class="w-full px-4 max-h-62 lg:px-0">
         <div class="p-3 bg-white rounded shadow-md hover:shadow-2xl">
@@ -152,4 +114,4 @@
 {{$annonces->links()}}
 </div>
 
-</x-app-layout>
+</div>

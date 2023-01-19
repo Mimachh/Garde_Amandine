@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\View\Components\Flash;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use App\View\Components\DashboardLayout;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,5 +33,7 @@ class AppServiceProvider extends ServiceProvider
   
             return $view->with('messages', $messages);
         });
+
+        Blade::component('dasboard-layout', DashboardLayout::class);
     }
 }

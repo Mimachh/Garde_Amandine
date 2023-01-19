@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
-use function PHPUnit\Framework\callback;
 
+use function PHPUnit\Framework\callback;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -27,8 +28,21 @@ class Annonce extends Model
             callback: static function ($query, $sortBy) use($direction): void {
                 match($sortBy){
                     'price' => $query->orderBy('price', $direction),
+                    'likes' => $query->orderByLikes($direction),
                 };
             }
+        );
+    }
+
+    public function scopeOrderByLikes(
+        Builder $query,
+        ?string $direction,
+    ): void {
+        $query->orderBy(
+            column: DB::raw(
+                value:"(fav_count)"
+            ),
+        direction: $direction,
         );
     }
 
@@ -105,6 +119,11 @@ public function start_date_fr()
     public function fav()
     {
         return $this->belongsToMany('App\Models\User');
+    }
+
+    public function fav_count()
+    {
+        return $this->fav->count();
     }
     
     public function fav_added()

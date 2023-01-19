@@ -2,29 +2,30 @@
 
 namespace App\Http\Livewire\Annonces;
 
+use App\Models\Ville;
 use App\Models\Animal;
 use App\Models\Espece;
 use App\Models\Annonce;
-use Illuminate\Contracts\Container\Container;
 use Livewire\Component;
-use Livewire\WithPagination;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Livewire\WithPagination;
 use Illuminate\Routing\Route;
+use Illuminate\Contracts\Container\Container;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Annonces extends Component
 {
     use AuthorizesRequests;
     use WithPagination;
+    public $chats;
 
-  
     public function index(Request $request)
     {
         $annonces = Annonce::query()
         ->where('status', 1)->filters(
             sortBy: $request->sortBy,
             direction: $request->direction,
-        )->latest()->paginate(6);
+        )->withCount(relations: 'fav')->latest()->paginate(6);
       
         
         return view('annonces.index', ['annonces' => $annonces]);
