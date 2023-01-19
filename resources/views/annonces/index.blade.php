@@ -48,7 +48,7 @@
 @livewire('search-annonces')
     <div class="mt-4 mr-12 ml-8 mb-4 grid grid-cols-1 gap-4 lg:grid-cols-3 sm:grid-cols-2">
 @forelse($annonces as $annonce)
-    <div class="w-full px-4 max-h-62 lg:px-0">
+    <div class="w-full md:px-4 max-h-62 lg:px-0">
         <div class="p-3 bg-white rounded shadow-md hover:shadow-2xl">
             <div class="">
                 <div class="rounded aspect-w-1 aspect-h-1  overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
@@ -137,7 +137,7 @@
                             </p>   
                         </div>
                     </div>
-                    <button class="button-perso inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3">
+                    <button class="button-perso inline-block md:px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3">
                         <a class="py-2 px-20" href="{{ route('annonces.show', $annonce) }}">Voir l'annonce</a> 
                     </button>
                 </div>

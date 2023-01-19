@@ -6,10 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
-
+        
         <!-- Styles -->
         @livewireStyles
         <style>
@@ -25,8 +22,6 @@
         <x-jet-banner />
 
         <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
-
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-perso shadow">
@@ -36,12 +31,6 @@
                 </header>
             @endif
 
-            <!-- Button Back --> 
-            @if(isset($buttonBack))    
-                <div class="mt-2">
-                    {{ $buttonBack}}
-                </div>
-            @endif
             <!-- Page Content -->
             <main>
                 <!-- Messages flash -->     
@@ -49,15 +38,11 @@
                     @include ('partials.messages')  
                 <!-- Fin Messages flash -->
                 {{ $slot }}
-                @yield('content')      
             </main>
-            @livewire('footer')
         </div>
         @stack('modals')
     <!-- SCRIPTS -->
-        @livewireScripts
-        <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
-        <script src="./TW-ELEMENTS-PATH/dist/js/index.min.js"></script>                
+        @livewireScripts               
         @auth
             @vite(['resources/js/confirmationModal.js', 'resources/js/app.js'])            
             <script>
@@ -66,9 +51,6 @@
                 }
             </script>
         @endauth
-        @guest
-            @vite(['resources/js/app.js', 'resources/js/perso.js'])
-        @endguest
     <!-- FIN SCRIPTS -->
     </body>
 </html>

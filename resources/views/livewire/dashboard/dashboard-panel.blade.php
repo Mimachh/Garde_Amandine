@@ -1,16 +1,16 @@
 
 <div class="min-h-screen">
 <!-- Sidebar -->
-<div class="rounded-r-3xl mt-2 fixed flex flex-col top-14 left-0 w-14 hover:w-64 md:w-64 bg-blue-900 dark:bg-gray-800 h-full text-white transition-all duration-300 border-none z-10 sidebar">
+<div class="rounded-r-3xl mt-2 fixed flex flex-col -top-2 left-0 w-14 hover:w-64 md:w-64 bg-blue-900 dark:bg-gray-800 h-full text-white transition-all duration-300 border-none z-10 sidebar">
         <div class="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
           <ul class="flex flex-col py-4 space-y-1">
             <li class="px-5 hidden md:block">
               <div class="flex flex-row items-center h-8">
-                <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Main</div>
+                <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Menu</div>
               </div>
             </li>
             <!-- Annonces -->
-            <li>
+            <li class="text-md">
               <button wire:click="goToPageAds" type="button" class=" w-full relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                 <span class="inline-flex justify-center items-center ml-2">
                   <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
@@ -40,7 +40,7 @@
                     <g>
                   </svg>                
                 </span>
-                <span class="ml-2 text-sm tracking-wide truncate">Mes annonces</span>
+                <span class="ml-2 tracking-wide truncate">Mes annonces</span>
                 <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">{{ auth()->user()->ads->count() }}</span>
               </button>
             </li>
@@ -52,7 +52,7 @@
                 <span class="inline-flex justify-center items-center ml-2">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-6" width="150px" height="150px" viewBox="0 0 150 150" id="ART"><defs><style>.cls-1{fill:#915a31;}.cls-1,.cls-2,.cls-4,.cls-5,.cls-6{stroke:#000;stroke-miterlimit:10;}.cls-1,.cls-2{stroke-width:4px;}.cls-2{fill:#a06538;}.cls-3{fill:#d6d6d6;}.cls-4{fill:#333;}.cls-4,.cls-5,.cls-6{stroke-width:2px;}.cls-5{fill:none;}.cls-6{fill:#fff;}</style></defs><title/><path class="cls-1" d="M143.41,87.3c2.12,2.75,3.38,14.05-4.72,14.05-6.54,0-22.6-6.84-22.6-20.37s-18-51.44-18-51.44c22.45,0,43.66.88,43.66,28.83C141.76,58.37,141.29,84.55,143.41,87.3Z"/><path class="cls-1" d="M6.59,87.3c-2.12,2.75-3.38,14.05,4.72,14.05,6.54,0,22.6-6.84,22.6-20.37s18-51.44,18-51.44c-22.45,0-43.66.88-43.66,28.83C8.24,58.37,8.71,84.55,6.59,87.3Z"/><path class="cls-2" d="M119.27,73.22c0,47.32-16.91,61.52-44.27,61.52s-44.27-14.2-44.27-61.52,24.77-58,44.27-58S119.27,25.9,119.27,73.22Z" data-name="&lt;Path&gt;" id="_Path_"/><path class="cls-3" d="M104.69,121.79c-6.7,7.46-16.2,11-29.69,11s-23-3.49-29.69-11c2.94-12.49,8-26.67,14.06-35.75C67,74.6,69.49,38.94,67.62,17.82a48.91,48.91,0,0,1,14.76,0C80.51,38.94,83,74.6,90.63,86,96.69,95.12,101.75,109.3,104.69,121.79Z"/><path class="cls-4" d="M75.77,119.33c-3.18,0-15.65-16.29-14.62-18.84s5.21-5,14.62-5,13.59,2.42,14.64,5S79,119.33,75.77,119.33Z"/><path class="cls-5" d="M82.41,122.37c-.47,4.17-4.25,6-7.14,6s-6.67-1.84-7.13-6"/><circle class="cls-6" cx="53.02" cy="75" r="10.57"/><circle class="cls-6" cx="96.98" cy="75" r="10.57"/><circle cx="55.34" cy="75" r="5.92"/><circle cx="94.66" cy="75" r="5.92"/></svg>
                 </span>
-                <span class="ml-2 text-sm tracking-wide truncate">Mes animaux</span>
+                <span class="ml-2 tracking-wide truncate">Mes animaux</span>
                 <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">{{ auth()->user()->animals->count() }}</span>
               </button>
             </li>
@@ -60,7 +60,7 @@
 
             <!-- Partie Propriétaire -->
             <li>
-              <div x-data="{ open: false }">
+              <div @click.away="open= false" x-data="{ open: false }">
                 <button x-on:click="open = ! open" type="button" class=" w-full relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                   <span class="inline-flex justify-center items-center ml-2">
                     <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
@@ -81,9 +81,9 @@
                       </g>
                     </svg>                  
                   </span>
-                  <span class="ml-2 text-sm tracking-wide truncate">Mes demandes de garde</span>
+                  <span class="ml-2 tracking-wide truncate">Mes demandes de garde</span>
                 </button>
-                <div x-show="open" x-transition class="pl-16">
+                <div x-cloak x-show="open" x-transition class="pl-16">
                   <ul>
                     <li>
                       <button wire:click="goToPageGardeSent" type="button" class=" w-full relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
@@ -95,7 +95,7 @@
                             <path id="XMLID_52_" d="M492.431,32.443c-1.513-1.395-3.466-2.125-5.44-2.125c-1.19,0-2.377,0.264-3.5,0.816L7.905,264.422   c-4.861,2.389-7.937,7.353-7.904,12.783c0.033,5.423,3.161,10.353,8.057,12.689l125.342,59.724l250.62-205.99L164.455,364.414   l156.145,74.4c1.918,0.919,4.012,1.376,6.084,1.376c1.768,0,3.519-0.322,5.186-0.977c3.637-1.438,6.527-4.318,7.97-7.956   L494.436,41.257C495.66,38.188,494.862,34.679,492.431,32.443z"/>
                           </g>
                         </svg>  
-                        <span class="ml-2 text-sm tracking-wide truncate">Envoyées</span>
+                        <span class="ml-2 tracking-wide truncate">Envoyées</span>
                         <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">{{ auth()->user()->proposals->count() }}</span>
                       </button>
                     </li>
@@ -110,7 +110,7 @@
                             <path d="M148.5,138.019c5.519,0,9.992-4.474,9.992-9.992v-17.664c0-5.518-4.474-9.993-9.992-9.993s-9.992,4.475-9.992,9.993v17.664   C138.508,133.545,142.981,138.019,148.5,138.019z"/>
                           </g>
                         </svg>
-                        <span class="ml-2 text-sm tracking-wide truncate">En attente</span>
+                        <span class="ml-2 tracking-wide truncate">En attente</span>
                         <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">{{ auth()->user()->proposals->where('validated', 2)->count() }}</span>
                       </button>
                     </li>
@@ -134,7 +134,7 @@
                             <path d="M150,0C67.159,0,0.001,67.159,0.001,150c0,82.838,67.157,150.003,149.997,150.003S300.002,232.838,300.002,150    C300.002,67.159,232.839,0,150,0z M206.584,207.171c-5.989,5.984-15.691,5.984-21.675,0l-34.132-34.132l-35.686,35.686    c-5.986,5.984-15.689,5.984-21.672,0c-5.989-5.991-5.989-15.691,0-21.68l35.683-35.683L95.878,118.14    c-5.984-5.991-5.984-15.691,0-21.678c5.986-5.986,15.691-5.986,21.678,0l33.222,33.222l31.671-31.673    c5.986-5.984,15.694-5.986,21.675,0c5.989,5.991,5.989,15.697,0,21.678l-31.668,31.671l34.13,34.132    C212.57,191.475,212.573,201.183,206.584,207.171z"/>
                           </g>
                         </svg>
-                        <span class="ml-2 text-sm tracking-wide truncate">Refusées</span>
+                        <span class="ml-2 tracking-wide truncate">Refusées</span>
                         <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">{{ auth()->user()->proposals->where('validated', 0)->count() }}</span>
                       </button>
                     </li>
@@ -163,7 +163,7 @@
                               c0,2.9,1.1,5.7,3.2,7.7l22.9,22.9c4.3,4.3,11.2,4.3,15.5,0l47.3-47.3C443,379.8,444.1,377,444.1,374.1z"/>
                           </g>
                         </svg>
-                        <span class="ml-2 text-sm tracking-wide truncate">Réalisées</span>
+                        <span class="ml-2 tracking-wide truncate">Réalisées</span>
                       </button>
                     </li>
                   </ul>
@@ -174,7 +174,7 @@
 
             <!-- Partie Pet-Sitter -->
             <li>
-              <div x-data="{ open: false }">
+              <div @click.away="open= false"  x-data="{ open: false }">
                 <button x-on:click="open = ! open" type="button" class=" w-full relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                   <span class="inline-flex justify-center items-center ml-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-8"  viewBox="0 0 72 72" id="emoji" version="1.1">
@@ -203,9 +203,9 @@
                         <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M14,48l-1,2c0,0-2.2441,0.2998-3,1c-0.5801,0.5371-1,3-1,3s-2.8779,1.5928-3,2c-0.0937,0.3125,1.293,2,2,2c1,0,4-1,4-1c2,0,2,3,3,4 c0.4102,0.4102,0,3-0.334,3.959C13.9863,66.9131,17,68,17.834,65.834C18.1387,65.04,19,63,19,61"/>
                       </g>
                     </svg>                  </span>
-                  <span class="ml-2 text-sm tracking-wide truncate">Mon espace Pet-Sitter</span>
+                  <span class="ml-2 tracking-wide truncate">Mon espace Pet-Sitter</span>
                 </button>
-                <div x-show="open" x-transition class="pl-16">
+                <div x-cloak x-show="open" x-transition class="pl-16">
                   <ul>
                     <li>
                       <button wire:click="goToPageGardeReceivedWait" type="button" class="w-full relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
@@ -218,7 +218,7 @@
                             <path d="M148.5,138.019c5.519,0,9.992-4.474,9.992-9.992v-17.664c0-5.518-4.474-9.993-9.992-9.993s-9.992,4.475-9.992,9.993v17.664   C138.508,133.545,142.981,138.019,148.5,138.019z"/>
                           </g>
                         </svg>
-                        <span class="ml-2 text-sm tracking-wide truncate">En attente</span>
+                        <span class="ml-2 tracking-wide truncate">En attente</span>
                       </button>
                     </li>
                     <li>
@@ -229,7 +229,7 @@
                             <path d="M26.2,140.611c-6.4,11.7-11.8,23.9-15.9,36.6c-2.5,6.2-3.5,12.8-5.2,19.2c-1.8,6.3-2.4,13.3-3.4,20.1l-0.7,5.1l-0.3,2.5    l-0.1,2.3l-0.3,9.3l-0.2,4.6l-0.1,2.3v1.2v0.3v0.8v0.1v0.2v0.6l0.6,9.9l0.7,9.9c0.4,3.3,1,6.5,1.6,9.8l1.6,9.8    c0.5,3.3,1.6,6.4,2.4,9.6c4.3,23.3,12.6,46.3,25.4,66.9c12.7,20.6,29.2,39.1,48.5,54.2s41.4,26.9,65,34.5l18,4.8    c6.1,1.4,12.7,2.2,19.1,3.2l4.8,0.7l4.2,0.3l8.4,0.5l4.2,0.2l2.1,0.1l1.1,0.1h1.3h0.3h0.6l9.3-0.4c49.6-2.1,98.2-22.6,134.6-56.2    c18.3-16.7,33.6-36.6,45.2-58.5c5.9-11,10.6-22.2,14.6-34.3l2.8-9.3l1.4-4.7c0.4-1.5,0.6-2.8,0.9-4.2l1.8-8.2l0.9-4.1l0.2-1l0.4-2    l0.4-2.3c1.5-8.8-1.3-22.8-3.8-27c-2.4-4.1-4.7-3.4-6.7,0.1c-2.1,3.6-4.1,10-6.4,17.5c-8.2,24.6-19,49.9-35.4,72.6    c-16.3,22.7-37,43.4-61.6,58.5c-29.2,18.8-63.8,27.8-98.1,27.5h-0.8h-0.3l-1.5-0.1l-3.5-0.2l-7-0.5l-7-0.5    c-2.2-0.3-4.1-0.7-6.1-1.1c-4-0.8-8-1.4-12-2.2l-12.3-3.4c-16.1-5.3-31.9-11.9-45.9-21.6c-14-9.5-27.2-20.3-38-33.4    c-10.8-12.9-20.6-26.9-27.3-42.5c-6.8-15.6-12.2-31.8-14.4-48.6l-1.1-6.3c-0.3-2.1-0.3-4.2-0.5-6.3l-0.4-6.4l-0.2-3.2l-0.1-1.6    l-0.1-0.8v-0.4v-0.2v-0.1l0.4-13.3c0.1-2.3,0-4.9,0.3-6.9l0.8-6c0.8-4,1.1-7.8,2.3-11.9l3.4-12.1c1-4.1,3-7.9,4.3-11.8l2.3-5.9    c0.8-2,1.9-3.8,2.7-5.7c11.5-23.9,28.3-45.2,48.7-62c20.7-16.5,44.8-28.4,70.4-34.7c51.3-12.9,107.8-1.9,151.1,29.7    c15.6,11.1,28.3,23.1,37.2,28.6c-19.1,20.1-38.1,40.5-57.2,60.6c-30.1,22.5-57.8,48-84.8,74.5c-22-21.9-44.2-43.7-65.4-66.4    c-2.5-2.7-9-4.3-12-3.8c-6,0.9-5.6,7.1-3,14.2c8.8,23.5,25.1,46.4,44.2,67.2l25.2,27.7c5.5,6.1,14.9,6.5,20.9,1l1-1    c41.2-37.3,82.3-74.7,120-116l18.8-17.1c39.2-36.6,77.6-74.1,112.6-114.7c9.9-11.5,15.6-23.7,8.4-29.3c-6.6-5.1-18.5-1.9-30.2,8.4    c-21.1,18.5-42.4,37.1-62.2,57c-8.3,8.4-16.5,16.9-24.7,25.4c-0.7-2.2-1.7-4.5-3-7c-4.9-10-14.3-22.6-28.5-34.2    c-25.4-20.7-56.1-35.6-88.8-42.3l-12.2-1.8l-12.9-1.4l-11.6-0.6h-0.7h-0.4h-0.9l-1.6,0.1l-3.1,0.1l-6.3,0.2    c-4.2,0.3-8.4,0.1-12.5,0.8l-12.4,1.8l-6.2,0.9l-6.1,1.5l-12.1,3.1C96.5,57.411,51.9,93.811,26.2,140.611z"/>
                           </g>
                         </svg>
-                        <span class="ml-2 text-sm tracking-wide truncate">Validées</span>
+                        <span class="ml-2 tracking-wide truncate">Validées</span>
                       </button>
                     </li>
                     <li>
@@ -240,7 +240,7 @@
                             <path d="M150,0C67.159,0,0.001,67.159,0.001,150c0,82.838,67.157,150.003,149.997,150.003S300.002,232.838,300.002,150    C300.002,67.159,232.839,0,150,0z M206.584,207.171c-5.989,5.984-15.691,5.984-21.675,0l-34.132-34.132l-35.686,35.686    c-5.986,5.984-15.689,5.984-21.672,0c-5.989-5.991-5.989-15.691,0-21.68l35.683-35.683L95.878,118.14    c-5.984-5.991-5.984-15.691,0-21.678c5.986-5.986,15.691-5.986,21.678,0l33.222,33.222l31.671-31.673    c5.986-5.984,15.694-5.986,21.675,0c5.989,5.991,5.989,15.697,0,21.678l-31.668,31.671l34.13,34.132    C212.57,191.475,212.573,201.183,206.584,207.171z"/>
                           </g>
                         </svg>
-                        <span class="ml-2 text-sm tracking-wide truncate">Refusées</span>
+                        <span class="ml-2 tracking-wide truncate">Refusées</span>
                       </button>
                     </li>
                     <li>
@@ -268,7 +268,7 @@
                               c0,2.9,1.1,5.7,3.2,7.7l22.9,22.9c4.3,4.3,11.2,4.3,15.5,0l47.3-47.3C443,379.8,444.1,377,444.1,374.1z"/>
                           </g>
                         </svg>
-                        <span class="ml-2 text-sm tracking-wide truncate">Réalisées</span>
+                        <span class="ml-2 tracking-wide truncate">Réalisées</span>
                       </button>
                     </li>
                   </ul>
@@ -297,7 +297,7 @@
                     </g>
                   </svg>                
                 </span>
-                <span class="ml-2 text-sm tracking-wide truncate">Mes favoris</span>
+                <span class="ml-2 tracking-wide truncate">Mes favoris</span>
                 <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">{{ auth()->user()->fav->count() }}</span>
               </button>
             </li>
@@ -309,22 +309,22 @@
               </div>
             </li>
             <li>
-              <a href="#" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+              <a href="{{ route('profile.show') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                 <span class="inline-flex justify-center items-center ml-4">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                 </span>
-                <span class="ml-2 text-sm tracking-wide truncate">Profile</span>
+                <span class="ml-2 tracking-wide truncate">Mon profil</span>
               </a>
             </li>
             <li>
-              <a href="#" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+              <a href="{{ route('annonces.index') }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                 <span class="inline-flex justify-center items-center ml-4">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                   </svg>
                 </span>
-                <span class="ml-2 text-sm tracking-wide truncate">Settings</span>
+                <span class="ml-2 tracking-wide truncate">Quitter le tableau de bord</span>
               </a>
             </li>
           </ul>
@@ -333,16 +333,16 @@
 </div>
 <!-- ./Sidebar -->
 
-<div class="h-full mt-14 mb-10 ml-14 md:ml-64">
+<div class="h-full mt-14 pb-10 ml-14 md:ml-64">
     <div class='h-full bg-white overflow-hidden shadow-xl sm:rounded-lg'>
     
       @if($currentPage === 1)
         <div class="mt-2">
         <!-- Page de mes annonces -->
-          <div class="mx-5 flex space-x-4 justify-between">
-            <h2 class="inline text-gray-600 font-bold text-md"> Mes annonces ({{ auth()->user()->ads->count() }})</h2> 
-            <div class="inline">
-              <a href="{{ route('annonces.create') }}" class="text-sm mb-3 ml-5 text-blue-600">
+          <div class="mx-5 md:flex md:space-x-4 md:justify-between">
+            <h2 class="md:inline text-gray-600 font-bold text-md"> Mes annonces ({{ auth()->user()->ads->count() }})</h2> 
+            <div class="md:inline">
+              <a href="{{ route('annonces.create') }}" class="text-sm mb-3 md:ml-5 text-blue-600">
                   Ajouter une nouvelle annonce 
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2563EB" class="inline w-6 h-6">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
