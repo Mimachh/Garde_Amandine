@@ -17,6 +17,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                tommy: ['MADE TOMMY', 'sans-serif'],
             },
         },
     },

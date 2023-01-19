@@ -21,7 +21,7 @@
 
 
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-tommy antialiased">
         <x-jet-banner />
 
         <div class="min-h-screen bg-gray-100">
