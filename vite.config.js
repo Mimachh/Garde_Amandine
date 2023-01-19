@@ -6,9 +6,10 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
+                'resources/css/css_perso.css',
                 'resources/js/app.js',
                 'resources/js/perso.js',
-                'resources/css/css_perso.css'
+                'resources/js/confirmationModal.js',
             ],
             refresh: [
                 ...refreshPaths,

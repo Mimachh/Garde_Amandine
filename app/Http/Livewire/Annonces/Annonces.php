@@ -5,20 +5,26 @@ namespace App\Http\Livewire\Annonces;
 use App\Models\Animal;
 use App\Models\Espece;
 use App\Models\Annonce;
+use Illuminate\Contracts\Container\Container;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 
 class Annonces extends Component
 {
     use AuthorizesRequests;
     use WithPagination;
 
-   
-    public function index()
+  
+    public function index(Request $request)
     {
-        $annonces = Annonce::where('status', 1)->paginate(6);
+        $annonces = Annonce::query()
+        ->where('status', 1)->filters(
+            sortBy: $request->sortBy,
+            direction: $request->direction,
+        )->latest()->paginate(6);
       
         
         return view('annonces.index', ['annonces' => $annonces]);

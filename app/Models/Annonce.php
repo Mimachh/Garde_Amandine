@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use function PHPUnit\Framework\callback;
+
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Annonce extends Model
 {
@@ -12,6 +15,21 @@ class Annonce extends Model
     public function scopeOnline($query)
     {
         return $query->where('status', 1);
+    }
+
+    public function scopeFilters(
+        Builder $query,
+        ?string $sortBy,
+        ?string $direction,
+    ): void {
+        $query->when(
+            value: $sortBy,
+            callback: static function ($query, $sortBy) use($direction): void {
+                match($sortBy){
+                    'price' => $query->orderBy('price', $direction),
+                };
+            }
+        );
     }
 
 /* Fonctions pour le prix */

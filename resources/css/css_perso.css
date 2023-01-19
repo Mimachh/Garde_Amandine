@@ -1,3 +1,9 @@
+/* Sort main page ads*/
+#sortbox:checked ~ #sortboxmenu {
+  opacity: 1;
+}
+
+
 /* Boutons du formulaire */
 #buttonsubmit {
   

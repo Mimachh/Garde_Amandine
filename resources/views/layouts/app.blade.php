@@ -10,19 +10,15 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/css/css_perso.css'])
-       
-
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-        <!-- Pour les flash messages -->
+        <!-- Styles -->
+        @livewireStyles
         <style>
             [x-cloak] { display: none;}
         </style>
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/css/css_perso.css'])
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        <!-- Styles -->
-        @livewireStyles
 
     </head>
     <body class="font-sans antialiased">
@@ -46,94 +42,34 @@
                     {{ $buttonBack}}
                 </div>
             @endif
-
             <!-- Page Content -->
             <main>
-
-                <!-- Messages flash -->
-            
+                <!-- Messages flash -->     
                     @livewire('flash')
-                        @include ('partials.messages')  
-
+                    @include ('partials.messages')  
                 <!-- Fin Messages flash -->
 
                 {{ $slot }}
-
-                @yield('content')
-                
+                @yield('content')      
             </main>
-
             @livewire('footer')
         </div>
-
         @stack('modals')
-
     <!-- SCRIPTS -->
-
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
-        <script src="./TW-ELEMENTS-PATH/dist/js/index.min.js"></script>
-        <!-- Sweet Alert 2 Confirmation Delete Annonce -->
-            <script>
-                window.addEventListener('show-delete-confirmation', event => {
-                    Swal.fire({
-                        title: 'Supprimer cette annonce ?',
-                        text: "Cette action est irreversible !",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        cancelButtonText: 'Non',
-                        confirmButtonText: 'Confirmer !'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                Livewire.emit('deleteConfirmed')
-                            }
-                    })
-                });
-                
-            </script>
-        <!-- Fin Sweet Alert 2 Confirmation Delete Annonce -->
-        
-        <!-- Sweet Alert 2 Confirmation Delete Animal -->
-            <script>
-                window.addEventListener('show-delete-confirmation-animal', event => {
-                    Swal.fire({
-                        title: 'Supprimer cette fiche ?',
-                        text: "Cette action est irreversible !",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        cancelButtonText: 'Non',
-                        confirmButtonText: 'Confirmer !'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                Livewire.emit('deleteAnimalConfirmed')
-                            }
-                    })
-                });
-                
-            </script>
-        <!-- Fin Sweet Alert 2 Confirmation Delete Animal-->
-
-        
+        <script src="./TW-ELEMENTS-PATH/dist/js/index.min.js"></script>                
         @auth
-            <script src="{{ asset('js/app.js') }}" defer></script>
+            @vite(['resources/js/confirmationModal.js', 'resources/js/app.js'])            
             <script>
                 window.User = {
                     id: {{ optional(auth()->user())->id }}
                 }
             </script>
         @endauth
-
-        <!-- Script de secours pour les non connecté, import d'alpine -->
-            <script src="{{ asset('js/perso.js') }}" defer></script>
-        <!-- Fin script de secours pour les non connecté, import d'alpine -->
-
-            <script src="{{ asset('js/app_perso.js') }}" defer></script>
-
+        @guest
             @vite(['resources/js/app.js', 'resources/js/perso.js'])
+        @endguest
     <!-- FIN SCRIPTS -->
     </body>
 </html>
