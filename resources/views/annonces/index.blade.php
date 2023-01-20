@@ -9,6 +9,8 @@
     <x-slot name="buttonBack">
         @livewire('previous-page')
     </x-slot>
+    @livewire('recherche')
+
     <!-- Sort By -->
     <div class="flex justify-end mr-8">
         <div class="relative">

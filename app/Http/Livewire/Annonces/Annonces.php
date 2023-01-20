@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Annonces;
 
+use App\Models\Garde;
 use App\Models\Ville;
 use App\Models\Animal;
 use App\Models\Espece;
@@ -25,27 +26,49 @@ class Annonces extends Component
         ->where('status', 1)->filters(
             sortBy: $request->sortBy,
             direction: $request->direction,
-        )->withCount(relations: 'fav')->latest()->paginate(6);
-      
-        
+        )->withCount(relations: 'fav')->latest()->paginate(6);    
         return view('annonces.index', ['annonces' => $annonces]);
     }
 
     public $q;
     public function search()
     {
-        if(!empty(request()->input("q"))){
-            $q = request()->input("q");
-            $v=Ville::where('ville_nom', 'like', "%$q%")->pluck('id');
-        }
+        // if(!empty(request()->input("q"))){
+        //     $q = request()->input("q");
+        //     $v=Ville::where('ville_nom', 'like', "%$q%")->pluck('id');
+        // }
 
-        if(empty(request()->input("qq")) ){
-            $a= Annonce::where('ville_id', 'like', $v)->get();
-        }else{
-            $qq = 1;
-            $a= Annonce::where('ville_id', 'like', $v)->where('chats', $qq)->get();
-        }
-         
+        // if(empty(request()->input("qq")) ){
+        //     $a= Annonce::where('ville_id', 'like', $v)->get();
+        // }else{
+        //     $qq = 1;
+        //     $a= Annonce::where('ville_id', 'like', $v)->where('chats', $qq)->get();
+        // }
+        $ville = request()->input("ville");
+        $garde = request()->input("garde");
+        $chats = request()->input("chats");
+        $chiens = request()->input("chiens");
+        $poissons = request()->input("poissons");
+        $rongeurs = request()->input("rongeurs");
+
+
+        $v= Ville::where('ville_nom', 'like', "%$ville%")->pluck('id');
+        $g = Garde::where('name', 'like', "%$garde%")->pluck('id');
+
+        $a= Annonce::when($v, function ($s) use ($v) {
+            return $s->where('ville_id', 'like', $v);})
+            ->when($chats, function ($s) use ($chats) {
+            return $s->where('chats', $chats);})
+            ->when($chiens, function ($s) use ($chiens) {
+            return $s->where('chiens', $chiens);})
+            ->when($poissons, function ($s) use ($poissons) {
+            return $s->where('poissons', $poissons);})
+            ->when($rongeurs, function ($s) use ($rongeurs) {
+            return $s->where('rongeurs', $rongeurs);})
+            ->get();
+
+
+
         dd($a);
        
     }

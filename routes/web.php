@@ -18,7 +18,7 @@ use App\Http\Livewire\Admin\AdminUserController;
 use App\Http\Livewire\Admin\AdminAnimalController;
 use App\Http\Livewire\Admin\AdminProposalController;
 use App\Http\Livewire\Admin\AdminContactMessageController;
-
+use App\Http\Livewire\Recherche;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +64,7 @@ Route::middleware([
 
 /* Page principale des Annonces */
 Route::get('/', [Annonces::class, 'index'])->name('annonces.index');
-Route::get('/search', [Annonces::class, 'search'])->name('annonces.search');
+Route::get('/search', [Recherche::class, 'search'])->name('annonces.search');
 
 /* Route Admin */
 Route::middleware(['auth', 'role:Admin'])->group(function(){
