@@ -1,22 +1,23 @@
 <?php
 
-use App\Http\Livewire\Animals\Animals;
-use App\Http\Livewire\Annonces\Annonces;
-
 use App\Http\Livewire\Demandes;
 use App\Http\Livewire\GardePage;
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Livewire\AnimalOwnedForm;
+
+use App\Http\Livewire\Animals\Animals;
+
+use App\Http\Livewire\Annonces\Annonces;
+use App\Http\Controllers\API\UserController;
+
+
 use App\Http\Controllers\ProposalController;
-
-
-use App\Http\Livewire\Admin\AdminUserController;
 use App\Http\Livewire\Admin\AdminAdController;
+use App\Http\Livewire\Admin\AdminUserController;
+use App\Http\Livewire\Admin\AdminAnimalController;
 use App\Http\Livewire\Admin\AdminProposalController;
 use App\Http\Livewire\Admin\AdminContactMessageController;
-use App\Http\Livewire\Admin\AdminAnimalController;
 
 
 /*
@@ -63,6 +64,7 @@ Route::middleware([
 
 /* Page principale des Annonces */
 Route::get('/', [Annonces::class, 'index'])->name('annonces.index');
+Route::get('/search', [Annonces::class, 'search'])->name('annonces.search');
 
 /* Route Admin */
 Route::middleware(['auth', 'role:Admin'])->group(function(){
@@ -76,4 +78,3 @@ Route::middleware(['auth', 'role:Admin'])->group(function(){
     Route::get('/admin/users', [AdminUserController::class, 'index'])->name('admin.users.index');
     Route::get('/admin/animals', [AdminAnimalController::class, 'index'])->name('admin.animals.index');
 });
-

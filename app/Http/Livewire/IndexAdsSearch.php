@@ -15,8 +15,6 @@ class IndexAdsSearch extends Component
     public $reptiles;
     public $locations;
     public $location;
-    public $sortAd = "asc";
-    public $orderColumn = 'emp_name';
 
 
     public function mount()

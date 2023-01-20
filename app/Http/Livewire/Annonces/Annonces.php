@@ -31,6 +31,25 @@ class Annonces extends Component
         return view('annonces.index', ['annonces' => $annonces]);
     }
 
+    public $q;
+    public function search()
+    {
+        if(!empty(request()->input("q"))){
+            $q = request()->input("q");
+            $v=Ville::where('ville_nom', 'like', "%$q%")->pluck('id');
+        }
+
+        if(empty(request()->input("qq")) ){
+            $a= Annonce::where('ville_id', 'like', $v)->get();
+        }else{
+            $qq = 1;
+            $a= Annonce::where('ville_id', 'like', $v)->where('chats', $qq)->get();
+        }
+         
+        dd($a);
+       
+    }
+
     /**
      * Show the form for creating a new resource.
      *

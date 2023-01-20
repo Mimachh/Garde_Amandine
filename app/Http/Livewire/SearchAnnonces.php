@@ -40,9 +40,9 @@ class SearchAnnonces extends Component
         $words = '%' . $this->query . '%';
         if (strlen($this->query) > 1) {
         
-        $ville = Ville::select('id')->where('ville_nom', 'like', $words)->get();
+        $ville = Ville::select('id')->where('ville_nom', 'like', $words)->pluck('id');
         
-        $this->annonces = Annonce::where('name', 'like', $words)->get();
+        $this->annonces = Annonce::where('ville_id', 'like', $ville)->get();
         }
       
     }
