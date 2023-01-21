@@ -42,7 +42,6 @@ class Recherche extends Component
         $reptiles = request()->input("reptiles");
         $ferme = request()->input("ferme");
         $autre = request()->input("autre");
-
         $v= Ville::where('ville_nom', 'like', "%$ville%")->pluck('id');
         $g = Garde::where('id', 'like', "%$garde%")->pluck('id');
         $a= Annonce::when($v, function ($s) use ($v) {

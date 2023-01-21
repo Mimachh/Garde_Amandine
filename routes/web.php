@@ -66,6 +66,8 @@ Route::middleware([
 Route::get('/', [Annonces::class, 'index'])->name('annonces.index');
 Route::get('/search', [Recherche::class, 'search'])->name('annonces.search');
 
+Route::post('/apisearch', [Annonces::class, 'search'])->name('annonces.apisearch');
+
 /* Route Admin */
 Route::middleware(['auth', 'role:Admin'])->group(function(){
     

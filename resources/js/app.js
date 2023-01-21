@@ -7,3 +7,5 @@ Alpine.plugin(focus);
 
 Alpine.start();
 
+import './search.js';
+

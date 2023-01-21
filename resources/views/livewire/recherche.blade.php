@@ -6,7 +6,7 @@
 
       Off-canvas filters for mobile, show/hide based on off-canvas filters state.
     -->
-    <div x-cloak x-data="{ open: false }" class="relative z-40" role="dialog" aria-modal="true">
+    <div x-cloak x-data="{ open: false }" class="relative z-40 md:hidden" role="dialog" aria-modal="true">
       <!--
         Off-canvas menu backdrop, show/hide based on off-canvas menu state.
 
@@ -43,103 +43,49 @@
           </div>
 
           <!-- Filters -->
-          <form class="mt-4 border-t border-gray-200">
-            <h3 class="sr-only">Categories</h3>
-            <ul role="list" class="px-2 py-3 font-medium text-gray-900">
-              <li>
-                <a href="#" class="block px-2 py-3">Totes</a>
-              </li>
-
-              <li>
-                <a href="#" class="block px-2 py-3">Backpacks</a>
-              </li>
-
-              <li>
-                <a href="#" class="block px-2 py-3">Travel Bags</a>
-              </li>
-
-              <li>
-                <a href="#" class="block px-2 py-3">Hip Bags</a>
-              </li>
-
-              <li>
-                <a href="#" class="block px-2 py-3">Laptop Sleeves</a>
-              </li>
-            </ul>
-
-            <div class="border-t border-gray-200 px-4 py-6">
-              <h3 class="-mx-2 -my-3 flow-root">
-                <!-- Expand/collapse section button -->
-                <button type="button" class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500" aria-controls="filter-section-mobile-0" aria-expanded="false">
-                  <span class="font-medium text-gray-900">Color</span>
-                  <span class="ml-6 flex items-center">
-                    <!--
-                      Expand icon, show/hide based on section open state.
-
-                      Heroicon name: mini/plus
-                    -->
-                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
-                    </svg>
-                    <!--
-                      Collapse icon, show/hide based on section open state.
-
-                      Heroicon name: mini/minus
-                    -->
-                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z" clip-rule="evenodd" />
-                    </svg>
-                  </span>
-                </button>
-              </h3>
-              <!-- Filter section, show/hide based on section state. -->
-              <div class="pt-6" id="filter-section-mobile-0">
-                <div class="space-y-6">
-                  <div class="flex items-center">
-                    <input id="filter-mobile-color-0" name="color[]" value="white" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-0" class="ml-3 min-w-0 flex-1 text-gray-500">White</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-color-1" name="color[]" value="beige" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-1" class="ml-3 min-w-0 flex-1 text-gray-500">Beige</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-color-2" name="color[]" value="blue" type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-2" class="ml-3 min-w-0 flex-1 text-gray-500">Blue</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-color-3" name="color[]" value="brown" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-3" class="ml-3 min-w-0 flex-1 text-gray-500">Brown</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-color-4" name="color[]" value="green" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-4" class="ml-3 min-w-0 flex-1 text-gray-500">Green</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-color-5" name="color[]" value="purple" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-5" class="ml-3 min-w-0 flex-1 text-gray-500">Purple</label>
-                  </div>
-                </div>
+          <form action="{{ route('annonces.search') }}" class="mt-4 border-t border-gray-200">
+            <!-- Ville Mobile -->
+            <div class="px-4 py-6">
+              <h3 class="my-4 flow-root font-medium text-gray-900">Ville de recherche</h3>
+              <div class="">
+                  <input class="w-full border-none bg-gray-200 rounded-xl" placeholder="Ville de recherche" name="ville" type="search" id="ville">
               </div>
             </div>
-
+            <!-- Type Garde Mobile -->
             <div class="border-t border-gray-200 px-4 py-6">
               <h3 class="-mx-2 -my-3 flow-root">
                 <!-- Expand/collapse section button -->
                 <button type="button" class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500" aria-controls="filter-section-mobile-1" aria-expanded="false">
-                  <span class="font-medium text-gray-900">Category</span>
+                  <span class="font-medium text-gray-900">Type de garde</span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div class="pt-6" id="filter-section-mobile-1">
+                <div class="space-y-4">
+                  <div>
+                    <select class="border-none bg-gray-200 rounded-xl w-full" name="garde" id="garde">
+                        <option value="">Choisir un type de garde</option>
+                        @foreach($gardes as $garde)
+                        <option value="{{$garde->id }}">{{ $garde->garde }}</option>
+                        @endforeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+             <!-- Animaux Mobile  -->
+            <div x-data="{ open: false }"  class="border-t border-gray-200 px-4 py-6">
+              <h3 class="-mx-2 -my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button x-on:click="open = ! open" type="button" class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500" aria-controls="filter-section-mobile-2" aria-expanded="false">
+                  <span class="font-medium text-gray-900">Animaux à garder</span>
                   <span class="ml-6 flex items-center">
                     <!--
                       Expand icon, show/hide based on section open state.
 
                       Heroicon name: mini/plus
                     -->
-                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <svg x-show="!open" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                       <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
                     </svg>
                     <!--
@@ -147,100 +93,70 @@
 
                       Heroicon name: mini/minus
                     -->
-                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <svg x-show="open" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                       <path fill-rule="evenodd" d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z" clip-rule="evenodd" />
                     </svg>
                   </span>
                 </button>
               </h3>
               <!-- Filter section, show/hide based on section state. -->
-              <div class="pt-6" id="filter-section-mobile-1">
-                <div class="space-y-6">
+              <div x-cloak x-show="open" x-transition class="pt-6" id="filter-section-mobile-2">
+                <div class="space-y-4">
                   <div class="flex items-center">
-                    <input id="filter-mobile-category-0" name="category[]" value="new-arrivals" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-category-0" class="ml-3 min-w-0 flex-1 text-gray-500">New Arrivals</label>
+                    <input id="chats" name="chats" value="1" id="chats" type="checkbox" 
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="chats" class="ml-3 text-sm text-gray-600">Chat</label>
                   </div>
 
                   <div class="flex items-center">
-                    <input id="filter-mobile-category-1" name="category[]" value="sale" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-category-1" class="ml-3 min-w-0 flex-1 text-gray-500">Sale</label>
+                    <input name="chiens" value="2" id="chiens" type="checkbox" 
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="chiens" class="ml-3 text-sm text-gray-600">Chien</label>
                   </div>
 
                   <div class="flex items-center">
-                    <input id="filter-mobile-category-2" name="category[]" value="travel" type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-category-2" class="ml-3 min-w-0 flex-1 text-gray-500">Travel</label>
+                    <input name="poissons" value="3" id="poissons" type="checkbox"
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="poissons" class="ml-3 text-sm text-gray-600">Poisson</label>
                   </div>
 
                   <div class="flex items-center">
-                    <input id="filter-mobile-category-3" name="category[]" value="organization" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-category-3" class="ml-3 min-w-0 flex-1 text-gray-500">Organization</label>
+                    <input name="rongeurs" value="4" id="rongeurs" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="rongeurs" class="ml-3 text-sm text-gray-600">Rongeur</label>
                   </div>
 
                   <div class="flex items-center">
-                    <input id="filter-mobile-category-4" name="category[]" value="accessories" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-category-4" class="ml-3 min-w-0 flex-1 text-gray-500">Accessories</label>
+                    <input name="oiseaux" value="5" id="oiseaux" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="oiseaux" class="ml-3 text-sm text-gray-600">Oiseau</label>
+                  </div>
+
+                  <div class="flex items-center">
+                    <input name="reptiles" value="6" id="reptiles" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="reptiles" class="ml-3 text-sm text-gray-600">Reptile</label>
+                  </div>
+
+                  <div class="flex items-center">
+                    <input name="ferme" value="7" id="ferme" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="ferme" class="ml-3 text-sm text-gray-600">Animaux de la ferme</label>
+                  </div>
+
+                  <div class="flex items-center">
+                    <input name="autre" value="8" id="autre" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="autre" class="ml-3 text-sm text-gray-600">Autre</label>
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="border-t border-gray-200 px-4 py-6">
-              <h3 class="-mx-2 -my-3 flow-root">
-                <!-- Expand/collapse section button -->
-                <button type="button" class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500" aria-controls="filter-section-mobile-2" aria-expanded="false">
-                  <span class="font-medium text-gray-900">Size</span>
-                  <span class="ml-6 flex items-center">
-                    <!--
-                      Expand icon, show/hide based on section open state.
-
-                      Heroicon name: mini/plus
-                    -->
-                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
-                    </svg>
-                    <!--
-                      Collapse icon, show/hide based on section open state.
-
-                      Heroicon name: mini/minus
-                    -->
-                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z" clip-rule="evenodd" />
-                    </svg>
-                  </span>
-                </button>
-              </h3>
-              <!-- Filter section, show/hide based on section state. -->
-              <div class="pt-6" id="filter-section-mobile-2">
+              <!-- Button Mobile -->
+              <div class="pt-6" id="filter-section-mobile-0">
                 <div class="space-y-6">
-                  <div class="flex items-center">
-                    <input id="filter-mobile-size-0" name="size[]" value="2l" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-size-0" class="ml-3 min-w-0 flex-1 text-gray-500">2L</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-size-1" name="size[]" value="6l" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-size-1" class="ml-3 min-w-0 flex-1 text-gray-500">6L</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-size-2" name="size[]" value="12l" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-size-2" class="ml-3 min-w-0 flex-1 text-gray-500">12L</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-size-3" name="size[]" value="18l" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-size-3" class="ml-3 min-w-0 flex-1 text-gray-500">18L</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-size-4" name="size[]" value="20l" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-size-4" class="ml-3 min-w-0 flex-1 text-gray-500">20L</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-size-5" name="size[]" value="40l" type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-size-5" class="ml-3 min-w-0 flex-1 text-gray-500">40L</label>
-                  </div>
+                  <button type="submit" class="button-perso inline-block md:px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md
+                          hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 
+                          active:shadow-lg transition duration-150 ease-in-out w-64 mb-3">
+                      <a class="py-2 px-4">Lancer la recherche</a> 
+                  </button>
                 </div>
               </div>
             </div>
@@ -358,14 +274,14 @@
               <!-- Filter section, show/hide based on section state. -->
               <div class="pt-6" id="filter-section-1">
                 <div class="space-y-4">
-                <div>
-                        <select class="border-none bg-gray-200 rounded-xl w-full" name="garde" id="garde">
-                            <option value="">Choisir un type de garde</option>
-                            @foreach($gardes as $garde)
-                            <option value="{{$garde->id }}">{{ $garde->garde }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                  <div>
+                    <select class="border-none bg-gray-200 rounded-xl w-full" name="garde" id="garde">
+                        <option value="">Choisir un type de garde</option>
+                        @foreach($gardes as $garde)
+                        <option value="{{$garde->id }}">{{ $garde->garde }}</option>
+                        @endforeach
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -450,7 +366,7 @@
                 <button type="submit" class="button-perso inline-block md:px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md
                         hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 
                         active:shadow-lg transition duration-150 ease-in-out w-64 mb-3">
-                    <a class="py-2 px-4 bg-blue-500">Lancer la recherche</a> 
+                    <a class="py-2 px-4">Lancer la recherche</a> 
                 </button>
               </div>
             </div>

@@ -58,7 +58,7 @@
     <!-- SCRIPTS -->
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
-        <script src="./TW-ELEMENTS-PATH/dist/js/index.min.js"></script>                
+        <!-- <script src="./TW-ELEMENTS-PATH/dist/js/index.min.js"></script>                 -->
         @auth
             @vite(['resources/js/confirmationModal.js', 'resources/js/app.js'])            
             <script>
