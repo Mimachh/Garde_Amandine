@@ -1,68 +1,3 @@
-<div class="bg-green-400 inline-block">
-    <form action="{{ route('annonces.search') }}">
-        <div class="flex items-center">
-            <div>
-                <div class="flex space-x-4">
-                    <div>
-                        <input class="rounded-full" placeholder="Ville de recherche" name="ville" type="search" id="ville">
-                    </div>
-                    <div>
-                        <select class="rounded-full" name="garde" id="garde">
-                            <option value="">Choisir un type de garde</option>
-                            @foreach($gardes as $garde)
-                            <option value="{{$garde->id }}">{{ $garde->garde }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="flex space-x-4">
-                    <div>
-                        <input class="rounded-full" type="checkbox" name="chats" value="1" id="chats">
-                        <label for="chats">Chat</label>
-                    </div>
-                    <div>
-                        <input class="rounded-full" type="checkbox" name="chiens" value="2" id="chiens">
-                        <label for="chiens">Chien</label>
-                    </div>
-                    <div>
-                        <input class="rounded-full" type="checkbox" name="poissons" value="3" id="poissons">
-                        <label for="chiens">Poisson</label>
-                    </div>
-                    <div>
-                        <input class="rounded-full" type="checkbox" name="rongeurs" value="4" id="rongeurs">
-                        <label for="chiens">Rongeur</label>
-                    </div>
-                </div>
-                <div class="flex space-x-4">
-                    <div>
-                        <input class="rounded-full" type="checkbox" name="oiseaux" value="5" id="oiseaux">
-                        <label for="oiseaux">Oiseau</label>
-                    </div>
-                    <div>
-                        <input class="rounded-full" type="checkbox" name="reptiles" value="6" id="reptiles">
-                        <label for="reptiles">Reptile</label>
-                    </div>
-                    <div>
-                        <input class="rounded-full" type="checkbox" name="ferme" value="7" id="ferme">
-                        <label for="ferme">Animaux de la ferme</label>
-                    </div>
-                    <div>
-                        <input class="rounded-full" type="checkbox" name="autre" value="8" id="autre">
-                        <label for="autre">Autre</label>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <button type="submit" class="button-perso inline-block md:px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md
-                        hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 
-                        active:shadow-lg transition duration-150 ease-in-out w-64 mb-3">
-                    <a class="py-2 px-16">Lancer la recherche</a> 
-                </button>
-            </div>  
-        </div>
- 
-    </form>
-</div>
 
 <div class="min-h-screen bg-white">
   <div>
@@ -71,7 +6,7 @@
 
       Off-canvas filters for mobile, show/hide based on off-canvas filters state.
     -->
-    <div class="relative z-40 lg:hidden" role="dialog" aria-modal="true">
+    <div x-cloak x-data="{ open: false }" class="relative z-40" role="dialog" aria-modal="true">
       <!--
         Off-canvas menu backdrop, show/hide based on off-canvas menu state.
 
@@ -82,9 +17,9 @@
           From: "opacity-100"
           To: "opacity-0"
       -->
-      <div class="fixed inset-0 bg-black bg-opacity-25"></div>
+      <div x-show="open" id="opacityDiv"  class="fixed inset-0 bg-black bg-opacity-25"></div>
 
-      <div class="fixed inset-0 z-40 flex">
+      <div x-show="open" id="filterDiv"  class="fixed inset-0 z-40 flex">
         <!--
           Off-canvas menu, show/hide based on off-canvas menu state.
 
@@ -97,8 +32,8 @@
         -->
         <div class="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
           <div class="flex items-center justify-between px-4">
-            <h2 class="text-lg font-medium text-gray-900">Filters</h2>
-            <button type="button" class="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400">
+            <h2 class="text-lg font-medium text-gray-900">Filtrer</h2>
+            <button value="Close Div" onclick="closeDiv()" type="button" class="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400">
               <span class="sr-only">Close menu</span>
               <!-- Heroicon name: outline/x-mark -->
               <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -318,7 +253,7 @@
       <div class="flex items-baseline justify-between border-b border-gray-200 pt-24 pb-6">
         <h1 class="text-4xl font-bold tracking-tight text-gray-900">Liste des annonces</h1>
 
-        <div x-data="{ open: false }" class="flex items-center">
+        <div @click.away="open = false" x-data="{ open: false }" class="flex items-center">
           <div class="relative inline-block text-left">
             <div>
               <button x-on:click="open = ! open" type="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" id="menu-button" aria-expanded="false" aria-haspopup="true">
@@ -347,15 +282,20 @@
 
                   Selected: "font-medium text-gray-900", Not Selected: "text-gray-500"
                 -->
-                <a href="#" class="font-medium text-gray-900 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Most Popular</a>
+                <a class="text-gray-500 block px-4 py-2 text-sm" href="" role="menuitem" tabindex="-1" id="menu-item-1">
+                    Prix Croissant
+                </a>
+                <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">
+                    Prix décroissant                
+                </a>
 
-                <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Best Rating</a>
+                <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-3">
+                    Nombre de like croissant
+                </a>
 
-                <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">Newest</a>
-
-                <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-3">Price: Low to High</a>
-
-                <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-4">Price: High to Low</a>
+                <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-4">
+                    Nombre de like décroissant
+                </a>
               </div>
             </div>
           </div>
@@ -367,7 +307,7 @@
               <path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v2.5A2.25 2.25 0 004.25 9h2.5A2.25 2.25 0 009 6.75v-2.5A2.25 2.25 0 006.75 2h-2.5zm0 9A2.25 2.25 0 002 13.25v2.5A2.25 2.25 0 004.25 18h2.5A2.25 2.25 0 009 15.75v-2.5A2.25 2.25 0 006.75 11h-2.5zm9-9A2.25 2.25 0 0011 4.25v2.5A2.25 2.25 0 0013.25 9h2.5A2.25 2.25 0 0018 6.75v-2.5A2.25 2.25 0 0015.75 2h-2.5zm0 9A2.25 2.25 0 0011 13.25v2.5A2.25 2.25 0 0013.25 18h2.5A2.25 2.25 0 0018 15.75v-2.5A2.25 2.25 0 0015.75 11h-2.5z" clip-rule="evenodd" />
             </svg>
           </button>
-          <button type="button" class="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden">
+          <button value="Show Div" onclick="showDiv()"  type="button" class="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden">
             <span class="sr-only">Filters</span>
             <!-- Heroicon name: mini/funnel -->
             <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -528,5 +468,16 @@
       </section>
     </main>
   </div>
+  <script>
+    function showDiv() {
+   document.getElementById('filterDiv').style.display = "flex";
+   document.getElementById('opacityDiv').style.display = "block";
+}
+function closeDiv() {
+   document.getElementById('filterDiv').style.display = "none";
+   document.getElementById('opacityDiv').style.display = "none";
+}
+</script>
 </div>
+
 

@@ -11,9 +11,11 @@ class Recherche extends Component
 {
     public $q;
     public $gardes;
+    public $annonces;
 
     public function mount()
     {
+        $this->annonces = Annonce::all();
         $this->gardes = Garde::all();
     }
     
