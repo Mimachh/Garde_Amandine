@@ -47,14 +47,18 @@ class Annonces extends Component
         $q = $request->input('q');
 
         
-
+        $ville = $request->input('ville');
         /* Ville */
         if($request->input('ville')){
-            $ville = $request->input('ville');
+            
+            $v= Ville::where('ville_nom', 'like', "%". $ville . "%")->pluck('id');
         }else{
-            $ville = 'Le mans';
+            //$ville = 'Le mans';
+            $rand = rand(1,2);
+            $v= Ville::where('id', 'like', $rand)->pluck('id')->all();
         }
-        $v= Ville::where('ville_nom', 'like', "%". $ville . "%")->pluck('id');
+
+        //$v= Ville::where('ville_nom', 'like', "%". $ville . "%")->pluck('id');
 
 
 
@@ -64,6 +68,7 @@ class Annonces extends Component
         ->when($chat, function ($s) use ($chat) {
             return $s->where('chats', 'like', $chat);})->where('status', 1)
         ->get();
+
 
         return response()->json([
             'annonces' => $annonces,

@@ -9,7 +9,6 @@ use App\Http\Livewire\AnimalOwnedForm;
 use App\Http\Livewire\Animals\Animals;
 
 use App\Http\Livewire\Annonces\Annonces;
-use App\Http\Controllers\API\UserController;
 
 
 use App\Http\Controllers\ProposalController;
@@ -65,8 +64,8 @@ Route::middleware([
 /* Page principale des Annonces */
 Route::get('/', [Annonces::class, 'index'])->name('annonces.index');
 Route::get('/search', [Recherche::class, 'search'])->name('annonces.search');
-
 Route::post('/apisearch', [Annonces::class, 'search'])->name('annonces.apisearch');
+
 
 /* Route Admin */
 Route::middleware(['auth', 'role:Admin'])->group(function(){

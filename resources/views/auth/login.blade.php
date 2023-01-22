@@ -1,5 +1,5 @@
 <x-app-layout>
-    <section class="mb-4 flex flex-col lg:flex-row h-screen items-center container md:mx-auto">
+    <section class="mb-4 flex flex-col lg:flex-row min-h-screen items-center container md:mx-auto">
 
         <div class="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
             <img src="https://source.unsplash.com/random" alt="" class="w-full h-full object-cover">

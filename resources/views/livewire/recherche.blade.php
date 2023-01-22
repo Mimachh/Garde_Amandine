@@ -243,7 +243,7 @@
                 <span class="font-medium text-gray-900">Ville de recherche</span>
             </h3>
             <div>
-                <input class="border-none bg-gray-200 rounded-xl w-full" placeholder="Ville de recherche" name="ville" type="search" id="ville">
+                <input value="{{ request()->ville ?? '' }}" class="border-none bg-gray-200 rounded-xl w-full" placeholder="Ville de recherche" name="ville" type="search" id="ville">
             </div>
 
             <div class="border-b border-gray-200 py-6">
@@ -275,12 +275,26 @@
               <div class="pt-6" id="filter-section-1">
                 <div class="space-y-4">
                   <div>
-                    <select class="border-none bg-gray-200 rounded-xl w-full" name="garde" id="garde">
-                        <option value="">Choisir un type de garde</option>
+                    @if(request()->garde)
+                    <select  class="border-none bg-gray-200 rounded-xl w-full" name="garde" id="garde">
+                        <option value="{{ request()->garde ?? '' }}">
+                          @if(request()->garde == 1) Chez le Pet-Sitter
+                          @elseif(request()->garde == 2) Visite à domicile
+                          @elseif(request()->garde == 3) Chez le Pet-Sitter/En visite
+                          @endif
+                        </option>
                         @foreach($gardes as $garde)
-                        <option value="{{$garde->id }}">{{ $garde->garde }}</option>
+                        <option value="{{$garde->id }}">{{$garde->garde }}</option>
                         @endforeach
                     </select>
+                    @else
+                    <select  class="border-none bg-gray-200 rounded-xl w-full" name="garde" id="garde">
+                        <option value="">Choisir un type de garde</option>
+                        @foreach($gardes as $garde)
+                        <option value="{{$garde->id }}">{{$garde->garde }}</option>
+                        @endforeach
+                    </select>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -316,44 +330,49 @@
                 <div class="space-y-4">
                   <div class="flex items-center">
                     <input id="chats" name="chats" value="1" id="chats" type="checkbox" 
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->chats) {{ 'checked' }} @endif>
                     <label for="chats" class="ml-3 text-sm text-gray-600">Chat</label>
                   </div>
 
                   <div class="flex items-center">
                     <input name="chiens" value="2" id="chiens" type="checkbox" 
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->chiens) {{ 'checked' }} @endif>
                     <label for="chiens" class="ml-3 text-sm text-gray-600">Chien</label>
                   </div>
 
                   <div class="flex items-center">
                     <input name="poissons" value="3" id="poissons" type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->poissons) {{ 'checked' }} @endif>
                     <label for="poissons" class="ml-3 text-sm text-gray-600">Poisson</label>
                   </div>
 
                   <div class="flex items-center">
-                    <input name="rongeurs" value="4" id="rongeurs" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <input name="rongeurs" value="4" id="rongeurs" type="checkbox" 
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->rongeurs) {{ 'checked' }} @endif>
                     <label for="rongeurs" class="ml-3 text-sm text-gray-600">Rongeur</label>
                   </div>
 
                   <div class="flex items-center">
-                    <input name="oiseaux" value="5" id="oiseaux" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <input name="oiseaux" value="5" id="oiseaux" type="checkbox" 
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->oiseaux) {{ 'checked' }} @endif>
                     <label for="oiseaux" class="ml-3 text-sm text-gray-600">Oiseau</label>
                   </div>
 
                   <div class="flex items-center">
-                    <input name="reptiles" value="6" id="reptiles" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <input name="reptiles" value="6" id="reptiles" type="checkbox" 
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->reptiles) {{ 'checked' }} @endif>
                     <label for="reptiles" class="ml-3 text-sm text-gray-600">Reptile</label>
                   </div>
 
                   <div class="flex items-center">
-                    <input name="ferme" value="7" id="ferme" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <input name="ferme" value="7" id="ferme" type="checkbox" 
+                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->ferme) {{ 'checked' }} @endif>
                     <label for="ferme" class="ml-3 text-sm text-gray-600">Animaux de la ferme</label>
                   </div>
 
                   <div class="flex items-center">
-                    <input name="autre" value="8" id="autre" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <input name="autre" value="8" id="autre" type="checkbox" 
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->autre) {{ 'checked' }} @endif>
                     <label for="autre" class="ml-3 text-sm text-gray-600">Autre</label>
                   </div>
                 </div>

@@ -6,9 +6,11 @@ use App\Models\Garde;
 use App\Models\Ville;
 use App\Models\Annonce;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Recherche extends Component
 {
+   
     public $q;
     public $gardes;
     public $annonces;
@@ -42,8 +44,26 @@ class Recherche extends Component
         $reptiles = request()->input("reptiles");
         $ferme = request()->input("ferme");
         $autre = request()->input("autre");
-        $v= Ville::where('ville_nom', 'like', "%$ville%")->pluck('id');
-        $g = Garde::where('id', 'like', "%$garde%")->pluck('id');
+        // $v= Ville::where('ville_nom', 'like', "%$ville%")->pluck('id');
+        
+        if(request()->input("ville")){
+            
+            $v= Ville::where('ville_nom', 'like', "%". $ville . "%")->pluck('id');
+        }else{
+            //$ville = 'Le mans';
+            $rand = rand(1,2);
+            $v= Ville::where('id', 'like', $rand)->pluck('id')->all();
+        }
+
+        if(request()->input('garde')){
+            $g = Garde::where('id', 'like', "%$garde%")->pluck('id');
+            $gardes_search = Garde::where('id', '!=', $g)->get();
+        }else{
+            $g = '2';
+        }
+
+        //$g = Garde::where('id', 'like', "%$garde%")->pluck('id');
+
         $a= Annonce::when($v, function ($s) use ($v) {
                 return $s->where('ville_id', 'like', $v);})
             ->when($g, function ($s) use ($g) {
@@ -64,15 +84,19 @@ class Recherche extends Component
                     return $s->where('ferme', $ferme);})
             ->when($autre, function ($s) use ($autre) {
                     return $s->where('autre', $autre);})
-            ->get();
+            ->paginate(1);
 
-        dd($a);
-
+   
+            return view('annonces.search', [
+            'annonces' => $a,
+        ]);
        
     }
 
     public function render()
     {
+        
+        
         return view('livewire.recherche');
     }
 }
