@@ -51,10 +51,7 @@ class Demandes extends Component
     public function store()
     { 
         /* Contenu par défaut */
-
-            $this->content = 'Bonjour '. $this->annonce->name . " acceptes-tu de garder : ";
-       
-        
+            $this->content = 'Bonjour '. $this->annonce->name . " acceptes-tu de garder : ";   
         /* Boucle pour calculer le nombre d'animaux */
             for($i = 0; $i < 1; $i++)
             {
@@ -125,41 +122,22 @@ class Demandes extends Component
                 'validated' => 2,
             ]);
 
-            
-
             $demande = Demande::create([
-
                 'content' => $this->content,
-
                 'start_date' => $this->start_date,
-
                 'end_date' => $this->end_date,
-
                 'garde_id' => $this->garde_id,
-
                 'phone' => $this->phone,
-
                 'first_animal_id' => $this->first_animal_id,
-
                 'second_animal_id' => $this->second_animal_id,
-
                 'third_animal_id' => $this->third_animal_id,
-
                 'number_visit' => $this->number_visit,
-
                 'proposal_id' => $proposal->id,
-
-                'prix_final' => $prix_final,
-        
-            ]);
-            
+                'prix_final' => $prix_final,       
+            ]);           
             $proposal->annonce->user->notify(new ProposalRecieved($proposal));
-           
-
-            self::message('success', 'Ta demande est transmise au Pet-Sitter ! Il te répondra au plus vite. ');
-            
+            self::message('success', 'Ta demande est transmise au Pet-Sitter ! Il te répondra au plus vite. ');          
             return redirect()->route('annonces.index');
-     
 
     }
 

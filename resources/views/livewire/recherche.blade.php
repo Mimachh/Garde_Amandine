@@ -6,7 +6,7 @@
 
       Off-canvas filters for mobile, show/hide based on off-canvas filters state.
     -->
-    <div x-cloak x-data="{ open: false }" class="relative z-40 md:hidden" role="dialog" aria-modal="true">
+    <div x-cloak x-data="{ open: false }" class=" z-40 md:hidden" role="dialog" aria-modal="true">
       <!--
         Off-canvas menu backdrop, show/hide based on off-canvas menu state.
 
@@ -238,7 +238,7 @@
 
         <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
           <!-- Filters -->
-          <form action="{{ route('annonces.search') }}" class="hidden lg:block">
+          <form action="{{ route('annonces.search') }}" class="left-0 hidden lg:block">
             <h3 class="py-6">
                 <span class="font-medium text-gray-900">Ville de recherche</span>
             </h3>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Annonces;
 
+use Throwable;
 use App\Models\Garde;
 use App\Models\Ville;
 use App\Models\Animal;
@@ -47,6 +48,8 @@ class Annonces extends Component
         $q = $request->input('q');
 
         
+        
+
         $ville = $request->input('ville');
         /* Ville */
         if($request->input('ville')){
@@ -58,9 +61,9 @@ class Annonces extends Component
             $v= Ville::where('id', 'like', $rand)->pluck('id')->all();
         }
 
+       
+
         //$v= Ville::where('ville_nom', 'like', "%". $ville . "%")->pluck('id');
-
-
 
         $annonces = Annonce::where('name', 'like', '%'. $q . '%')
         ->when($v, function ($s) use ($v) {
