@@ -16,7 +16,6 @@
         <button type="submit">Recherche</button>
     </form>
     
-    @livewire('recherche')
     <!-- Sort By -->
     <div class="flex justify-end mr-8">
         <div class="relative">

@@ -32,52 +32,6 @@ class Annonces extends Component
         return view('annonces.index', ['annonces' => $annonces]);
     }
 
-
-    public $q;
-
-    public function search(Request $request): JsonResponse
-    { 
-        $chat = $request->input('chat');
-        if($chat != 1)
-        {
-            $chat = NULL;
-        }else{
-            $chat = 1;
-        }
-        
-        $q = $request->input('q');
-
-        
-        
-
-        $ville = $request->input('ville');
-        /* Ville */
-        if($request->input('ville')){
-            
-            $v= Ville::where('ville_nom', 'like', "%". $ville . "%")->pluck('id');
-        }else{
-            //$ville = 'Le mans';
-            $rand = rand(1,2);
-            $v= Ville::where('id', 'like', $rand)->pluck('id')->all();
-        }
-
-       
-
-        //$v= Ville::where('ville_nom', 'like', "%". $ville . "%")->pluck('id');
-
-        $annonces = Annonce::where('name', 'like', '%'. $q . '%')
-        ->when($v, function ($s) use ($v) {
-            return $s->where('ville_id', 'like', $v);})
-        ->when($chat, function ($s) use ($chat) {
-            return $s->where('chats', 'like', $chat);})->where('status', 1)
-        ->get();
-
-
-        return response()->json([
-            'annonces' => $annonces,
-        ]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
