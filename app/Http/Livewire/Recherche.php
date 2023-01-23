@@ -7,7 +7,6 @@ use App\Models\Garde;
 use App\Models\Ville;
 use App\Models\Annonce;
 use Livewire\Component;
-use Livewire\WithPagination;
 use Illuminate\Database\QueryException;
 
 class Recherche extends Component

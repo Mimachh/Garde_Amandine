@@ -1,12 +1,12 @@
 
-<div class="min-h-screen bg-white">
+<div class="bg-perso -mt-2">
   <div>
     <!--
       Mobile filter dialog
 
       Off-canvas filters for mobile, show/hide based on off-canvas filters state.
     -->
-    <div x-cloak x-data="{ open: false }" class=" z-40 md:hidden" role="dialog" aria-modal="true">
+    <div x-cloak x-data="{ open: false }" class=" z-40 " role="dialog" aria-modal="true">
       <!--
         Off-canvas menu backdrop, show/hide based on off-canvas menu state.
 
@@ -48,7 +48,7 @@
             <div class="px-4 py-6">
               <h3 class="my-4 flow-root font-medium text-gray-900">Ville de recherche</h3>
               <div class="">
-                  <input class="w-full border-none bg-gray-200 rounded-xl" placeholder="Ville de recherche" name="ville" type="search" id="ville">
+                  <input value="{{ request()->ville ?? '' }}" class="w-full border-none bg-gray-200 rounded-xl" placeholder="Ville de recherche" name="ville" type="search" id="ville">
               </div>
             </div>
             <!-- Type Garde Mobile -->
@@ -63,12 +63,26 @@
               <div class="pt-6" id="filter-section-mobile-1">
                 <div class="space-y-4">
                   <div>
-                    <select class="border-none bg-gray-200 rounded-xl w-full" name="garde" id="garde">
-                        <option value="">Choisir un type de garde</option>
+                    @if(request()->garde)
+                    <select  class="border-none bg-gray-200 rounded-xl w-full" name="garde" id="garde">
+                        <option value="{{ request()->garde ?? '' }}">
+                          @if(request()->garde == 1) Chez le Pet-Sitter
+                          @elseif(request()->garde == 2) Visite à domicile
+                          @elseif(request()->garde == 3) Chez le Pet-Sitter/En visite
+                          @endif
+                        </option>
                         @foreach($gardes as $garde)
-                        <option value="{{$garde->id }}">{{ $garde->garde }}</option>
+                        <option value="{{$garde->id }}">{{$garde->garde }}</option>
                         @endforeach
                     </select>
+                    @else
+                    <select  class="border-none bg-gray-200 rounded-xl w-full" name="garde" id="garde">
+                        <option value="">Choisir un type de garde</option>
+                        @foreach($gardes as $garde)
+                        <option value="{{$garde->id }}">{{$garde->garde }}</option>
+                        @endforeach
+                    </select>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -104,44 +118,49 @@
                 <div class="space-y-4">
                   <div class="flex items-center">
                     <input id="chats" name="chats" value="1" id="chats" type="checkbox" 
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->chats) {{ 'checked' }} @endif>
                     <label for="chats" class="ml-3 text-sm text-gray-600">Chat</label>
                   </div>
 
                   <div class="flex items-center">
                     <input name="chiens" value="2" id="chiens" type="checkbox" 
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->chiens) {{ 'checked' }} @endif>
                     <label for="chiens" class="ml-3 text-sm text-gray-600">Chien</label>
                   </div>
 
                   <div class="flex items-center">
                     <input name="poissons" value="3" id="poissons" type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->poissons) {{ 'checked' }} @endif>
                     <label for="poissons" class="ml-3 text-sm text-gray-600">Poisson</label>
                   </div>
 
                   <div class="flex items-center">
-                    <input name="rongeurs" value="4" id="rongeurs" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <input name="rongeurs" value="4" id="rongeurs" type="checkbox" 
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->rongeurs) {{ 'checked' }} @endif>
                     <label for="rongeurs" class="ml-3 text-sm text-gray-600">Rongeur</label>
                   </div>
 
                   <div class="flex items-center">
-                    <input name="oiseaux" value="5" id="oiseaux" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <input name="oiseaux" value="5" id="oiseaux" type="checkbox" 
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->oiseaux) {{ 'checked' }} @endif>
                     <label for="oiseaux" class="ml-3 text-sm text-gray-600">Oiseau</label>
                   </div>
 
                   <div class="flex items-center">
-                    <input name="reptiles" value="6" id="reptiles" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <input name="reptiles" value="6" id="reptiles" type="checkbox" 
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->reptiles) {{ 'checked' }} @endif>
                     <label for="reptiles" class="ml-3 text-sm text-gray-600">Reptile</label>
                   </div>
 
                   <div class="flex items-center">
-                    <input name="ferme" value="7" id="ferme" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <input name="ferme" value="7" id="ferme" type="checkbox" 
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->ferme) {{ 'checked' }} @endif>
                     <label for="ferme" class="ml-3 text-sm text-gray-600">Animaux de la ferme</label>
                   </div>
 
                   <div class="flex items-center">
-                    <input name="autre" value="8" id="autre" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <input name="autre" value="8" id="autre" type="checkbox" 
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->autre) {{ 'checked' }} @endif>
                     <label for="autre" class="ml-3 text-sm text-gray-600">Autre</label>
                   </div>
                 </div>
@@ -166,9 +185,9 @@
     </div>
 
     <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex items-baseline justify-between border-b border-gray-200 pt-24 pb-6">
-        <h1 class="text-4xl font-bold tracking-tight text-gray-900">Liste des annonces</h1>
-
+      <div class="flex items-baseline justify-between pt-4 pb-6">
+        <h1 class="text-4xl font-bold tracking-tight text-gray-800">Liste des annonces</h1>
+        <!-- Trier -->
         <div @click.away="open = false" x-data="{ open: false }" class="flex items-center">
           <div class="relative inline-block text-left">
             <div>
@@ -223,7 +242,7 @@
               <path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v2.5A2.25 2.25 0 004.25 9h2.5A2.25 2.25 0 009 6.75v-2.5A2.25 2.25 0 006.75 2h-2.5zm0 9A2.25 2.25 0 002 13.25v2.5A2.25 2.25 0 004.25 18h2.5A2.25 2.25 0 009 15.75v-2.5A2.25 2.25 0 006.75 11h-2.5zm9-9A2.25 2.25 0 0011 4.25v2.5A2.25 2.25 0 0013.25 9h2.5A2.25 2.25 0 0018 6.75v-2.5A2.25 2.25 0 0015.75 2h-2.5zm0 9A2.25 2.25 0 0011 13.25v2.5A2.25 2.25 0 0013.25 18h2.5A2.25 2.25 0 0018 15.75v-2.5A2.25 2.25 0 0015.75 11h-2.5z" clip-rule="evenodd" />
             </svg>
           </button>
-          <button value="Show Div" onclick="showDiv()"  type="button" class="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden">
+          <button value="Show Div" onclick="showDiv()"  type="button" class="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6">
             <span class="sr-only">Filters</span>
             <!-- Heroicon name: mini/funnel -->
             <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -232,175 +251,6 @@
           </button>
         </div>
       </div>
-
-      <section aria-labelledby="products-heading" class="pt-6 pb-24">
-        <h2 id="products-heading" class="sr-only">Products</h2>
-
-        <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-          <!-- Filters -->
-          <form action="{{ route('annonces.search') }}" class="left-0 hidden lg:block">
-            <h3 class="py-6">
-                <span class="font-medium text-gray-900">Ville de recherche</span>
-            </h3>
-            <div>
-                <input value="{{ request()->ville ?? '' }}" class="border-none bg-gray-200 rounded-xl w-full" placeholder="Ville de recherche" name="ville" type="search" id="ville">
-            </div>
-
-            <div class="border-b border-gray-200 py-6">
-              <h3 class="-my-3 flow-root">
-                <!-- Expand/collapse section button -->
-                <button type="button" class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500" aria-controls="filter-section-1" aria-expanded="false">
-                  <span class="font-medium text-gray-900">Type de garde</span>
-                  <span class="ml-6 flex items-center">
-                    <!--
-                      Expand icon, show/hide based on section open state.
-
-                      Heroicon name: mini/plus
-                    -->
-                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
-                    </svg>
-                    <!--
-                      Collapse icon, show/hide based on section open state.
-
-                      Heroicon name: mini/minus
-                    -->
-                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z" clip-rule="evenodd" />
-                    </svg>
-                  </span>
-                </button>
-              </h3>
-              <!-- Filter section, show/hide based on section state. -->
-              <div class="pt-6" id="filter-section-1">
-                <div class="space-y-4">
-                  <div>
-                    @if(request()->garde)
-                    <select  class="border-none bg-gray-200 rounded-xl w-full" name="garde" id="garde">
-                        <option value="{{ request()->garde ?? '' }}">
-                          @if(request()->garde == 1) Chez le Pet-Sitter
-                          @elseif(request()->garde == 2) Visite à domicile
-                          @elseif(request()->garde == 3) Chez le Pet-Sitter/En visite
-                          @endif
-                        </option>
-                        @foreach($gardes as $garde)
-                        <option value="{{$garde->id }}">{{$garde->garde }}</option>
-                        @endforeach
-                    </select>
-                    @else
-                    <select  class="border-none bg-gray-200 rounded-xl w-full" name="garde" id="garde">
-                        <option value="">Choisir un type de garde</option>
-                        @foreach($gardes as $garde)
-                        <option value="{{$garde->id }}">{{$garde->garde }}</option>
-                        @endforeach
-                    </select>
-                    @endif
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div x-data="{ open: false }" class="border-b border-gray-200 py-6">
-              <h3 class="-my-3 flow-root">
-                <!-- Expand/collapse section button -->
-                <button x-on:click="open = ! open" type="button" class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500" aria-controls="filter-section-0" aria-expanded="false">
-                  <span class="font-medium text-gray-900">Animal/aux à garder </span>
-                  <span class="ml-6 flex items-center">
-                    <!--
-                      Expand icon, show/hide based on section open state.
-
-                      Heroicon name: mini/plus
-                    -->
-                    <svg x-show="!open" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
-                    </svg>
-                    <!--
-                      Collapse icon, show/hide based on section open state.
-
-                      Heroicon name: mini/minus
-                    -->
-                    <svg x-show="open" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z" clip-rule="evenodd" />
-                    </svg>
-                  </span>
-                </button>
-              </h3>
-              <!-- Filter section, show/hide based on section state. -->
-              <div x-cloak x-show="open" x-transition class="pt-6" id="filter-section-0">
-                <div class="space-y-4">
-                  <div class="flex items-center">
-                    <input id="chats" name="chats" value="1" id="chats" type="checkbox" 
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->chats) {{ 'checked' }} @endif>
-                    <label for="chats" class="ml-3 text-sm text-gray-600">Chat</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input name="chiens" value="2" id="chiens" type="checkbox" 
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->chiens) {{ 'checked' }} @endif>
-                    <label for="chiens" class="ml-3 text-sm text-gray-600">Chien</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input name="poissons" value="3" id="poissons" type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->poissons) {{ 'checked' }} @endif>
-                    <label for="poissons" class="ml-3 text-sm text-gray-600">Poisson</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input name="rongeurs" value="4" id="rongeurs" type="checkbox" 
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->rongeurs) {{ 'checked' }} @endif>
-                    <label for="rongeurs" class="ml-3 text-sm text-gray-600">Rongeur</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input name="oiseaux" value="5" id="oiseaux" type="checkbox" 
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->oiseaux) {{ 'checked' }} @endif>
-                    <label for="oiseaux" class="ml-3 text-sm text-gray-600">Oiseau</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input name="reptiles" value="6" id="reptiles" type="checkbox" 
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->reptiles) {{ 'checked' }} @endif>
-                    <label for="reptiles" class="ml-3 text-sm text-gray-600">Reptile</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input name="ferme" value="7" id="ferme" type="checkbox" 
-                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->ferme) {{ 'checked' }} @endif>
-                    <label for="ferme" class="ml-3 text-sm text-gray-600">Animaux de la ferme</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input name="autre" value="8" id="autre" type="checkbox" 
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @if(request()->autre) {{ 'checked' }} @endif>
-                    <label for="autre" class="ml-3 text-sm text-gray-600">Autre</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="border-b border-gray-200 py-6">
-              <!-- Filter section, show/hide based on section state. -->
-              <div class="pt-6" id="filter-section-1">
-                <button type="submit" class="button-perso inline-block md:px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md
-                        hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 
-                        active:shadow-lg transition duration-150 ease-in-out w-64 mb-3">
-                    <a class="py-2 px-4">Lancer la recherche</a> 
-                </button>
-              </div>
-            </div>
-          </form>
-
-          <!-- Product grid -->
-          <div class="lg:col-span-3">
-            <!-- Replace with your content -->
-            <div class="h-96 rounded-lg border-4 border-dashed border-blue-200 lg:h-full">
-                Ici
-            </div>
-            <!-- /End replace -->
-          </div>
-        </div>
-      </section>
     </main>
   </div>
   <script>

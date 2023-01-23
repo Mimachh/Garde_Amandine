@@ -149,7 +149,13 @@ public function start_date_fr()
      */
     protected $fillable = [
         
-        'user_id', 'description', 'price', 'visit', 'home', 'name', 'chats', 'chiens', 'poissons', 'rongeurs',
-        'oiseaux', 'reptiles', 'ferme', 'autre', 'ville_id', 'start_watch', 'end_watch', 'garde_id', 'photo', 'habitation_id', 'exterieur_id'
+        'user_id', 'description', 'price', 
+        'visit', 'home', 'name', 'chats', 
+        'chiens', 'poissons', 'rongeurs',
+        'oiseaux', 'reptiles', 'ferme', 
+        'autre', 'ville_id', 'start_watch', 
+        'end_watch', 'garde_id', 'photo', 
+        'habitation_id', 'exterieur_id',
+        'ville_name', 'ville_code', 'region_code', 
     ];
 }

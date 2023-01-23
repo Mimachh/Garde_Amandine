@@ -1,20 +1,10 @@
 <x-app-layout>
-
-    <x-slot name="header">
-        <h1 class="font-semibold text-xl text-gray-200 leading-tight text-center">
-            {{ __('Les annonces en ligne') }}
-        </h1>
-    </x-slot>
-
-    <x-slot name="buttonBack">
-        @livewire('previous-page')
-    </x-slot>
-    <form id="search-form" action="{{ route('annonces.apisearch') }}" method="post">
+    <!-- <form id="search-form" action="{{ route('annonces.apisearch') }}" method="post">
         <input name="q" id="q" type="search">
         <input type="checkbox"  name="chat" id="chat" value="1">
         <input type="search" name="ville" id="ville">
         <button type="submit">Recherche</button>
-    </form>
+    </form> -->
 
     @livewire('recherche')
     <!-- Sort By -->
@@ -53,7 +43,7 @@
             </div>
         </div>       
     </div>
-    <div id="annonces" class="mt-4 mr-12 ml-8 mb-4 grid grid-cols-1 gap-4 lg:grid-cols-3 sm:grid-cols-2">
+    <div class="min-h-screen mt-4 mr-12 ml-8 mb-4 grid grid-cols-1 gap-4 lg:grid-cols-3 sm:grid-cols-2">
     @forelse($annonces as $annonce)
         <div class="w-full md:px-4 max-h-62 lg:px-0">
             <div class="p-3 bg-white rounded shadow-md hover:shadow-2xl">

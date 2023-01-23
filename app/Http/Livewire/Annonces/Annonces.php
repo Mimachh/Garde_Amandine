@@ -11,16 +11,12 @@ use App\Models\Annonce;
 use Livewire\Component;
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
-use Illuminate\Routing\Route;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Annonces extends Component
 {
     use AuthorizesRequests;
     use WithPagination;
-    public $chats;
 
     public function index(Request $request)
     {

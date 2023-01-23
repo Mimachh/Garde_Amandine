@@ -20,6 +20,12 @@ return new class extends Migration
             $table->string('photo')->nullable();
 
             $table->unsignedBigInteger('ville_id')->onDelete('cascade')->nullable();
+            
+            /* CODE API COMMUNE */
+            $table->string('ville_code')->nullable();
+            $table->string('ville_name')->nullable();
+            $table->string('region_code')->nullable();
+
             $table->unsignedBigInteger('habitation_id')->onDelete('cascade')->nullable();
             $table->unsignedBigInteger('exterieur_id')->onDelete('cascade')->nullable(); 
 

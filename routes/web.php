@@ -3,21 +3,22 @@
 use App\Http\Livewire\Demandes;
 use App\Http\Livewire\GardePage;
 
+use App\Http\Livewire\Recherche;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Livewire\AnimalOwnedForm;
 
 use App\Http\Livewire\Animals\Animals;
 
+
 use App\Http\Livewire\Annonces\Annonces;
-
-
+use App\Http\Controllers\AnnonceController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Livewire\Admin\AdminAdController;
 use App\Http\Livewire\Admin\AdminUserController;
 use App\Http\Livewire\Admin\AdminAnimalController;
 use App\Http\Livewire\Admin\AdminProposalController;
 use App\Http\Livewire\Admin\AdminContactMessageController;
-use App\Http\Livewire\Recherche;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,3 +80,6 @@ Route::middleware(['auth', 'role:Admin'])->group(function(){
     Route::get('/admin/users', [AdminUserController::class, 'index'])->name('admin.users.index');
     Route::get('/admin/animals', [AdminAnimalController::class, 'index'])->name('admin.animals.index');
 });
+
+
+Route::resource('/a', AnnonceController::class);
