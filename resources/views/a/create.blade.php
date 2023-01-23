@@ -1,16 +1,13 @@
 <x-app-layout>
-<form >
-
-    <input type="text" >
-        <div id="error-message"></div>
-        <select  ></select>
-    <button type="submit" class="btn-submit">ok</button>
-</form>
-
-
+<x-slot name="header">
+    <h1 class="font-semibold text-xl text-gray-200 leading-tight text-center">
+        {{ __('Créer mon annonce de pet-sitter') }}
+    </h1>
+</x-slot>
 <form action="{{ route('a.store' ) }}" method="post" id="apiform" 
-    class="space-y-6 w-full max-w-lg mx-auto mb-12" enctype="multipart/form-data">
+    class="bg-white space-y-6 w-full max-w-full md:max-w-3xl mx-auto mb-12 px-4 py-10 rounded shadow-lg" enctype="multipart/form-data">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <p>Les champs obligatoires sont marqués par *</p>
     @csrf
     <!-- Dates -->
     <h2 class="uppercase tracking-wide text-gray-700 text-md font-bold mt-4 mb-2">
@@ -24,6 +21,7 @@
             </label>
             <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             name="start_watch" type="date">
+            @error('start_watch') <small class="text-red-600 italic"> {{ $errors->first('start_watch') }}</small>@enderror
         </div>
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -32,14 +30,33 @@
             </label>
             <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             name="end_watch" type="date">
+            @error('end_watch') <small class="text-red-600 italic"> {{ $errors->first('end_watch') }}</small>@enderror
         </div>
     </div>
     <hr>
     <!-- Conditions -->
     <h2 class="uppercase tracking-wide text-gray-700 text-md font-bold mt-4 mb-2">
-       Les conditions de garde
+       Les conditions de garde *
     </h2>
     <div class="flex flex-wrap -mx-3 mb-2">
+        <div class="w-full px-3 pb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            for="garde_id">
+                Type de garde 
+            </label>
+            <div class="relative">
+                <select name="garde_id" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                    <option value="">Choisir une option</option>
+                    @foreach($gardes as $garde)
+                        <option value="{{ $garde->id }}">{{ $garde->garde }}</option>
+                    @endforeach
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+            </div>
+            @error('garde_id') <small class="text-red-600 italic"> {{ $errors->first('garde_id') }}</small>@enderror
+        </div>
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="habitation_id">
@@ -56,6 +73,7 @@
                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                 </div>
             </div>
+            @error('habitation_id') <small class="text-red-600 italic"> {{ $errors->first('habitation_id') }}</small>@enderror
         </div>
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -73,12 +91,13 @@
                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                 </div>
             </div>
+            @error('exterieur_id') <small class="text-red-600 italic"> {{ $errors->first('exterieur_id') }}</small>@enderror
         </div>
     </div>
     <hr>
     <!-- Commune -->
     <h2 class="uppercase tracking-wide text-gray-700 text-md font-bold mt-4 mb-2">
-       Localisation
+       Localisation *
     </h2>
     <div class="flex flex-wrap -mx-3 mb-2">
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -87,6 +106,7 @@
         </label>
         <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
         name="zipcode" id="zipcode"type="text" placeholder="72500">
+        <small class="text-red-600 italic" id="error-message"></small>
         </div>
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -101,12 +121,14 @@
                 </div>
             </div>
         </div>
+        @error('city_code') <small class="text-red-600 italic"> {{ $errors->first('city_code') }}</small>@enderror
     </div>
     <hr>
     <!-- Checkbox -->
     <h2 class="uppercase tracking-wide text-gray-700 text-md font-bold mt-4 mb-2">
         Les animaux que vous pouvez garder
     </h2>
+    <small class="italic">Faites votre choix en cliquant sur les images</small>
     <div class="flex flex-wrap -mx-3 mb-2">
         <div class="checkboxAnimalsFormDiv w-full w-1/2 px-3 mb-6 md:mb-0">
             <input id="animalsCheckbox1" type="checkbox" value="1" name="chats">
@@ -168,7 +190,7 @@
     <hr>
     <!-- Description / Photo -->
     <h2 class="uppercase tracking-wide text-gray-700 text-md font-bold mt-4 mb-2">
-       Votre profil
+       Votre profil *
     </h2>
     <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full px-3">
@@ -176,7 +198,8 @@
                 Votre photo
             </label>
             <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            i name="photo" type="file">
+             name="photo" type="file">
+            @error('photo') <small class="text-red-600 italic"> {{ $errors->first('photo') }}</small>@enderror
         </div>
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
@@ -188,12 +211,13 @@
                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
             </textarea>
             <p class="text-gray-600 text-xs italic">Mettez quelques mots vous concernant, cela permet aux propriétaires des animaux d'avoir confiance en leur Pet-Sitter</p>
+            @error('description') <small class="text-red-600 italic"> {{ $errors->first('description') }}</small>@enderror
         </div>
     </div>
     <hr>
     <!-- Prix -->
     <h2 class="uppercase tracking-wide text-gray-700 text-md font-bold mt-4 mb-2">
-       Votre tarif
+       Votre tarif *
     </h2>
     <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full px-3">
@@ -202,6 +226,7 @@
             </label>
             <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
              id="price" type="text" name="price">
+             @error('price') <small class="text-red-600 italic"> {{ $errors->first('price') }}</small>@enderror
             <p class="text-gray-600 text-xs italic"></p>
         </div>
     </div>

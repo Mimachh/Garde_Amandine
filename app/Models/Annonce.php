@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Response;
 
+use Illuminate\Database\Eloquent\Model;
 use function PHPUnit\Framework\callback;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -45,6 +47,19 @@ class Annonce extends Model
         direction: $direction,
         );
     }
+
+/* Fonctions pour les villes via l'api */
+    public function getVille()
+    {
+        $ville_code = $this->ville_code;
+        if(!empty($ville_code))
+        {
+            $url = Http::get('https://geo.api.gouv.fr/communes?code='.$ville_code.'&fields=nom');
+            $responsetest = json_decode($url->getBody()->getContents());
+            return $responsetest[0]->nom;
+        }         
+    }
+/* /Fonctions pour les villes via l'api */
 
 /* Fonctions pour le prix */
 

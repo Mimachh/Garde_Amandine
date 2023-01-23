@@ -61,7 +61,10 @@
                     <div class="flex-auto p-2 justify-evenly">
                         <div class="flex flex-wrap">
                             <div class="flex items-center justify-between w-full min-w-0 ">
-                                <h2 class="mr-auto text-lg cursor-pointer hover:text-gray-900" id="name">{{ $annonce->name }}</h2>
+                                <h2 class="mr-auto text-lg cursor-pointer hover:text-gray-900" id="name">
+                                    {{ $annonce->user->name }}
+                                    {{ $annonce->getVille() }}
+                                </h2>
                                 @auth
                                     @if($annonce->user_id !== auth()->user()->id)
                                         <livewire:ad-fav :annonce="$annonce">
