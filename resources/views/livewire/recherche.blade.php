@@ -168,7 +168,7 @@
     <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex items-baseline justify-between border-b border-gray-200 pt-24 pb-6">
         <h1 class="text-4xl font-bold tracking-tight text-gray-900">Liste des annonces</h1>
-
+        <!-- Trier -->
         <div @click.away="open = false" x-data="{ open: false }" class="flex items-center">
           <div class="relative inline-block text-left">
             <div>

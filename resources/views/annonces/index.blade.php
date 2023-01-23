@@ -9,13 +9,14 @@
     <x-slot name="buttonBack">
         @livewire('previous-page')
     </x-slot>
-    <form id="search-form" action="{{ route('annonces.apisearch') }}" method="post">
+    <!-- <form id="search-form" action="{{ route('annonces.apisearch') }}" method="post">
         <input name="q" id="q" type="search">
         <input type="checkbox"  name="chat" id="chat" value="1">
         <input type="search" name="ville" id="ville">
         <button type="submit">Recherche</button>
     </form>
-    
+     -->
+     @livewire('recherche')
     <!-- Sort By -->
     <div class="flex justify-end mr-8">
         <div class="relative">

@@ -28,7 +28,7 @@
 
                         </div>
                     <!-- Fin messages d'erreur -->
-
+                   
                     <form wire:submit.prevent="store">
                         <div class="overflow-hidden shadow sm:rounded-md mb-10 ">
                             <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
@@ -48,6 +48,7 @@
                                 </fieldset>
                                 <!-- Choix de la ville -->    
                                 <fieldset class="mt-4">
+                                
                                     <button type="button" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">  
                                         Choisir votre ville :
                                         <legend class="sr-only">Choisir votre ville </legend>           

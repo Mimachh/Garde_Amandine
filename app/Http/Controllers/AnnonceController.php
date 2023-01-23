@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Annonce;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class AnnonceController extends Controller
 {
@@ -24,7 +25,7 @@ class AnnonceController extends Controller
      */
     public function create()
     {
-        //
+        return view('a.create');
     }
 
     /**
@@ -35,7 +36,19 @@ class AnnonceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->input('city'));
+
+        $validate = $request->validate([
+            'name' => 'string',
+        ]);
+
+        $create = Annonce::create([
+            'name' => $request->input('city'),
+            'user_id' => 2,
+        ]);
+        
+
+    
     }
 
     /**

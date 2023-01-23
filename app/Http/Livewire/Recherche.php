@@ -16,7 +16,7 @@ class Recherche extends Component
     public $q;
     public $gardes;
     public $annonces;
-
+use WithPagination;
     public function mount()
     {
         $this->annonces = Annonce::all();

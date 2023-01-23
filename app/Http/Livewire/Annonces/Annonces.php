@@ -22,6 +22,7 @@ class Annonces extends Component
     use WithPagination;
     public $chats;
 
+    
     public function index(Request $request)
     {
         $annonces = Annonce::query()

@@ -57,7 +57,6 @@ class CreateAnnonce extends Component
   }
 
   /* Validation du formulaire */
- 
   public $garde;
   public $prix;
   
@@ -119,6 +118,7 @@ class CreateAnnonce extends Component
 
   public function store()
   {   
+
     $this->validate(
       [ 
         'description' => 'required|max:60',
