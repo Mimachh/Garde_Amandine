@@ -221,8 +221,7 @@ class DatabaseSeeder extends Seeder
        
 
         DB::table('animals')->insert([
-            ['id' => '1', 'animal_name' => "Bunny"],
-                        
+            ['id' => '1', 'animal_name' => "Bunny"],         
         ]);
      
     }

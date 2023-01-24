@@ -19,7 +19,7 @@
       -->
       <div x-show="open" id="opacityDiv"  class="fixed inset-0 bg-black bg-opacity-25"></div>
 
-      <div x-show="open" id="filterDiv"  class="fixed inset-0 z-40 flex">
+      <div x-show="open" id="filterDiv" class="fixed inset-0 z-40 flex">
         <!--
           Off-canvas menu, show/hide based on off-canvas menu state.
 
@@ -43,12 +43,30 @@
           </div>
 
           <!-- Filters -->
-          <form action="{{ route('annonces.search') }}" class="mt-4 border-t border-gray-200">
-            <!-- Ville Mobile -->
+          <form action="{{ route('annonces.search') }}" id="searchForm" class="mt-4 border-t border-gray-200">
+          <meta name="csrf-token" content="{{ csrf_token() }}">
+            <!-- Region Mobile -->
             <div class="px-4 py-6">
-              <h3 class="my-4 flow-root font-medium text-gray-900">Ville de recherche</h3>
+              <h3 class="my-4 flow-root font-medium text-gray-900">Vous pouvez rechercher soit :</h3>
+              <h3 class="my-4 flow-root font-medium text-sm text-gray-900">Par région</h3>
               <div class="">
-                  <input value="{{ request()->ville ?? '' }}" class="w-full border-none bg-gray-200 rounded-xl" placeholder="Ville de recherche" name="ville" type="search" id="ville">
+                  <input value="{{ request()->region ?? '' }}" class="w-full border-none bg-gray-200 rounded-xl" placeholder="Entrer un nom de région"
+                   name="regionName" type="search" id="regionName">
+                   <select name="regionCode" id="regionCode" hidden></select>
+                   <small class="text-red-600 italic" id="error-message-region-name"></small>
+              </div>
+              <!-- Département Mobile -->
+              <h3 class="my-4 flow-root font-medium text-sm text-gray-900">Par département</h3>
+              <div class="">
+                  <input value="{{ request()->departement ?? '' }}" class="w-full border-none bg-gray-200 rounded-xl" placeholder="Entrer un nom de département"
+                   name="departementCode" type="search" id="departementcode">
+                   <small class="text-red-600 italic" id="error-message-departement"></small>
+              </div>
+              <!-- Commune Mobile -->
+              <h3 class="my-4 flow-root font-medium text-sm text-gray-900">Par commune</h3>
+              <div class="">
+                  <input value="{{ request()->commune ?? '' }}" class="w-full border-none bg-gray-200 rounded-xl" placeholder="Entrer un nom de commune"
+                   name="commune" type="search" id="commune">
               </div>
             </div>
             <!-- Type Garde Mobile -->
@@ -210,7 +228,7 @@
                 From: "transform opacity-100 scale-100"
                 To: "transform opacity-0 scale-95"
             -->
-            <div x-cloak x-show="open" x-transition class="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+            <div x-cloak x-show="open" x-transition.duration.500ms class="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
               <div class="py-1" role="none">
                 <!--
                   Active: "bg-gray-100", Not Active: ""
@@ -235,15 +253,15 @@
             </div>
           </div>
 
-          <button type="button" class="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
-            <span class="sr-only">View grid</span>
+          <!-- <button type="button" class="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
+            <span class="sr-only">View grid</span> -->
             <!-- Heroicon name: mini/squares-2x2 -->
-            <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <!-- <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v2.5A2.25 2.25 0 004.25 9h2.5A2.25 2.25 0 009 6.75v-2.5A2.25 2.25 0 006.75 2h-2.5zm0 9A2.25 2.25 0 002 13.25v2.5A2.25 2.25 0 004.25 18h2.5A2.25 2.25 0 009 15.75v-2.5A2.25 2.25 0 006.75 11h-2.5zm9-9A2.25 2.25 0 0011 4.25v2.5A2.25 2.25 0 0013.25 9h2.5A2.25 2.25 0 0018 6.75v-2.5A2.25 2.25 0 0015.75 2h-2.5zm0 9A2.25 2.25 0 0011 13.25v2.5A2.25 2.25 0 0013.25 18h2.5A2.25 2.25 0 0018 15.75v-2.5A2.25 2.25 0 0015.75 11h-2.5z" clip-rule="evenodd" />
             </svg>
-          </button>
+          </button> -->
           <button value="Show Div" onclick="showDiv()"  type="button" class="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6">
-            <span class="sr-only">Filters</span>
+            <span class="">Filtres</span>
             <!-- Heroicon name: mini/funnel -->
             <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M2.628 1.601C5.028 1.206 7.49 1 10 1s4.973.206 7.372.601a.75.75 0 01.628.74v2.288a2.25 2.25 0 01-.659 1.59l-4.682 4.683a2.25 2.25 0 00-.659 1.59v3.037c0 .684-.31 1.33-.844 1.757l-1.937 1.55A.75.75 0 018 18.25v-5.757a2.25 2.25 0 00-.659-1.591L2.659 6.22A2.25 2.25 0 012 4.629V2.34a.75.75 0 01.628-.74z" clip-rule="evenodd" />
@@ -263,6 +281,7 @@ function closeDiv() {
    document.getElementById('opacityDiv').style.display = "none";
 }
 </script>
+@vite('resources/js/search.js')
 </div>
 
 

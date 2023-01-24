@@ -151,45 +151,40 @@
 
 
 
-
-
-
-
-
 $(document).ready(function(){
-    const apiUrl = 'https://geo.api.gouv.fr/communes?codePostal=';
-    const format = '&format=json';
-    // const apiUrl2 = 'https://geo.api.gouv.fr/departements?nom=';
-    // const formatDepart = "&fields=nom,code,codeRegion";
-
-    let zipcode = $('#zipcode'); let city_code = $('#city_code'); let errorMessage = $('#error-message');
-
-    $(zipcode).on('blur', function(){
+    
+    // FIND REGION WITH API
+    let regionName = $('#regionName'); let regionCode = $('#regionCode'); let errorMessageRegionName = $('#error-message-region-name'); 
+    
+    const regionUrl = 'https://geo.api.gouv.fr/regions?nom=';
+    const regionUrlEnd = '&fields=nom,code';
+    $(regionName).on('blur', function(){
         let code = $(this).val();
         //console.log(code);
-        let url = apiUrl + code + format;
+        let url = regionUrl + code + regionUrlEnd;
         //console.log(url);
 
         fetch(url,{method: 'get'}).then(response => response.json()).then(results =>{
-            //console.log(results);
-            $(city_code).find('option').remove();
+            // console.log(results);
+            $(regionCode).find('option').remove();
             if(results.length){
-                $(errorMessage).text('').hide();
+                //console.log(results);
+                //console.log(results[0]['code']);
+                 $(errorMessageRegionName).text('').hide();
                 $.each(results, function(key, value){
-                   // console.log(value);
-                    //console.log(value.nom);
-                    $(city_code).append('<option value="'+value.code+'">'+value.nom+'</option>')
-                    let q = document.getElementById('city_code').value;
-                    console.log(q);
+                    // console.log(value);
+                    $(regionCode).append('<option value="'+results[0]['code']+'">'+results[0]['code']+'</option>')
+                    let r = document.getElementById('regionCode').value;
+                    //console.log(r);
                 });
             }
             else{
-                if($(zipcode).val()){
-                    console.log('Erreur de code postal.');
-                    $(errorMessage).text('Aucune commune avec ce code postal.').show();
+                if($(regionName).val()){
+                    console.log('Ce nom ne correspond à aucune région.');
+                    $(errorMessageRegionName).text('Ce nom ne correspond à aucune région.').show();
                 }
                 else{
-                    $(errorMessage).text('').hide();
+                    $(errorMessageRegionName).text('').hide();
                 }
             }
         }).catch(err => {
@@ -197,20 +192,56 @@ $(document).ready(function(){
             $(city_code).find('option').remove();
         });
     });
+
+
+    // FIND DEPARTEMENT WITH API
+    const apiUrlDepartement = 'https://geo.api.gouv.fr/departements?code=';
+    const formatDepartement = '&fields=nom,code,codeRegion&format=json';
+    let departementCode = $('#departementcode'); let errorMessageDepartement = $('#error-message-departement'); 
+
+    $(departementCode).on('blur', function(){
+        let code = $(this).val();
+        //console.log(code);
+        let url = apiUrlDepartement + code + formatDepartement;
+        //console.log(url);
+
+        fetch(url,{method: 'get'}).then(response => response.json()).then(results =>{
+            //console.log(results);
+            //$(city_code).find('option').remove();
+            if(results.length){
+                $(errorMessageDepartement).text('').hide();
+                //$.each(results, function(key, value){
+                   // console.log(value);
+                    //console.log(value.nom);
+                    // $(city_code).append('<option value="'+value.code+'">'+value.nom+'</option>')
+                    // let q = document.getElementById('city_code').value;
+                    // console.log(q);
+                //});
+            }
+            else{
+                if($(departementcode).val()){
+                    console.log('Aucun département correspondant.');
+                    $(errorMessageDepartement).text('Aucun département correspondant.').show();
+                }
+                else{
+                    $(errorMessageDepartement).text('').hide();
+                }
+            }
+        }).catch(err => {
+            console.log(err);
+            $(departementcode).find('option').remove();
+        });
+    });
 });
 
 
-
-const form = document.getElementById('apiform');
+const form = document.getElementById('searchForm');
 form.addEventListener('submit', function (e) {
    
-
     const token = document.querySelector('meta[name="csrf-token"]').content;
     const url = this.getAttribute('action');
     console.log(url);
-    let city_code = document.getElementById('city_code').value;
-    console.log(city);
-    
+    console.log(regionCode);
     
     fetch(url, {
         headers: {
@@ -218,7 +249,7 @@ form.addEventListener('submit', function (e) {
         },
         method: 'post',
         body: {
-            city_code: city_code}
+            regionCode: regionCode }
         
     });
 

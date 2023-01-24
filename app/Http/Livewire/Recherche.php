@@ -8,6 +8,7 @@ use App\Models\Ville;
 use App\Models\Annonce;
 use Livewire\Component;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Http;
 
 class Recherche extends Component
 {
@@ -24,6 +25,48 @@ class Recherche extends Component
     
     public function search()
     {
+        /* GET AND VERIFY THE CODE OF THE REGION API */
+        $region_name = request()->input('regionName');
+        $region_code = request()->input('regionCode');
+        //dd($region_name);
+        $url_region = Http::get('https://geo.api.gouv.fr/regions?nom='.$region_name.'&fields=nom,code&format=json');
+        //dd($url);
+        $response_region = json_decode($url_region->getBody()->getContents());
+        //dd($response_region);
+        $regions = [];   
+            foreach($response_region as $resp)
+            {
+                array_push($regions, $resp->code);
+            }
+            //dd($region_name);
+            //dd($regions);
+            if(in_array($region_code, $regions)){
+                // dd('ok');
+            }else{
+                $region_code = NULL;
+                // dd('non');
+            }
+
+        /* GET AND VERIFY THE CODE OF THE DEPARTEMENT API */
+        $departement_code = request()->input('departementCode');
+        //dd($departement_code);
+        $url_departement = Http::get('https://geo.api.gouv.fr/departements?code='.$departement_code.'&fields=nom,code,codeRegion&format=json');
+        $response_departement = json_decode($url_departement->getBody()->getContents());
+        //dd($response_departement);
+        $departements = [];   
+            foreach($response_departement as $resp)
+            {
+                array_push($departements, $resp->code);
+            }
+            //dd($departements);
+            if(in_array($departement_code, $departements)){
+                $departement_name = $response_departement[0]->nom;
+                dd('ok');
+            }else{
+                $departement_code = NULL;
+                dd('non');
+            }
+
         try
         {
             $ville = request()->input("ville");

@@ -10,6 +10,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/perso.js',
                 'resources/js/confirmationModal.js',
+                'resources/js/api_ville.js',
             ],
             refresh: [
                 ...refreshPaths,

@@ -234,4 +234,5 @@
        Enregistrer
     </button>
 </form>
+@vite('resources/js/api_ville.js')
 </x-app-layout>
