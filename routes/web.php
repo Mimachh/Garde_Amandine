@@ -82,4 +82,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function(){
 });
 
 
-Route::resource('/a', AnnonceController::class);
+Route::resource('/a', AnnonceController::class)->except('store', 'edit', 'update');
+Route::post('/a', [AnnonceController::class, 'store'])->name('a.store');
+Route::get('/a/{annonce}/edit', [AnnonceController::class, 'edit'])->name('a.edit');
+Route::patch('/a/{annonce}', [AnnonceController::class, 'update'])->name('a.update');

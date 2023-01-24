@@ -302,7 +302,7 @@ input[type="checkbox"][id^="animalsCheckbox"] {
   border: 1px solid grey;
   position: absolute;
   top: 15px;
-  right: 10px;
+  right: 120px;
   width: 25px;
   height: 25px;
   text-align: center;

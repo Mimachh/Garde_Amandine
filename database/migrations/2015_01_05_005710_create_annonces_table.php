@@ -22,9 +22,11 @@ return new class extends Migration
             $table->unsignedBigInteger('ville_id')->onDelete('cascade')->nullable();
             
             /* CODE API COMMUNE */
+            $table->string('code_postal')->nullable();
             $table->string('ville_code')->nullable();
             $table->string('ville_name')->nullable();
             $table->string('region_code')->nullable();
+            $table->string('departement_code')->nullable();
 
             $table->unsignedBigInteger('habitation_id')->onDelete('cascade')->nullable();
             $table->unsignedBigInteger('exterieur_id')->onDelete('cascade')->nullable(); 

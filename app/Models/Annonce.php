@@ -57,7 +57,40 @@ class Annonce extends Model
             $url = Http::get('https://geo.api.gouv.fr/communes?code='.$ville_code.'&fields=nom');
             $responsetest = json_decode($url->getBody()->getContents());
             return $responsetest[0]->nom;
+           
+        }
+        else
+        {
+            return 'Commune non renseignée';
         }         
+    }
+    public function getRegion()
+    {
+        $region_code = $this->region_code;
+        if(!empty($region_code))
+        {
+            $url = Http::get('https://geo.api.gouv.fr/regions?code='.$region_code.'&fields=nom,code');
+            $responsetest = json_decode($url->getBody()->getContents());
+            return $responsetest[0]->nom;
+        }
+        else
+        {
+            return 'Région non renseignée';
+        }          
+    }
+    public function getDepartement()
+    {
+        $departement_code = $this->departement_code;
+        if(!empty($departement_code))
+        {
+            $url = Http::get('https://geo.api.gouv.fr/departements?code='.$departement_code.'&fields=nom,code,codeRegion');
+            $responsetest = json_decode($url->getBody()->getContents());
+            return $responsetest[0]->nom;
+        }
+        else
+        {
+            return 'Departement non renseigné';
+        }          
     }
 /* /Fonctions pour les villes via l'api */
 
@@ -171,6 +204,7 @@ public function start_date_fr()
         'autre', 'ville_id', 'start_watch', 
         'end_watch', 'garde_id', 'photo', 
         'habitation_id', 'exterieur_id',
-        'ville_name', 'ville_code', 'region_code', 
+        'ville_name', 'ville_code', 'region_code',
+        'departement_code', 'code_postal'
     ];
 }

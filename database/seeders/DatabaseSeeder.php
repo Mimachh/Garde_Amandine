@@ -206,9 +206,9 @@ class DatabaseSeeder extends Seeder
 
 
         DB::table('annonces')->insert([
-            ['id' => '1', 'garde_id' => '2', 'habitation_id'=> '1', 'exterieur_id' =>'2', 'name'=>'Karl', 'ville_id' =>1, 'description' => 'je suis un chameau', 'chats' => '1', 'chiens' => '2', 'price' => 12, 'user_id' => 1],
-            ['id' => '2', 'garde_id' => '1', 'habitation_id'=> '2','exterieur_id' =>'2', 'name'=>'Karl', 'ville_id' =>1, 'description' => 'je suis un chameau', 'chats' => '1', 'chiens' => '2', 'price' => 21, 'user_id' => 1],
-            ['id' => '3', 'garde_id' => '2', 'habitation_id'=> '2','exterieur_id' =>'2', 'name'=>'Karl', 'ville_id' =>1, 'description' => 'je suis un chameau', 'chats' => '1', 'chiens' => '2', 'price' => 25, 'user_id' => 1]
+            ['id' => '1', 'garde_id' => '2', 'habitation_id'=> '1', 'exterieur_id' =>'2', 'name'=>'Karl', 'ville_code' =>72028, 'description' => 'je suis un chameau', 'chats' => '1', 'chiens' => '2', 'price' => 1200, 'user_id' => 1],
+            ['id' => '2', 'garde_id' => '1', 'habitation_id'=> '2','exterieur_id' =>'2', 'name'=>'Karl', 'ville_code' =>72028, 'description' => 'je suis un chameau', 'chats' => '1', 'chiens' => '2', 'price' => 2100, 'user_id' => 1],
+            ['id' => '3', 'garde_id' => '2', 'habitation_id'=> '2','exterieur_id' =>'2', 'name'=>'Karl', 'ville_code' =>72028, 'description' => 'je suis un chameau', 'chats' => '1', 'chiens' => '2', 'price' => 2500, 'user_id' => 1]
         ]);
 
         DB::table('ages')->insert([
