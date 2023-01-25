@@ -43,6 +43,9 @@
             </div>
         </div>       
     </div>
+    <div class="ml-4 text-red-600 italic">
+        @error('garde') <small> {{ $errors->first('garde') }}</small>@enderror
+    </div>
 
     <div class="min-h-screen mt-4 mr-12 ml-8 mb-4 grid grid-cols-1 gap-4 lg:grid-cols-3 sm:grid-cols-2">
     @forelse($annonces as $annonce)

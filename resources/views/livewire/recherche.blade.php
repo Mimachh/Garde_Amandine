@@ -50,23 +50,30 @@
               <h3 class="my-4 flow-root font-medium text-gray-900">Vous pouvez rechercher soit :</h3>
               <h3 class="my-4 flow-root font-medium text-sm text-gray-900">Par région</h3>
               <div class="">
-                  <input value="{{ request()->region ?? '' }}" class="w-full border-none bg-gray-200 rounded-xl" placeholder="Entrer un nom de région"
+                  <input value="{{ request()->regionName ?? '' }}" class="w-full border-none bg-gray-200 rounded-xl" placeholder="Entrer un nom de région"
                    name="regionName" type="search" id="regionName">
-                   <select name="regionCode" id="regionCode" hidden></select>
+                   <select name="regionCode" id="regionCode" hidden>
+                    <option value="{{ request()->regionCode ?? '' }}"></option>
+                   </select>
                    <small class="text-red-600 italic" id="error-message-region-name"></small>
               </div>
               <!-- Département Mobile -->
               <h3 class="my-4 flow-root font-medium text-sm text-gray-900">Par département</h3>
               <div class="">
-                  <input value="{{ request()->departement ?? '' }}" class="w-full border-none bg-gray-200 rounded-xl" placeholder="Entrer un nom de département"
+                  <input value="{{ request()->departementCode ?? '' }}" class="w-full border-none bg-gray-200 rounded-xl" placeholder="Entrer un nom de département"
                    name="departementCode" type="search" id="departementcode">
                    <small class="text-red-600 italic" id="error-message-departement"></small>
               </div>
               <!-- Commune Mobile -->
-              <h3 class="my-4 flow-root font-medium text-sm text-gray-900">Par commune</h3>
+              <h3 class="my-4 flow-root font-medium text-sm text-gray-900">Par code postal</h3>
               <div class="">
-                  <input value="{{ request()->commune ?? '' }}" class="w-full border-none bg-gray-200 rounded-xl" placeholder="Entrer un nom de commune"
-                   name="commune" type="search" id="commune">
+                  <input value="{{ request()->zipcode ?? '' }}" class="w-full border-none bg-gray-200 rounded-xl" placeholder="Entrer votre code postal"
+                   name="zipcode" type="search" id="zipcode">
+                   <small class="text-red-600 italic" id="error-message"></small>
+              </div>
+              <div class="mt-2">
+                <select name="city_code" id="city_code" class="border-none bg-gray-200 rounded-xl w-full" placeholder="Les communes s'afficheront ici">
+                </select>
               </div>
             </div>
             <!-- Type Garde Mobile -->
