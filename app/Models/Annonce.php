@@ -48,52 +48,6 @@ class Annonce extends Model
         );
     }
 
-/* Fonctions pour les villes via l'api */
-    // public function getVille()
-    // {
-    //     $ville_code = $this->ville_code;
-    //     if(!empty($ville_code))
-    //     {
-    //         $url = Http::get('https://geo.api.gouv.fr/communes?code='.$ville_code.'&fields=nom&format=json');
-    //         $responsetest = json_decode($url->getBody()->getContents());
-    //         return $responsetest[0]->nom;
-           
-    //     }
-    //     else
-    //     {
-    //         return 'Commune non renseignée';
-    //     }         
-    // }
-    // public function getRegion()
-    // {
-    //     $region_code = $this->region_code;
-    //     if(!empty($region_code))
-    //     {
-    //         $url = Http::get('https://geo.api.gouv.fr/regions?code='.$region_code.'&fields=nom,code');
-    //         $responsetest = json_decode($url->getBody()->getContents());
-    //         return $responsetest[0]->nom;
-    //     }
-    //     else
-    //     {
-    //         return 'Région non renseignée';
-    //     }          
-    // }
-    // public function getDepartement()
-    // {
-    //     $departement_code = $this->departement_code;
-    //     if(!empty($departement_code))
-    //     {
-    //         $url = Http::get('https://geo.api.gouv.fr/departements?code='.$departement_code.'&fields=nom,code,codeRegion');
-    //         $responsetest = json_decode($url->getBody()->getContents());
-    //         return $responsetest[0]->nom;
-    //     }
-    //     else
-    //     {
-    //         return 'Departement non renseigné';
-    //     }          
-    // }
-/* /Fonctions pour les villes via l'api */
-
 /* Fonctions pour le prix */
 
     public function getPrice()
