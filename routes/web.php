@@ -72,14 +72,20 @@ Route::post('/apisearch', [Annonces::class, 'search'])->name('annonces.apisearch
 /* Route Admin */
 Route::middleware(['auth', 'role:Admin'])->group(function(){
     
-    Route::get('/admin', function () { return view('admin.index'); })->name('admin/');
+   
 
     /* Passe par livewire pour le crud */
-    Route::get('/admin/ads', [AdminAdController::class, 'index'])->name('admin.ads.index');
-    Route::get('/admin/proposals', [AdminProposalController::class, 'index'])->name('admin.proposals.index');
-    Route::get('/admin/contacts', [AdminContactMessageController::class, 'index'])->name('admin.contacts.index');
-    Route::get('/admin/users', [AdminUserController::class, 'index'])->name('admin.users.index');
-    Route::get('/admin/animals', [AdminAnimalController::class, 'index'])->name('admin.animals.index');
+    Route::prefix('admin')->group(function() {
+        Route::get('/', function () { return view('admin.index'); })->name('admin/');
+        Route::name('admin.')->group(function() {
+            Route::get('/ads', [AdminAdController::class, 'index'])->name('ads.index');
+            Route::get('/proposals', [AdminProposalController::class, 'index'])->name('proposals.index');
+            Route::get('/contacts', [AdminContactMessageController::class, 'index'])->name('contacts.index');
+            Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+            Route::get('/animals', [AdminAnimalController::class, 'index'])->name('animals.index');
+        });
+    });
+   
 });
 
 
