@@ -32,15 +32,7 @@ class Annonces extends Component
             'paid' => $paid,]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('annonces.create');
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -54,8 +46,6 @@ class Annonces extends Component
     }
     public $annonce;
     
-    
-
     /**
      * Display the specified resource.
      *

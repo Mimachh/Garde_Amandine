@@ -37,7 +37,7 @@ class AnnonceController extends Controller
         $habitations = Habitation::all();
         $exterieurs = Exterieur::all();
         
-        return view('a.create', [
+        return view('annonces.create', [
             'habitations' => $habitations,
             'exterieurs' => $exterieurs,
             'gardes' => $gardes,
@@ -199,7 +199,7 @@ class AnnonceController extends Controller
         $habitations = Habitation::all();
         $exterieurs = Exterieur::all();
         $price = $annonce->price / 100;
-        return view('a.edit', [
+        return view('annonces.edit', [
             'annonce' => $annonce,
             'price' => $price,
         ]);

@@ -44,7 +44,14 @@ Route::middleware([
 
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
 
-    Route::resource('/annonces', Annonces::class)->except('index');
+
+
+
+
+    Route::resource('/annonces', AnnonceController::class)->except('show');
+    //Route::resource('/annonces', Annonces::class)->except('index','create', 'store', 'show');
+    Route::get('/annonces/{annonce}', [Annonces::class, 'show'])->name('annonces.show');
+   
 
     Route::resource('/animals', Animals::class);   
 
@@ -71,9 +78,6 @@ Route::post('/apisearch', [Annonces::class, 'search'])->name('annonces.apisearch
 
 /* Route Admin */
 Route::middleware(['auth', 'role:Admin'])->group(function(){
-    
-   
-
     /* Passe par livewire pour le crud */
     Route::prefix('admin')->group(function() {
         Route::get('/', function () { return view('admin.index'); })->name('admin/');
@@ -89,7 +93,4 @@ Route::middleware(['auth', 'role:Admin'])->group(function(){
 });
 
 
-Route::resource('/a', AnnonceController::class)->except('store', 'edit', 'update');
-Route::post('/a', [AnnonceController::class, 'store'])->name('a.store');
-Route::get('/a/{annonce}/edit', [AnnonceController::class, 'edit'])->name('a.edit');
-Route::patch('/a/{annonce}', [AnnonceController::class, 'update'])->name('a.update');
+

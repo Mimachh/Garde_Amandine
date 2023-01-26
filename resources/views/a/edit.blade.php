@@ -4,7 +4,7 @@
         {{ __('Editer mon annonce') }}
     </h1>
 </x-slot>
-<form action="{{ route('a.update', $annonce ) }}" method="post" id="apiform" 
+<form action="{{ route('annonces.update', $annonce ) }}" method="post" id="apiform" 
     class="bg-white space-y-6 w-full max-w-full md:max-w-3xl mx-auto mb-12 px-4 py-10 rounded shadow-lg" enctype="multipart/form-data">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <p>Les champs obligatoires sont marqués par *</p>
