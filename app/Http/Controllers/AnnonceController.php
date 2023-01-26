@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Garde;
+use App\Models\Animal;
+use App\Models\Espece;
 use App\Models\Annonce;
 use App\Models\Exterieur;
 use App\Models\Habitation;
@@ -23,7 +25,7 @@ class AnnonceController extends Controller
      */
     public function index()
     {
-        //
+        abort(403);
     }
 
     /**
@@ -183,8 +185,24 @@ class AnnonceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Annonce $annonce)
-    {
-        //
+    {   
+        $animal = Animal::where('user_id', $annonce->user_id)->get();
+        $cat= Espece::select('espece')->where('id', $annonce->chats)->get();
+        $dog = Espece::select('espece')->where('id', $annonce->chiens)->get();
+        $fish = Espece::select('espece')->where('id', $annonce->poissons)->get();
+        $rabbit = Espece::select('espece')->where('id', $annonce->rongeurs)->get(); 
+        $bird = Espece::select('espece')->where('id', $annonce->oiseaux)->get();
+        $rept = Espece::select('espece')->where('id', $annonce->reptiles)->get();
+        $farm = Espece::select('espece')->where('id', $annonce->ferme)->get();
+        $other = Espece::select('espece')->where('id', $annonce->autre)->get();
+    
+        $all_garde = [$cat, $dog, $fish, $rabbit, $bird, $rept, $farm, $other];
+   
+        return view('annonces.show', [
+            'annonce' => $annonce, 
+            'watches'=>$all_garde, 
+            'animals' => $animal,
+        ]);
     }
 
     /**

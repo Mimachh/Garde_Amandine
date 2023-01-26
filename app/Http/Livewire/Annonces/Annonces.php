@@ -55,30 +55,30 @@ class Annonces extends Component
     public function show(Annonce $annonce)
     {       
       
-        $animal = Animal::where('user_id', $annonce->user_id)->get();
+    //     $animal = Animal::where('user_id', $annonce->user_id)->get();
      
-       $this->emit('annonce', $annonce->id);
+    //    $this->emit('annonce', $annonce->id);
 
       
 
-        $cat= Espece::select('espece')->where('id', $annonce->chats)->get();
-        $dog = Espece::select('espece')->where('id', $annonce->chiens)->get();
-        $fish = Espece::select('espece')->where('id', $annonce->poissons)->get();
-        $rabbit = Espece::select('espece')->where('id', $annonce->rongeurs)->get(); 
-        $bird = Espece::select('espece')->where('id', $annonce->oiseaux)->get();
-        $rept = Espece::select('espece')->where('id', $annonce->reptiles)->get();
-        $farm = Espece::select('espece')->where('id', $annonce->ferme)->get();
-        $other = Espece::select('espece')->where('id', $annonce->autre)->get();
+    //     $cat= Espece::select('espece')->where('id', $annonce->chats)->get();
+    //     $dog = Espece::select('espece')->where('id', $annonce->chiens)->get();
+    //     $fish = Espece::select('espece')->where('id', $annonce->poissons)->get();
+    //     $rabbit = Espece::select('espece')->where('id', $annonce->rongeurs)->get(); 
+    //     $bird = Espece::select('espece')->where('id', $annonce->oiseaux)->get();
+    //     $rept = Espece::select('espece')->where('id', $annonce->reptiles)->get();
+    //     $farm = Espece::select('espece')->where('id', $annonce->ferme)->get();
+    //     $other = Espece::select('espece')->where('id', $annonce->autre)->get();
     
-        $all_garde = [$cat, $dog, $fish, $rabbit, $bird, $rept, $farm, $other];
+    //     $all_garde = [$cat, $dog, $fish, $rabbit, $bird, $rept, $farm, $other];
    
         
   
-        return view('annonces.show', [
-            'annonce' => $annonce, 
-            'watches'=>$all_garde, 
-            'animals' => $animal,
-        ]);
+    //     return view('annonces.show', [
+    //         'annonce' => $annonce, 
+    //         'watches'=>$all_garde, 
+    //         'animals' => $animal,
+    //     ]);
     }
 
     /**

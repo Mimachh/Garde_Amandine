@@ -45,12 +45,9 @@ Route::middleware([
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
 
 
-
-
-
-    Route::resource('/annonces', AnnonceController::class)->except('show');
+    Route::resource('/annonces', AnnonceController::class);
     //Route::resource('/annonces', Annonces::class)->except('index','create', 'store', 'show');
-    Route::get('/annonces/{annonce}', [Annonces::class, 'show'])->name('annonces.show');
+    //Route::get('/annonces/{annonce}', [Annonces::class, 'show'])->name('annonces.show');
    
 
     Route::resource('/animals', Animals::class);   
