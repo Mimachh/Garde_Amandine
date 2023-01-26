@@ -6,11 +6,12 @@ use App\Http\Livewire\GardePage;
 use App\Http\Livewire\Recherche;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\GardeDonePDF;
+
 use App\Http\Livewire\AnimalOwnedForm;
 
+
 use App\Http\Livewire\Animals\Animals;
-
-
 use App\Http\Livewire\Annonces\Annonces;
 use App\Http\Controllers\AnnonceController;
 use App\Http\Controllers\ProposalController;
@@ -59,7 +60,7 @@ Route::middleware([
         return redirect()->back();
     })->name('markRead');
     
-
+    Route::get('generate-pdf/{paid}', [GardeDonePDF::class, 'generateGardeDonePDF'])->name('generatePDF');
 });
 
 /* Page principale des Annonces */

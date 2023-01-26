@@ -218,11 +218,15 @@ class DatabaseSeeder extends Seeder
             
         ]);
      
-       
-
         DB::table('animals')->insert([
             ['id' => '1', 'animal_name' => "Bunny"],         
         ]);
+
+        DB::table('paids')->insert([
+            ['id' => '1', 'start_watch' => "20/01/23", 'end_watch' => "23/01/23", 'price' => '1200', 'owner' => 'Karl', 'keeper' => 'Amandine'],         
+        ]);
+
+
      
     }
 

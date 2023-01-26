@@ -1,12 +1,16 @@
 <x-app-layout>
-
+    <x-slot name="searchBar">
+        @livewire('recherche')
+    </x-slot>
     <!-- <form id="search-form" action="{{ route('annonces.apisearch') }}" method="post">
         <input name="q" id="q" type="search">
         <input type="checkbox"  name="chat" id="chat" value="1">
         <input type="search" name="ville" id="ville">
         <button type="submit">Recherche</button>
     </form> -->
-    @livewire('recherche')
+    @foreach($paid as $pai)
+    <a class="btn btn-primary" href="{{ route('generatePDF', $pai) }}">Export to PDF</a>
+    @endforeach
     <!-- Sort By -->
     <div class="flex justify-end mr-8 mt-12">
         <div class="relative">
@@ -116,11 +120,11 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
                                     </svg>
                                     <p class="text-sm text-gray-600 pl-1 pb-3">
+                                    Localisation : 
                                         <span class="text-md text-gray-800">
-                                         Localisation : 
+                                        {{ $annonce->ville_name }}
                                         </span>
-                                        {{ $annonce->getRegion()}} / {{ $annonce->getDepartement()}} / {{ $annonce->getVille() }}  
-                                    </p>    
+                                    </p>   
                                 </div>
                                 <!--Fin ville -->
                                 <!-- Type de garde -->

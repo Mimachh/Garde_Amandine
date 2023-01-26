@@ -4,19 +4,19 @@ namespace App\Http\Livewire;
 
 use Throwable;
 use App\Models\Garde;
-use App\Models\Ville;
 use App\Models\Annonce;
 use Livewire\Component;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Http;
 
+
 class Recherche extends Component
 {
-   
     public $q;
     public $gardes;
     public $annonces;
     public $garde;
+    public $count;
 
     public function mount()
     {
@@ -126,7 +126,8 @@ class Recherche extends Component
             }
         
             //$g = Garde::where('id', 'like', "%$garde%")->pluck('id');
-            $a= Annonce::when($departement_code, function ($s) use ($departement_code){
+            $count= Annonce::where('status', 1)
+                ->when($departement_code, function ($s) use ($departement_code){
                     return $s->where('departement_code', '=', $departement_code);})
                 ->when($region_code, function ($s) use ($region_code){
                     return $s->where('region_code', '=', $region_code);})
@@ -150,10 +151,36 @@ class Recherche extends Component
                         return $s->where('ferme', $ferme);})
                 ->when($autre, function ($s) use ($autre) {
                         return $s->where('autre', $autre);})
-                ->paginate(6);
+                ->count();
 
-                
-                return view('annonces.search', ['annonces' => $a]);
+                return view('annonces.search', 
+                ['count' => $count,
+                'annonces' => Annonce::where('status', 1)
+                ->when($departement_code, function ($s) use ($departement_code){
+                    return $s->where('departement_code', '=', $departement_code);})
+                ->when($region_code, function ($s) use ($region_code){
+                    return $s->where('region_code', '=', $region_code);})
+                ->when($city_code, function ($s) use ($city_code){
+                    return $s->where('ville_code', '=', $city_code);})
+                ->when($g, function ($s) use ($g) {
+                    return $s->where('garde_id', $g);})
+                ->when($chats, function ($s) use ($chats) {
+                    return $s->where('chats', $chats);})
+                ->when($chiens, function ($s) use ($chiens) {
+                    return $s->where('chiens', $chiens);})
+                ->when($poissons, function ($s) use ($poissons) {
+                    return $s->where('poissons', $poissons);})
+                ->when($rongeurs, function ($s) use ($rongeurs) {
+                    return $s->where('rongeurs', $rongeurs);})
+                ->when($oiseaux, function ($s) use ($oiseaux) {
+                    return $s->where('oiseaux', $oiseaux);})
+                ->when($reptiles, function ($s) use ($reptiles) {
+                        return $s->where('reptiles', $reptiles);})
+                ->when($ferme, function ($s) use ($ferme) {
+                        return $s->where('ferme', $ferme);})
+                ->when($autre, function ($s) use ($autre) {
+                        return $s->where('autre', $autre);})
+                ->paginate(6)]);
         }
         catch (Throwable $e)
         {

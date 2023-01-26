@@ -52,7 +52,6 @@ class AnnonceController extends Controller
      */
     public function store(Request $request)
     {      
-      
         $api_url = 'https://geo.api.gouv.fr/';
         if(!empty($_POST['zipcode']) && !empty($_POST['city_code']))
         {
@@ -62,7 +61,7 @@ class AnnonceController extends Controller
             $response = json_decode($client->getBody()->getContents());
             //dd($response);
             $cities = [];
-           
+
             foreach($response as $resp)
             {
                 array_push($cities, $resp->code);
@@ -82,12 +81,15 @@ class AnnonceController extends Controller
                 $departement_code = NULL;
                 //dd('non');
             }
-
-            // TEST FOR GET NAME FROM CODE
-            $test = Http::get('https://geo.api.gouv.fr/communes?code='.$city_code.'&fields=nom');
-            $responsetest = json_decode($test->getBody()->getContents());
-            //dd($responsetest[0]->nom);
-           
+            // GET REGION AND DEPARTEMENT FROM API
+            $departement_nom_request = Http::get('https://geo.api.gouv.fr/departements?code='.$departement_code.'&fields=nom');
+            $response_departement_nom = json_decode($departement_nom_request->getBody()->getContents());
+            $departement_nom = $response_departement_nom[0]->nom;
+            //dd($response_departement_nom[0]->nom);
+            $region_nom_request = Http::get('https://geo.api.gouv.fr/regions?code='.$region_code.'&fields=nom');
+            $response_region_nom = json_decode($region_nom_request->getBody()->getContents());
+            $region_nom = $response_region_nom[0]->nom;
+            //dd($response_region_nom[0]->nom);
         }
        //dd($ville_name, $ville_code, $region_code);
         $user_id = auth()->user()->id;
@@ -145,9 +147,10 @@ class AnnonceController extends Controller
             $img = Image::make(public_path("/storage/annonces_photos/{$name_file}"))->fit(1795, 1200);
             $img->save();
 
+        $complete_locate = $region_nom.'/'.$departement_nom.'/'.$ville_name;
         $annonce = Annonce::create([
             'ville_code' => $ville_code,
-            'ville_name' => $ville_name,
+            'ville_name' => $complete_locate,
             'region_code' => $region_code,
             'departement_code' => $departement_code,
             'code_postal' => $zipcode,

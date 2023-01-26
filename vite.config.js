@@ -7,6 +7,7 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/css/css_perso.css',
+                'resources/css/ad_form.css',
                 'resources/js/app.js',
                 'resources/js/perso.js',
                 'resources/js/confirmationModal.js',

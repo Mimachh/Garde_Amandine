@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Annonces;
 
 use Throwable;
+use App\Models\Paid;
 use App\Models\Garde;
 use App\Models\Ville;
 use App\Models\Animal;
@@ -20,12 +21,15 @@ class Annonces extends Component
 
     public function index(Request $request)
     {
+        $paid = Paid::all();
         $annonces = Annonce::query()
         ->where('status', 1)->filters(
             sortBy: $request->sortBy,
             direction: $request->direction,
         )->withCount(relations: 'fav')->latest()->paginate(6);    
-        return view('annonces.index', ['annonces' => $annonces]);
+        return view('annonces.index', [
+            'annonces' => $annonces,
+            'paid' => $paid,]);
     }
 
     /**

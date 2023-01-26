@@ -1,12 +1,47 @@
 <x-app-layout>
+    <x-slot name="searchBar">
+        @livewire('recherche')
+    </x-slot>
     <!-- <form id="search-form" action="{{ route('annonces.apisearch') }}" method="post">
         <input name="q" id="q" type="search">
         <input type="checkbox"  name="chat" id="chat" value="1">
         <input type="search" name="ville" id="ville">
         <button type="submit">Recherche</button>
     </form> -->
-
-    @livewire('recherche')
+    <p>{{ $count }} Résultat(s) pour la recherche : 
+        <ul>
+            <li>
+                {{ request()->regionName ?? '' }}
+            </li>
+            <li>
+                {{ request()->departementCode ?? '' }}
+            </li>
+            <li>
+                {{ request()->zipcode ?? '' }}
+            </li>
+            <li>
+                @if(request()->garde == 1) Chez le Pet-Sitter
+                @elseif(request()->garde == 2) Visite à domicile
+                @elseif(request()->garde == 3) Chez le Pet-Sitter/En visite
+                @endif
+            </li>
+            @if(request()->chats || request()->chiens || request()->poissons || 
+                request()->rongeurs || request()->oiseaux || request()->reptiles || 
+                request()->ferme || request()->autre)
+            <li>
+                    Pour faire garder :
+                    @if(request()->chats) Chat @endif
+                    @if(request()->chiens) Chien @endif
+                    @if(request()->poissons) Poisson @endif
+                    @if(request()->rongeurs) Rongeur @endif
+                    @if(request()->oiseaux) Oiseau @endif
+                    @if(request()->reptiles) Reptile @endif
+                    @if(request()->ferme) Animaux de la ferme @endif
+                    @if(request()->autre) Autre @endif  
+            </li>
+            @endif
+        </ul>
+    </p>
     <!-- Sort By -->
     <div class="flex justify-end mr-8">
         <div class="relative">
@@ -46,40 +81,6 @@
     <div class="ml-4 text-red-600 italic">
         @error('garde') <small> {{ $errors->first('garde') }}</small>@enderror
     </div>
-    <p>Résultat pour la recherche : 
-        <ul>
-            <li>
-                {{ request()->regionName ?? '' }}
-            </li>
-            <li>
-                {{ request()->departementCode ?? '' }}
-            </li>
-            <li>
-                {{ request()->zipcode ?? '' }}
-            </li>
-            <li>
-                @if(request()->garde == 1) Chez le Pet-Sitter
-                @elseif(request()->garde == 2) Visite à domicile
-                @elseif(request()->garde == 3) Chez le Pet-Sitter/En visite
-                @endif
-            </li>
-            @if(request()->chats || request()->chiens || request()->poissons || 
-                request()->rongeurs || request()->oiseaux || request()->reptiles || 
-                request()->ferme || request()->autre)
-            <li>
-                    Pour faire garder :
-                    @if(request()->chats) Chat @endif
-                    @if(request()->chiens) Chien @endif
-                    @if(request()->poissons) Poisson @endif
-                    @if(request()->rongeurs) Rongeur @endif
-                    @if(request()->oiseaux) Oiseau @endif
-                    @if(request()->reptiles) Reptile @endif
-                    @if(request()->ferme) Animaux de la ferme @endif
-                    @if(request()->autre) Autre @endif  
-            </li>
-            @endif
-        </ul>
-    </p>
     <div class="min-h-screen mt-4 mr-12 ml-8 mb-4 grid grid-cols-1 gap-4 lg:grid-cols-3 sm:grid-cols-2">
     @forelse($annonces as $annonce)
         <div class="w-full md:px-4 max-h-62 lg:px-0">
@@ -147,10 +148,10 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
                                     </svg>
                                     <p class="text-sm text-gray-600 pl-1 pb-3">
+                                    Localisation : 
                                         <span class="text-md text-gray-800">
-                                         Localisation : 
+                                        {{ $annonce->ville_name }}
                                         </span>
-                                        {{ $annonce->getRegion()}} / {{ $annonce->getDepartement()}} / {{ $annonce->getVille() }}  
                                     </p>       
                                 </div>
                                 <!--Fin ville -->

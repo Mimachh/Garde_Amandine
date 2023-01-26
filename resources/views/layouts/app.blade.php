@@ -36,7 +36,12 @@
                     </div>
                 </header>
             @endif
-
+            <!-- Search Bar -->
+            @if(isset($searchBar))    
+                <div>
+                    {{ $searchBar}}
+                </div>
+            @endif
             <!-- Button Back --> 
             @if(isset($buttonBack))    
                 <div class="mt-2">
