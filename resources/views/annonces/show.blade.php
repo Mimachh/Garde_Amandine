@@ -1,7 +1,13 @@
 <x-app-layout>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+
+    
     <x-slot name="header">
         <h1 class="font-semibold text-xl text-gray-200 leading-tight text-center">
-            Annonce de {{$annonce->name}}
+            Annonce de {{$annonce->user->name}}
         </h1>
     </x-slot>
     
@@ -10,8 +16,8 @@
     </x-slot>
 
 <section class="mb-24 md:mb-8">
+    <!-- Annonce -->
     <div class="md:grid md:grid-cols-3 md:gap-4 relative">
-        <!-- Annonce -->
         <div class="col-span-2 md:ml-24 space-y-4">
             <div class="aspect-w-1 aspect-h-1">
                 <img class="rounded-md  w-full h-80 md:w-3/4 object-cover object-center group-hover:opacity-75 " src="{{ asset('storage/annonces_photos/' . $annonce->photo) }}">
@@ -138,6 +144,7 @@
                     <hr>
                 </div>   
             </div>
+            <div id="adMap" class="mx-2"></div>
         </div>
         <div>
             <!-- Button card -->
@@ -161,185 +168,223 @@
             </div>
         </div>
     </div>
-</section>
-    
-<div class="pb-5">
-       
 
-        <!-- Animaux -->
-        <div class="col-span-3 text-center">
-            <h3 class="text-green-700 font-bold text-3xl pb-2">Je vous présente mes animaux </h3>
-        </div>
-        @if(auth()->user()->id === $annonce->user_id)
-            <p class="ml-10 mt-2">Ajouter un animal en cliquant <a class="text-blue-600" href="{{ route('animals.create') }}">ici.</a></p> 
-        @endif
+    <!-- Animals -->
+    <div class="col-span-3 text-center">
+        <h3 class="text-green-700 font-bold text-3xl pb-2">Je vous présente mes animaux </h3>
+    </div>
+    @if(auth()->user()->id === $annonce->user_id)
+        <p class="ml-10 mt-2">Ajouter un animal en cliquant <a class="text-blue-600" href="{{ route('animals.create') }}">ici.</a></p> 
+    @endif
+
+    <div class="mt-8 md:grid md:grid-cols-3 md:gap-4">
         @forelse($animals as $animal)
-            <div class="grid grid-cols-3 gap-4 sm:mx-10 my-10 border rounded shadow hover:shadow-lg">
-                <div class="pr-5 md:col-span-2 col-span-3 ml-4">
-
-                    <!-- Plaque d'immat -->
-                        <!-- 
-                        <div class="grid place-items-center pt-1">
-                            <div class="rounded-lg bg-white shadow-md hover:shadow-xl">
-                                <div class="flex w-full rounded-lg border-4 border-black bg-yellow-500 shadow">
-                                    <label class="flex flex-col justify-between bg-blue-700 rounded-l p-4 text-2xl font-bold text-white">
-                                        <img class="h-4" src="https://cdn.cdnlogo.com/logos/e/51/eu.svg" />
-                                        <small class="text-xs text-center py-1">{{ $animal->espece->espece }}</small>
-                                        <small class="text-xs text-center">{{ $animal->race->race_animal}}</small>
-                                    </label>
-                                    <label class="p-4 font-mono text-5xl font-medium">{{$animal->animal_name}}</label>
-                                </div>
-                            </div>
-                        </div>
-                        -->
-                    <!-- Fin plaque -->
-
-                    <!-- Nom -->
-                        <div class="flex">
-                            @can('update', $animal)
-                                <div class="flex md:justify-end mb-3 pr-2 mt-2">
-                                    <a class="text-sm pr-10 items-center" href="{{ route('animals.edit', $animal) }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-5 inline">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                        </svg>
-                                        <p class="inline text-green-700">Modifier la fiche</p>
-                                    </a>
-                                </div> 
-                            @endcan
-
-                            @can('delete', $animal)
-                                <div class="flex md:justify-end mb-3 pr-2 mt-2">
+        <div class="grid-col-span-1 md:ml-24 bg-green-400">
+            <div>
+                PUB
+            </div>
+        </div>
+        <div class="md:ml-24 col-span-2 space-y-4">
+            <div class="aspect-w-1 aspect-h-1">
+                <img class="rounded-md  w-full h-80 md:w-3/4 object-cover object-center group-hover:opacity-75 " src="{{ asset('storage/annonces_photos/' . $annonce->photo) }}">
+            </div>
+            <div class="space-y-4 ml-2 md:ml-0">
+                <hr>
+                <!-- Name -->
+                <div>
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-lg md:text-xl font-bold">{{ $animal->animal_name }}</h2>
+                        @if($annonce->user_id === auth()->user()->id)
+                            <div class="flex mr-8 space-x-4">
+                                @can('update', $animal)
+                                <a href="{{ route('animals.edit', $animal) }}">
+                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11 4.00023H6.8C5.11984 4.00023 4.27976 4.00023 3.63803 4.32721C3.07354 4.61483 2.6146 5.07377 2.32698 5.63826C2 6.27999 2 7.12007 2 8.80023V17.2002C2 18.8804 2 19.7205 2.32698 20.3622C2.6146 20.9267 3.07354 21.3856 3.63803 21.6732C4.27976 22.0002 5.11984 22.0002 6.8 22.0002H15.2C16.8802 22.0002 17.7202 22.0002 18.362 21.6732C18.9265 21.3856 19.3854 20.9267 19.673 20.3622C20 19.7205 20 18.8804 20 17.2002V13.0002M7.99997 16.0002H9.67452C10.1637 16.0002 10.4083 16.0002 10.6385 15.945C10.8425 15.896 11.0376 15.8152 11.2166 15.7055C11.4184 15.5818 11.5914 15.4089 11.9373 15.063L21.5 5.50023C22.3284 4.6718 22.3284 3.32865 21.5 2.50023C20.6716 1.6718 19.3284 1.6718 18.5 2.50022L8.93723 12.063C8.59133 12.4089 8.41838 12.5818 8.29469 12.7837C8.18504 12.9626 8.10423 13.1577 8.05523 13.3618C7.99997 13.5919 7.99997 13.8365 7.99997 14.3257V16.0002Z" stroke="#ff9200" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                </a>
+                                @endcan
+                                @can('delete', $animal)
+                                <a href="">
                                     <livewire:animals.delete-animal-comp :animal="$animal">
-                                </div>
-                            @endcan
-                        </div>
-                        <h2 class="text-xl text-bold text-gray-700">Voici {{ $animal->animal_name }}</h2>                                                                 
-                        <div class="mt-4 mb-4 mr-10 space-y-1">       
-                            <p class="ml-2 text-gray-700">{{$animal->espece->espece}}</p>
-                            <p class="ml-2 text-gray-700">{{$animal->race->race_animal}}</p>                                                                         
-                        </div>
-                        
-                    <!-- Fin Nom -->
-
-                    <!-- Personnalité -->
-                        <label for="personnality" class="my-1 font-medium text-gray-600 mt-6">Sa personnalité :</label> 
-                        <p class="text-gray-800 mb-5" id="personnality" name="personnality">{{ $animal->personnality }} </p>
-                    <!-- Fin personnalité -->
-
-                    <!-- Age -->
-                        <div class="flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="blue" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mt-1">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.87c1.355 0 2.697.055 4.024.165C17.155 8.51 18 9.473 18 10.608v2.513m-3-4.87v-1.5m-6 1.5v-1.5m12 9.75l-1.5.75a3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0L3 16.5m15-3.38a48.474 48.474 0 00-6-.37c-2.032 0-4.034.125-6 .37m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.17c0 .62-.504 1.124-1.125 1.124H4.125A1.125 1.125 0 013 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 016 13.12M12.265 3.11a.375.375 0 11-.53 0L12 2.845l.265.265zm-3 0a.375.375 0 11-.53 0L9 2.845l.265.265zm6 0a.375.375 0 11-.53 0L15 2.845l.265.265z" />
-                            </svg>
-                            <label for="age" class="ml-2 my-1 font-medium text-gray-600 ">Son âge :</label>   
-                        </div> 
-                        <p class="text-gray-800 mb-5" id="age" name="age"> {{ $animal->age->age}}</p>
-                    <!-- Fin age -->
-
-                    <!-- S'entend bien avec -->
-                        <div x-data="{ open: false }">
-                            
-                            <h2 for="like" class="my-1 font-medium text-gray-600 mt-6 mb-2">
-                            <button x-on:click="open = ! open">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="green" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="inline w-5 h-5 mb-1">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
-                                    </svg>
-    
-                                    S'entend bien avec
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline w-5 h-5 ml-2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                    </svg>
-                                </button>
-                            </h2>
-                            <div x-cloak x-show="open" x-transition class="space-y-2 mb-4 ml-2 md:pr-6"> 
-                                @if($animal->male_dogs === 1)
-                                    <div class="flex">
-                                        <p class="text-gray-800 mr-2">Chiens mâles</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-                                @endif
-
-                                @if($animal->female_dogs === 1)
-                                    <div class="flex">
-                                        <p class="text-gray-800 mr-2">Chiens femelles</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-                                @endif
-
-                                @if($animal->male_cats  === 1)
-                                    <div class="flex">
-                                        <p class="text-gray-800 mr-2">Chats mâles</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-                                @endif
-
-                                @if($animal->female_cats  === 1)
-                                    <div class="flex">
-                                        <p class="text-gray-800 mr-2">Chats femelles</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-                                @endif
-
-                                @if($animal->male_rongeurs  === 1)
-                                    <div class="flex">
-                                        <p class="text-gray-800 mr-2">Rongeurs mâles</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-                                @endif
-
-                                @if($animal->female_rongeurs === 1)
-                                    <div class="flex">
-                                        <p class="text-gray-800 mr-2">Rongeurs femelles</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-                                @endif
-
-                                @if($animal->birds === 1)
-                                    <div class="flex">
-                                        <p class="text-gray-800 mr-2">Oiseaux</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-                                @endif
-
-                                @if($animal->reptiles === 1)
-                                    <div class="flex">
-                                        <p class="text-gray-800 mr-2">Reptiles</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-                                @endif
+                                </a>
+                                @endcan                    
                             </div>
-                        </div>
-                    <!-- S'entend bien avec -->
-                </div>
-            
-                <div class="col-span-3 md:col-span-1 mx-auto">
-                    <div class="mx-2 my-2 aspect-w-1 aspect-h-1 overflow-hidden xl:aspect-w-3 xl:aspect-h-4">
-                        <img class="h-80 w-80 rounded-lg object-cover object-center group-hover:opacity-75" src="{{ asset('storage/animals_photos/' . $animal->photo) }}">
+                        @endif
                     </div>
                 </div>
+                <hr>
+                <!-- Type -->
+                <div class="font-medium">
+                    <p class="">{{$animal->espece->espece}}</p>
+                    <p class="">{{$animal->race->race_animal}}</p>
+                </div>
+                <hr>
+                <!-- Personnality -->
+                <div>
+                    <div>
+                        <p class="font-medium">Sa personnalité : <span class="font-normal"> {{ $animal->personnality }}</span></p>    
+                    </div>
+                </div>
+                <hr>
+                <!-- Age -->
+                <div>
+                    <div class="flex">
+                        <svg class="h-6 w-6" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione-monotone" preserveAspectRatio="xMidYMid meet" fill="#000000" stroke="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M38.026 30.765a35.948 35.948 0 0 0 2.005-.265v-4.701c-1.024.489-2.092.791-3.154 1.025c-2.693.563-5.432.629-8.146.345c-1.368-.173-2.685-.399-4.049-.884c-.27-.102-.538-.216-.805-.344v4.226c4.682.767 9.443 1.092 14.149.598" fill="#ff40ff"></path><path d="M56.299 41.987V24.841c0-1.988-1.366-3.839-3.703-5.407v-7.509c0-.735-.583-1.343-1.342-1.458c.557-.236.951-.723.951-1.309c0-.813-1.652-3.437-1.652-3.437s-1.654 2.623-1.654 3.437c0 .578.385 1.061.931 1.301c-.802.08-1.431.703-1.431 1.466v5.385a35.157 35.157 0 0 0-4.49-1.377a1.6 1.6 0 0 0 .123-.596c0-.983-2-4.154-2-4.154s-1.83 2.904-1.984 4.014c-1.959-.289-4.044-.457-6.195-.525V7.467c0-.661-.512-1.213-1.188-1.334c.461-.215.783-.631.783-1.126C33.447 4.295 32 2 32 2s-1.447 2.295-1.447 3.007c0 .489.314.901.766 1.118c-.713.092-1.266.655-1.266 1.342v7.206c-2.103.07-4.142.236-6.06.518c-.188-1.135-1.981-3.979-1.981-3.979s-2 3.17-2 4.154c0 .197.045.383.111.56a34.638 34.638 0 0 0-4.633 1.429V11.94c0-.734-.584-1.342-1.344-1.457c.557-.236.953-.724.953-1.31c0-.813-1.654-3.437-1.654-3.437s-1.654 2.623-1.654 3.437c0 .578.386 1.061.932 1.301c-.803.081-1.432.704-1.432 1.466v7.574c-2.267 1.552-3.592 3.374-3.592 5.328V41.99C4.117 44.066 2 46.62 2 49.383C2 56.352 15.432 62 32 62s30-5.648 30-12.617c0-2.764-2.118-5.318-5.701-7.396M49.725 9.943c0-.407.828-1.719.828-1.719s.828 1.312.828 1.719a.677.677 0 0 1-.249.512c-.046-.004-.091-.013-.138-.013h-.992c-.013 0-.024.003-.037.003a.67.67 0 0 1-.24-.502m-.327 1.982c0-.262.276-.482.604-.482h.992c.326 0 .602.221.602.482v10.797a.422.422 0 0 1-.116.284l-.368.188a.708.708 0 0 1-.117.011h-.992c-.327 0-.604-.222-.604-.483V11.925zm-7.367 2.284s1.002 1.585 1.002 2.077c0 .491-.449.89-1.002.89s-1-.398-1-.89s1-2.077 1-2.077M31.277 5.693c0-.355.723-1.502.723-1.502s.725 1.146.725 1.502a.59.59 0 0 1-.197.427c-.048-.005-.094-.014-.143-.014h-.867c-.018 0-.034.004-.052.005a.583.583 0 0 1-.189-.418m-.224 1.774c0-.195.213-.36.465-.36h.867c.253 0 .467.165.467.36v9.448a.294.294 0 0 1-.078.195l-.305.157a.583.583 0 0 1-.084.006h-.867c-.252 0-.465-.164-.465-.358V7.467m-9.041 6.769s1 1.586 1 2.078c0 .49-.447.89-1 .89s-1-.399-1-.89c0-.492 1-2.078 1-2.078m-9.393-4.28c0-.405.826-1.717.826-1.717s.828 1.312.828 1.717a.677.677 0 0 1-.25.514c-.046-.004-.09-.013-.137-.013h-.992c-.012 0-.023.003-.035.003a.677.677 0 0 1-.24-.504m-.328 1.982c0-.261.276-.481.604-.481h.992c.327 0 .604.221.604.481v10.798a.417.417 0 0 1-.117.282l-.368.189a.72.72 0 0 1-.118.011h-.992c-.327 0-.604-.221-.604-.482V11.938zm-1.104 11.643c.033-.17.099-.325.158-.483c.066.242.196.459.373.638c-.078.571.062 1.15.367 1.651c.649 1.043 1.76 1.773 2.892 2.353c1.585.789 3.291 1.292 5.035 1.688V19.249c0-.265.127-.497.313-.688c-.288.056-.578.098-.864.162c-1.345.306-2.713.711-3.971 1.296v-.529c.015-.007.029-.015.044-.021c1.228-.549 2.509-.952 3.808-1.26a41.605 41.605 0 0 1 7.928-1.046c.935-.035 1.872-.03 2.81-.007c.097.492.479.886.98 1.041a40.685 40.685 0 0 0-3.778-.213a43.034 43.034 0 0 0-4.439.208c.589.114 1.035.532 1.035 1.057v1.832l.053-.026c.686-.298 1.365-.47 2.051-.6c1.369-.252 2.74-.307 4.105-.229c1.372.095 2.712.285 4.052.856c.33.15.659.333.964.609c.289.253.628.744.492 1.306c-.145.524-.506.79-.814.994a4.03 4.03 0 0 1-1.002.44c-1.357.393-2.73.389-4.073.218c-.673-.107-1.329-.231-1.969-.54c-.297-.162-.649-.359-.753-.777c-.057-.461.34-.701.616-.847l.072.131c-.264.16-.526.422-.45.664s.375.41.653.527c.573.229 1.245.312 1.88.36c1.285.069 2.612-.053 3.784-.456c.526-.169 1.18-.601 1.206-.9c.082-.214-.438-.64-.99-.827c-1.125-.414-2.458-.54-3.719-.587c-1.276-.029-2.566.069-3.794.34c-.609.136-1.213.318-1.734.567a4.123 4.123 0 0 0-.63.375v1.517c.372.258.839.472 1.323.642c1.137.389 2.449.607 3.705.741c2.545.269 5.159.183 7.659-.286c1.229-.242 2.446-.587 3.467-1.171V20.52c-.402-.24-.827-.46-1.276-.648c-1.157-.485-2.412-.806-3.689-1.075a42.754 42.754 0 0 0-3.36-.522h.68c.125 0 .249-.015.37-.045l.544-.264l.104-.071c.153-.138.268-.301.344-.479c.514.063 1.027.125 1.539.213c1.319.231 2.652.521 3.958 1.015c.283.106.563.229.841.361c.126-.501.638-.887 1.28-.887h1.199c.736 0 1.334.496 1.334 1.106V29.63c3.086-.913 6.008-2.354 8.468-4.521l.104.107c-1.798 1.965-4.084 3.494-6.544 4.568c-.665.287-1.342.544-2.027.779v.837c0 .304-.148.581-.389.78l-.6.288a1.69 1.69 0 0 1-.346.039h-1.199c-.653 0-1.172-.397-1.287-.913c-.633.127-1.27.236-1.908.324c-4.763.653-9.605.425-14.306-.44a1.03 1.03 0 0 1-.374.729l-.6.287c-.109.024-.227.04-.346.04h-1.199c-.738 0-1.334-.496-1.334-1.107v-.821c-1.87-.511-3.719-1.16-5.432-2.131c-1.165-.685-2.331-1.519-3.032-2.784c-.342-.628-.511-1.39-.362-2.11m43.112 23.756c0 3.881-9.536 8.221-22.299 8.221c-12.764 0-22.301-4.34-22.301-8.221v-3.974c.984-.053 1.77-.766 1.77-1.645v-3.855c0-1.214 1.119-2.198 2.5-2.198s2.502.984 2.502 2.198v4.756c0 1.412 1.303 2.558 2.908 2.558c1.607 0 2.91-1.146 2.91-2.558V37.76c0-1.271 1.172-2.3 2.617-2.3c1.447 0 2.619 1.029 2.619 2.3v3.098c0 .707.65 1.279 1.455 1.279c.803 0 1.453-.572 1.453-1.279V38.4c0-.918.848-1.662 1.893-1.662c1.043 0 1.889.744 1.889 1.662v4.22c0 1.412 1.305 2.558 2.91 2.558c1.607 0 2.91-1.146 2.91-2.558v-4.73c0-1.2 1.107-2.174 2.473-2.174s2.473.974 2.473 2.174v3.452c0 .706.65 1.278 1.455 1.278c.803 0 1.455-.572 1.455-1.278v-2.417c0-.629.578-1.139 1.293-1.139c.717 0 1.297.51 1.297 1.139v3.695c0 1.412 1.301 2.558 2.908 2.558c.32 0 .622-.057.91-.141v2.3" fill="#ff40ff"></path></g></svg>
+                        <label for="age" class="ml-2 my-1 font-medium">Son âge : <span class="font-normal">{{ $animal->age->age}}</span></label>   
+                    </div>      
+                </div>
+                <hr>
+                <!-- Animals -->
+                <div>
+                    <p class="font-medium">S'entend bien avec :
+                        @if($animal->male_dogs === 1)
+                            <div class="flex">
+                                <p class="text-gray-800 mr-2">Chiens mâles</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        @endif
+
+                        @if($animal->female_dogs === 1)
+                            <div class="flex">
+                                <p class="text-gray-800 mr-2">Chiens femelles</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        @endif
+
+                        @if($animal->male_cats  === 1)
+                            <div class="flex">
+                                <p class="text-gray-800 mr-2">Chats mâles</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        @endif
+
+                        @if($animal->female_cats  === 1)
+                            <div class="flex">
+                                <p class="text-gray-800 mr-2">Chats femelles</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        @endif
+
+                        @if($animal->male_rongeurs  === 1)
+                            <div class="flex">
+                                <p class="text-gray-800 mr-2">Rongeurs mâles</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        @endif
+
+                        @if($animal->female_rongeurs === 1)
+                            <div class="flex">
+                                <p class="text-gray-800 mr-2">Rongeurs femelles</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        @endif
+
+                        @if($animal->birds === 1)
+                            <div class="flex">
+                                <p class="text-gray-800 mr-2">Oiseaux</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        @endif
+
+                        @if($animal->reptiles === 1)
+                            <div class="flex">
+                                <p class="text-gray-800 mr-2">Reptiles</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        @endif
+                    </p>
+                </div>
+                <hr> 
             </div>
+        </div>
         @empty
             <div class="text-center">
                 <small class="text-lg text-blue-900">Aucun animal renseigné.
                 </small>       
             </div>
-        @endforelse 
-         
-</div>
+        @endforelse
+    </div>
+</section>
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin="">
+</script>
+<script src="http://unpkg.com/leaflet@latest/dist/leaflet.js"></script>
+<script src="js/leaflet-providers.js"></script>
+
+<script>
+
+    const apiUrl = 'https://geo.api.gouv.fr/communes?code=';
+    const format = '&fields=nom,centre,contour&format=json';
+    
+        let code = {{$ville_code}};
+        //console.log(code);
+        let url = apiUrl + code + format;
+        //console.log(url);
+
+        fetch(url,{method: 'get'}).then(response => response.json()).then(results =>{
+
+
+            //console.log(results);
+
+            // Get the coordinates of the polygon and the center
+            if(results.length){
+                $.each(results, function(key, value){
+                    //console.log(value);
+                    //console.log(value.centre.coordinates[0])
+                    //console.log(value.contour.coordinates[0]);
+                    var name = value.nom;
+                    var coordinatesArray = value.contour.coordinates[0];
+                    var coordinatesCenter = value.centre.coordinates;
+                    var centerCoordinate0 = value.centre.coordinates[0];
+                    var centerCoordinate1 = value.centre.coordinates[1];
+
+                    var carte = L.map('adMap').setView([centerCoordinate1, centerCoordinate0], 12);
+                    var Stadia_OSMBright = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png', {
+                        maxZoom: 20,
+                        attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+                    }).addTo(carte);
+            
+
+                    var marker = L.marker([centerCoordinate1, centerCoordinate0]).addTo(carte);
+                    marker.bindPopup("<h1 class='font-medium'>"+name+"</h1>");
+                    var circle = L.circle([centerCoordinate1, centerCoordinate0], {
+                        color: 'red',
+                        fillColor: '#f03',
+                        fillOpacity: 0.5,
+                        radius: 500
+                    }).addTo(carte);
+                    
+                    coordinatesArray.forEach((coordinates) => {
+                        //console.log(coordinates);
+                        var one = coordinates[0];
+                        var two = coordinates[1]; 
+                        var polygon = L.polygon([
+                        [two, one]], {
+                        color: 'green',
+                        fillColor: '#f03',
+                        fillOpacity: 0.5,
+                        }).addTo(carte);
+                    });
+                });
+            }
+        });
+
+
+
+</script>
 </x-app-layout>

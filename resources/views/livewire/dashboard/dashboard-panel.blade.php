@@ -352,24 +352,14 @@
           </div>      
           @forelse($ads as $annonce)
               <div class="px-3 py-5 mb-3 mr-4 md:mr-32 ml-5 mt-4 shadow-sm hover:shadow-md rounded border border-gray-200">    
-                  <div class="flex justify-between">
-                      <h2 class="text-md font-bold text-gray-600 mb-2">{{$annonce->name}}</h2>
-                                      
-                          <div class="flex md:justify-end mb-3 pr-10">
-                              <a class="text-sm pr-10 items-center" href="{{ route('annonces.edit', $annonce) }}">
-                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-5 inline">
-                                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                  </svg>
-                                  <p class="inline text-green-700">Modifier mon annonce</p>
-                              </a> 
-                              <button wire:click.prevent="deleteConfirmation( {{ $annonce->id }} )" type="button" class="text-sm pr-10 items-center text-red-600">
-                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="w-5 h-5 inline-block">
-                                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                  </svg>
-                                  Supprimer mon annonce
-                              </button>
-                          </div>
-                  </div>
+                <div class="flex md:justify-end mb-3 pr-10">
+                    <a class="text-sm pr-10 items-center" href="{{ route('annonces.edit', $annonce) }}">
+                      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11 4.00023H6.8C5.11984 4.00023 4.27976 4.00023 3.63803 4.32721C3.07354 4.61483 2.6146 5.07377 2.32698 5.63826C2 6.27999 2 7.12007 2 8.80023V17.2002C2 18.8804 2 19.7205 2.32698 20.3622C2.6146 20.9267 3.07354 21.3856 3.63803 21.6732C4.27976 22.0002 5.11984 22.0002 6.8 22.0002H15.2C16.8802 22.0002 17.7202 22.0002 18.362 21.6732C18.9265 21.3856 19.3854 20.9267 19.673 20.3622C20 19.7205 20 18.8804 20 17.2002V13.0002M7.99997 16.0002H9.67452C10.1637 16.0002 10.4083 16.0002 10.6385 15.945C10.8425 15.896 11.0376 15.8152 11.2166 15.7055C11.4184 15.5818 11.5914 15.4089 11.9373 15.063L21.5 5.50023C22.3284 4.6718 22.3284 3.32865 21.5 2.50023C20.6716 1.6718 19.3284 1.6718 18.5 2.50022L8.93723 12.063C8.59133 12.4089 8.41838 12.5818 8.29469 12.7837C8.18504 12.9626 8.10423 13.1577 8.05523 13.3618C7.99997 13.5919 7.99997 13.8365 7.99997 14.3257V16.0002Z" stroke="#ff9200" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                    </a> 
+                    <button wire:click.prevent="deleteConfirmation( {{ $annonce->id }} )" type="button" class="text-sm pr-10 items-center text-red-600">
+                        <svg class="w-6 h-6" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M960 160h-291.2a160 160 0 0 0-313.6 0H64a32 32 0 0 0 0 64h896a32 32 0 0 0 0-64zM512 96a96 96 0 0 1 90.24 64h-180.48A96 96 0 0 1 512 96zM844.16 290.56a32 32 0 0 0-34.88 6.72A32 32 0 0 0 800 320a32 32 0 1 0 64 0 33.6 33.6 0 0 0-9.28-22.72 32 32 0 0 0-10.56-6.72zM832 416a32 32 0 0 0-32 32v96a32 32 0 0 0 64 0v-96a32 32 0 0 0-32-32zM832 640a32 32 0 0 0-32 32v224a32 32 0 0 1-32 32H256a32 32 0 0 1-32-32V320a32 32 0 0 0-64 0v576a96 96 0 0 0 96 96h512a96 96 0 0 0 96-96v-224a32 32 0 0 0-32-32z" fill="#ff2600"></path><path d="M384 768V352a32 32 0 0 0-64 0v416a32 32 0 0 0 64 0zM544 768V352a32 32 0 0 0-64 0v416a32 32 0 0 0 64 0zM704 768V352a32 32 0 0 0-64 0v416a32 32 0 0 0 64 0z" fill="#ff2600"></path></g></svg>
+                    </button>
+                </div>
 
                   @if($annonce->start_watch && $annonce->end_watch !== null)
                       <div class="flex">
@@ -383,14 +373,12 @@
                       </div>
                   @endif
                   <!-- Ville -->
-                  @if($annonce->ville_id !== null)
-                      <div class="flex">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="blue" class="w-4 h-4">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
-                          </svg>
-                          <p class="text-sm text-gray-600 pl-1 pb-3"><span class="text-md text-gray-800"> Ville : {{ $annonce->ville->ville_nom }}</span></p>    
-                      </div>
-                  @endif
+                    <div class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="blue" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+                        </svg>
+                        <p class="text-sm text-gray-600 pl-1 pb-3"><span class="text-md text-gray-800"> Ville : {{ $annonce->ville_name }}</span></p>    
+                    </div>
                   <!--Fin ville -->
                   @if($annonce->garde !== null)        
                     <p class="text-sm text-gray-600 pb-2">Type de garde : <span class="text-sm text-gray-800">
@@ -399,11 +387,27 @@
                   @endif          
                   <p class="text-sm text-gray-600">Animaux gardés :  </p>
                   <ul class="text-sm text-gray-800 pb-2">
+                    @if($annonce->chats)
                       <li class="pb-1">{{ $annonce->chats ? 'Chats' : ''}}</li>
+                    @endif
+                    @if($annonce->chiens)
                       <li class="pb-1">{{ $annonce->chiens ? ' Chiens' : ''}} </li>
+                    @endif
+                    @if($annonce->poissons)
                       <li class="pb-1">{{ $annonce->poissons ? ' Poissons' : ''}}</li>
+                    @endif
+                    @if($annonce->rongeurs)
                       <li class="pb-1">{{ $annonce->rongeurs ? ' Rongeurs' : ''}}</li>
-                      <li class="pb-1">{{ $annonce->oiseaux ? ' Oiseaux' : ''}}</li>                                <li class="pb-1">{{ $annonce->reptiles ? ' Reptiles' : ''}}</li>                                    <li class="pb-1">{{ $annonce->ferme ? ' Animaux de la ferme' : ''}}</li>
+                    @endif
+                    @if($annonce->oiseaux)
+                      <li class="pb-1">{{ $annonce->oiseaux ? ' Oiseaux' : ''}}</li>
+                    @endif
+                    @if($annonce->reptiles)                               
+                      <li class="pb-1">{{ $annonce->reptiles ? ' Reptiles' : ''}}</li> 
+                    @endif
+                    @if($annonce->ferme)                                   
+                      <li class="pb-1">{{ $annonce->ferme ? ' Animaux de la ferme' : ''}}</li>
+                    @endif
                   </ul>    
                   <p class="text-sm text-gray-600 pb-2">Prix : <span class="text-sm text-gray-800">{{ $annonce->getPrice() }} /jour.</span></p>     
                   <div class="flex justify-between">
@@ -412,15 +416,7 @@
                           <span class="h-2 w-2 bg-green-600 rounded-full mr-1"></span>
                           <a class="text-sm" href="{{ route('annonces.show', $annonce) }}">Voir mon annonce</a>
                       </div>
-
-                      <div class=" my-4">
-                          <p class="text-sm text-black mr-12 pr-5">Demandes de garde reçues ({{ $annonce->proposals->count() }})</p>
-                          @if($annonce->proposals->count() > 0)
-                          <a class="text-sm text-green-700" href="{{ route('proposals.index') }}">Voir les demandes</a>
-                          @endif
-                      </div>
-                  </div>
-                                                                          
+                  </div>                                                              
               </div>                          
           @empty
             <p class="ml-1 mt-2 text-sm font-normal text-gray-800">Vous n'avez aucune annonce active pour l'instant. Vous pouvez en poster une en cliquant <a class="text-blue-600" href="{{ route('annonces.create') }}">ici.</a></p>
@@ -449,17 +445,11 @@
                                         
                       <div class="flex md:justify-end mb-3 pr-10">
                           <a class="text-sm pr-10 items-center" href="{{ route('animals.edit', $animal) }}">
-                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="w-5 h-5 inline">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                              </svg>
-                              <p class="inline text-green-700">Modifier la fiche de {{$animal->animal_name}}</p>
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11 4.00023H6.8C5.11984 4.00023 4.27976 4.00023 3.63803 4.32721C3.07354 4.61483 2.6146 5.07377 2.32698 5.63826C2 6.27999 2 7.12007 2 8.80023V17.2002C2 18.8804 2 19.7205 2.32698 20.3622C2.6146 20.9267 3.07354 21.3856 3.63803 21.6732C4.27976 22.0002 5.11984 22.0002 6.8 22.0002H15.2C16.8802 22.0002 17.7202 22.0002 18.362 21.6732C18.9265 21.3856 19.3854 20.9267 19.673 20.3622C20 19.7205 20 18.8804 20 17.2002V13.0002M7.99997 16.0002H9.67452C10.1637 16.0002 10.4083 16.0002 10.6385 15.945C10.8425 15.896 11.0376 15.8152 11.2166 15.7055C11.4184 15.5818 11.5914 15.4089 11.9373 15.063L21.5 5.50023C22.3284 4.6718 22.3284 3.32865 21.5 2.50023C20.6716 1.6718 19.3284 1.6718 18.5 2.50022L8.93723 12.063C8.59133 12.4089 8.41838 12.5818 8.29469 12.7837C8.18504 12.9626 8.10423 13.1577 8.05523 13.3618C7.99997 13.5919 7.99997 13.8365 7.99997 14.3257V16.0002Z" stroke="#ff9200" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                           </a>
                                        
                           <button wire:click="deleteConfirmationAnimal( {{ $animal->id }} )" type="button" class="text-sm pr-10 items-center text-red-600">
-                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="w-5 h-5 inline-block">
-                                   <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                              </svg>
-                              Supprimer la fiche
+                            <svg class="w-6 h-6" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M960 160h-291.2a160 160 0 0 0-313.6 0H64a32 32 0 0 0 0 64h896a32 32 0 0 0 0-64zM512 96a96 96 0 0 1 90.24 64h-180.48A96 96 0 0 1 512 96zM844.16 290.56a32 32 0 0 0-34.88 6.72A32 32 0 0 0 800 320a32 32 0 1 0 64 0 33.6 33.6 0 0 0-9.28-22.72 32 32 0 0 0-10.56-6.72zM832 416a32 32 0 0 0-32 32v96a32 32 0 0 0 64 0v-96a32 32 0 0 0-32-32zM832 640a32 32 0 0 0-32 32v224a32 32 0 0 1-32 32H256a32 32 0 0 1-32-32V320a32 32 0 0 0-64 0v576a96 96 0 0 0 96 96h512a96 96 0 0 0 96-96v-224a32 32 0 0 0-32-32z" fill="#ff2600"></path><path d="M384 768V352a32 32 0 0 0-64 0v416a32 32 0 0 0 64 0zM544 768V352a32 32 0 0 0-64 0v416a32 32 0 0 0 64 0zM704 768V352a32 32 0 0 0-64 0v416a32 32 0 0 0 64 0z" fill="#ff2600"></path></g></svg>
                           </button>          
                       </div>
                   </div>

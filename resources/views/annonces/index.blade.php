@@ -147,9 +147,11 @@
                                 </p>   
                             </div>
                         </div>
+                        <a href="{{ route('annonces.show', $annonce) }}">
                         <button class="button-perso inline-block md:px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3">
-                            <a class="py-2 px-20" href="{{ route('annonces.show', $annonce) }}">Voir l'annonce</a> 
+                            Voir l'annonce 
                         </button>
+                        </a>
                     </div>
                 </div>
             </div>

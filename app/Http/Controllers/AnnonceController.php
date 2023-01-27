@@ -197,11 +197,12 @@ class AnnonceController extends Controller
         $other = Espece::select('espece')->where('id', $annonce->autre)->get();
     
         $all_garde = [$cat, $dog, $fish, $rabbit, $bird, $rept, $farm, $other];
-   
+        $ville_code = $annonce->ville_code;
         return view('annonces.show', [
             'annonce' => $annonce, 
             'watches'=>$all_garde, 
             'animals' => $animal,
+            'ville_code' => $ville_code,
         ]);
     }
 
