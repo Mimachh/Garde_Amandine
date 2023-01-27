@@ -37,7 +37,6 @@ class DeleteAnnonceComp extends Component
         
           
           $annonce = Annonce::where('id', $this->delete_id)->first();
-       
           Storage::delete('annonces_photos/' . $annonce->photo);
      
           $annonce->delete();

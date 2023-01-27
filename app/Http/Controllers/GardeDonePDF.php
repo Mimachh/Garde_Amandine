@@ -12,21 +12,20 @@ class GardeDonePDF extends Controller
     public $start_watch;
     public function generateGardeDonePDF(Paid $paid)
     {       
-        
     
         $data = [
             'title' => 'Récapitulatif de la garde',
             'start_watch' => $paid->start_watch,
             'end_watch' => $paid->end_watch,
             'animal' => $paid->animal,
-            'price' => $paid->price,
+            'price' => $paid->price /100,
             'keeper' => $paid->keeper,
             'owner' => $paid->owner
         ];
         //view()->share('paid', $data);
         //$pdf = PDF::loadView('myPDF', $data);
         $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadView('myPDF', $data);
+        $pdf->loadView('gardeDonePDF', $data);
         return $pdf->download('itsolutionstuff.pdf');
 
     }

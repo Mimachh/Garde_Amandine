@@ -425,6 +425,9 @@
           @empty
             <p class="ml-1 mt-2 text-sm font-normal text-gray-800">Vous n'avez aucune annonce active pour l'instant. Vous pouvez en poster une en cliquant <a class="text-blue-600" href="{{ route('annonces.create') }}">ici.</a></p>
           @endforelse
+          <div class="mx-4 pb-4">
+            {{ $ads->links()}}
+          </div>
         </div> 
       @endif
 
@@ -468,6 +471,9 @@
           @empty
           <p class="ml-1 mt-2 text-sm font-normal text-gray-800">Vous n'avez aucun animal pour l'instant. Vous pouvez en créer un en cliquant <a class="text-blue-600" href="{{ route('animals.create') }}">ici.</a></p>
           @endforelse
+          <div class="mx-4 pb-4">
+            {{ $animals->links()}}
+          </div>
         </div>
       @endif
 

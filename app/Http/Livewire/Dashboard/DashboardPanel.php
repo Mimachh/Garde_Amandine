@@ -2,11 +2,12 @@
 
 namespace App\Http\Livewire\Dashboard;
 
+use App\Models\Animal;
+
+use App\Models\Annonce;
 use Livewire\Component;
 
-use App\Models\Animal;
-use App\Models\Annonce;
-
+use App\Models\Proposal;
 use Illuminate\Support\Facades\Storage;
 
 class DashboardPanel extends Component
@@ -143,9 +144,13 @@ class DashboardPanel extends Component
 
     public function render()
     {
-        $ads = auth()->user()->ads;
-        $animals = auth()->user()->animals;
+        $auth = auth()->user()->id;
+        $ads = Annonce::where('user_id', $auth)->paginate(2);
+        $animals = Animal::where('user_id', $auth)->paginate(2);
+        
 
-        return view('livewire.dashboard.dashboard-panel', ['ads' => $ads, 'animals' => $animals]);
+        return view('livewire.dashboard.dashboard-panel', [
+          'ads' => $ads, 
+          'animals' => $animals,]);
     }
 }

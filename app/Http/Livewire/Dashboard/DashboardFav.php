@@ -9,7 +9,6 @@ class DashboardFav extends Component
     public function render()
     {
         $favs = auth()->user()->fav;
-
         return view('livewire.dashboard.dashboard-fav', ['favs' => $favs]);
     }
 }

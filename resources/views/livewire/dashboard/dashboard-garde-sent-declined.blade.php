@@ -1,5 +1,6 @@
 <div>
-    @forelse(auth()->user()->proposals->where('validated', 0)->sortByDesc('updated_at') as $proposal)
+    <h2 class="pl-5 md:inline text-gray-600 font-bold text-md"> Mes gardes envoyées refusées</h2>
+    @forelse($gardeDeclined as $proposal)
         <div class="px-3 py-5 mb-3 mt-4 mr-4 md:mr-32 ml-5 shadow-sm hover:shadow-md rounded border border-gray-200"> 
             <div class="flex justify-between">
                 <h2 class="text-md font-bold text-gray-600 mb-2">{{ $proposal->annonce->name}}</h2>
@@ -27,7 +28,10 @@
                                 
         </div>
     @empty
-        <p class="text-sm font-semi-bold text-gray-600 mb-2 text-center">Aucune annonce refusée à afficher</p>                                                                                                          
+        <p class="text-sm font-semi-bold text-gray-600 mb-2 text-center">Aucune garde refusée à afficher</p>                                                                                                          
     @endforelse
+    <div class="mx-4 pb-4">
+        {{ $gardeDeclined->withQueryString()->links()}}
+    </div>
 </div>
 

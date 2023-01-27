@@ -213,6 +213,7 @@ class AnnonceController extends Controller
      */
     public function edit(Annonce $annonce)
     {
+        $this->authorize('update', $annonce);
         $gardes = Garde::all();
         $habitations = Habitation::all();
         $exterieurs = Exterieur::all();
@@ -232,7 +233,7 @@ class AnnonceController extends Controller
      */
     public function update(Request $request, Annonce $annonce)
     {
-
+        $this->authorize('update', $annonce);
         $api_url = 'https://geo.api.gouv.fr/';
         if(!empty($_POST['zipcode']) && !empty($_POST['city_code']))
         {

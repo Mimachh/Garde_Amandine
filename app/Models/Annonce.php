@@ -117,7 +117,6 @@ public function start_date_fr()
         return $this->belongsTo('App\Models\Espece');
     }
    
-
     public function fav()
     {
         return $this->belongsToMany('App\Models\User');
@@ -133,7 +132,6 @@ public function start_date_fr()
         if (auth()->check()) {
             return auth()->user()->fav->contains('id', $this->id);      
         }
-        
     }
 
     public function proposals()
