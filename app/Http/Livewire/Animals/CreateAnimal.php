@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Animals;
 
 use App\Models\Age;
 use App\Models\Race;
+use App\Models\Sexe;
 use App\Models\Animal;
 use App\Models\Espece;
 use Livewire\Component;
@@ -68,12 +69,14 @@ public $age;
 
 public $races;
 public $user_id;
+public $sexes;
+public $sexe_id;
 
 public function mount()
 {
     $this->races = collect();
     $this->user_id = auth()->user()->id;
-
+    $this->sexes = Sexe::all();
 
 }
 
@@ -90,6 +93,7 @@ public function store(Request  $request)
     [
         'nom' => 'required|max:60',
         'personnalité' => 'required|max:255',
+        'sexe_id' => 'nullable|integer',
         'espece' => 'required|integer',
         'race' => 'required|integer',
         'chiens' => 'nullable|integer',
@@ -128,6 +132,7 @@ public function store(Request  $request)
         'photo.image' => 'Le format du fichier photo n\'est pas accepté',
         'photo.max' => 'La photo est trop lourde !',
         'photo.mimes' => 'Le type du fichier photo n\'est pas accepté !',
+        'sexe_id.integer' => 'La valeur n\'est pas correcte !',
     ]);
 
     /* Image */
@@ -138,9 +143,8 @@ public function store(Request  $request)
   
 
    $animals = Animal::create([
-       
-     
         'animal_name' => $this->nom,
+        'sexe_id' => $this->sexe_id,
         'age_id' => $this->age,
         'personnality' => $this->personnalité,
         'male_dogs' => $this->chiens,

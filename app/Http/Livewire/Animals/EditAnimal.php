@@ -4,13 +4,14 @@ namespace App\Http\Livewire\Animals;
 
 use App\Models\Age;
 use App\Models\Race;
+use App\Models\Sexe;
 use App\Models\Animal;
 use App\Models\Espece;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\View\Components\Flash;
-use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class EditAnimal extends Component
 {
@@ -71,6 +72,8 @@ public $ids;
 public $animal;
 
 public $personnality;
+public $sexes;
+public $sexe_id;
 
 /* FAIRE LES ESPECES */
 
@@ -83,7 +86,7 @@ public $races;
 public function mount()
 {
     $this->races = collect();
-   
+    $this->sexes = Sexe::all();
 
 }
 
@@ -97,9 +100,8 @@ public function oldValuesAnimals(Animal $animal)
     $animal_id = $this->animal->id;
     $animals = Animal::findOrFail($animal_id);
 
-   
-
     $this->nom = $animals->animal_name;
+    $this->sexe_id = $animals->sexe_id;
     $this->age = $animals->age_id;
     $this->espece = $animals->espece_id;
     $this->race = $animals->race_id;
@@ -140,6 +142,7 @@ public function update()
         [
             'nom' => 'required|max:60',
             'personnalité' => 'required|max:255',
+            'sexe_id' => 'nullable|integer',
             'espece' => 'required|integer',
             'race' => 'required|integer',
             'chiens' => 'nullable|boolean',
@@ -176,15 +179,17 @@ public function update()
             'photo.image' => 'Le format du fichier photo n\'est pas accepté',
             'photo.max' => 'La photo est trop lourde !',
             'photo.mimes' => 'Le type du fichier photo n\'est pas accepté !',
+            'sexe_id.integer' => 'La valeur n\'est pas correcte !',
         ]);
 
-   $ids = $this->animal->id;
+    $ids = $this->animal->id;
   
-   $animals = Animal::find($ids)->update([
+    $animals = Animal::find($ids)->update([
        
      
         'animal_name' => $this->nom,
         'age_id' => $this->age,
+        'sexe_id' => $this->sexe_id,
         'personnality' => $this->personnalité,
         'male_dogs' => $this->chiens,
         'female_dogs' => $this->chiennes,
@@ -202,9 +207,6 @@ public function update()
 
     self::message('success', 'La fiche de ton animal a bien été modifiée !');
     return redirect()->route('animals.show', $ids);
-
-   
- 
     }
 
     public function render()

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('photo')->nullable();
             $table->unsignedBigInteger('age_id')->nullable();
-            $table->unsignedBigInteger('sexe_id')->nullable();
+            $table->foreignId('sexe_id')->nullable()->constrained();
             $table->string('animal_name')->nullable();
             $table->text('personnality')->nullable();
             $table->unsignedBigInteger('espece_id')->nullable();

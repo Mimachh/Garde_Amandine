@@ -19,6 +19,7 @@ class Animal extends Model
         
         'animal_name', 'user_id', 'personnality', 'male_cats', 'female_cats', 'male_dogs', 'female_dogs', 
         'male_rongeurs', 'female_rongeurs', 'birds', 'reptiles', 'espece_id', 'race_id', 'photo', 'age_id',
+        'sexe_id'
     ];
 
     public function espece()
