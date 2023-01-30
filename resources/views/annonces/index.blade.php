@@ -89,11 +89,7 @@
                                 <!-- Prix -->
                                     <p class="my-1 text-lg font-medium text-gray-900 pb-3">
                                         @auth
-                                            @if($annonce->user_id !== auth()->user()->id)
-                                                {{ $annonce->getRealPrice() }} / jour
-                                            @else
-                                                {{ $annonce->getPrice() }} / jour
-                                            @endif
+                                            {{ $annonce->getPrice() }} / jour
                                         @endauth    
                                         @guest
                                             {{ $annonce->getRealPrice() }} / jour

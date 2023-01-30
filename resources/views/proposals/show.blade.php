@@ -34,12 +34,7 @@
             <p class="text-sm text-gray-600 mb-2">{{ $proposal->demande->garde->garde}}</p>
             <p class="text-sm text-gray-600 mb-2">Du {{ $proposal->start_date_fr()}} au {{ $proposal->end_date_fr()}}</p>
             <!-- Prix -->
-                @if(auth()->user()->id !== $proposal->user_id)
-                    <p class="text-sm font-semi-bold text-gray-600 mb-2">Pour un total de <span class="font-semibold text-lg">{{$proposal->getFinalPriceWithoutCom()}} </span></p>
-                @endif
-                @if(auth()->user()->id === $proposal->user_id)
-                    <p class="text-sm font-semi-bold text-gray-600 mb-2">Pour un total de <span class="font-semibold text-lg">{{$proposal->finalPrice()}} </span></p>
-                @endif
+                <p class="text-sm font-semi-bold text-gray-600 mb-2">Pour un total de <span class="font-semibold text-lg">{{ $proposal->getPriceProposal() }} </span></p>
             <!-- Prix -->
         </div>
 

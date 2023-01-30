@@ -52,8 +52,17 @@ class Annonce extends Model
 
     public function getPrice()
     {
-        $price = $this->price / 100;
-        return number_format($price, 2, ',', ' ' ). '€';
+        if(auth()->user()->id === $this->user->id)
+        {
+            $price = $this->price / 100;
+            return number_format($price, 2, ',', ' ' ). '€';
+        }
+        else
+        {
+            $price = $this->price / 100;
+            $price2 = $price * 2;
+            return number_format($price2, 2, ',', ' ' ). '€';
+        }
     }
 
     public function getRealPrice()

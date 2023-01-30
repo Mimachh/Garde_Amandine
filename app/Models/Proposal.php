@@ -35,16 +35,30 @@ class Proposal extends Model
         });
     }
 
-    public function getFinalPriceWithoutCom()
+    public function getPriceProposal()
     {
-       $price = $this->demande->prix_final /200;
-       return number_format($price, 2, ',', ' ' ). '€';
+        if(auth()->user()->id !== $this->user_id)
+        {
+            $price = $this->demande->prix_final /200;
+            return number_format($price, 2, ',', ' ' ). '€';
+        }
+        else
+        {
+            $price = $this->demande->prix_final / 100;
+            return number_format($price, 2, ',', ' ' ). '€';
+        }
     }
-    public function finalPrice()
-    {
-        $price = $this->demande->prix_final / 100;
-        return number_format($price, 2, ',', ' ' ). '€';
-    }
+
+    // public function getFinalPriceWithoutCom()
+    // {
+    //    $price = $this->demande->prix_final /200;
+    //    return number_format($price, 2, ',', ' ' ). '€';
+    // }
+    // public function finalPrice()
+    // {
+    //     $price = $this->demande->prix_final / 100;
+    //     return number_format($price, 2, ',', ' ' ). '€';
+    // }
     public function start_date_fr()
     {
        $date = $this->demande->start_date;

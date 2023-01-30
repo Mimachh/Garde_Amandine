@@ -226,8 +226,17 @@ class DatabaseSeeder extends Seeder
             ['id' => '1', 'start_watch' => "20/01/23", 'end_watch' => "23/01/23", 'price' => '1200', 'owner' => 'Karl', 'keeper' => 'Amandine'],         
         ]);
 
+        DB::table('subjects')->insert([
+            ['id' => '1', 'name' => 'Question'],
+            ['id' => '2', 'name' => 'Réclamation'],
+            ['id' => '3', 'name' => 'Remboursement'],
+            ['id' => '4', 'name' => 'Autre'],
+        ]);
 
+        DB::table('sexes')->insert([
+            ['id' => 1, 'sexe' => 'Mâle'],
+            ['id' => 2, 'sexe' => 'Femelle'],
+        ]);
      
     }
-
 }

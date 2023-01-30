@@ -16,7 +16,7 @@
                             <p class="text-sm text-gray-600 mb-2">Pour garder {{ $prop->demande->third_animal->animal_name}} son/sa {{ $prop->demande->third_animal->race->race_animal}}. </p>
                         @endif
                         <p class="text-sm text-gray-600 mb-2">{{ $prop->demande->garde->garde}}</p>
-                        <p class="text-sm font-semi-bold text-gray-600 mb-2">Pour un total de <span class="font-semibold text-lg">{{$prop->getFinalPriceWithoutCom()}} </span></p>
+                        <p class="text-sm font-semi-bold text-gray-600 mb-2">Pour un total de <span class="font-semibold text-lg">{{$prop->getPriceProposal() }} </span></p>
                     </div>
                     <div>        
                         <p class="text-sm text-red-600 mb-2"> Demande refusée </p>     

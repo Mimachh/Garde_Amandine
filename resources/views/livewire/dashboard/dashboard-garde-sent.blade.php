@@ -8,8 +8,8 @@
             </div>
             <div>
                 <p class="text-sm text-gray-900 underline mb-2"> Demande envoyée le {{ $proposal->created_date()}}</p>
-                <p class="text-sm font-semi-bold text-gray-600 mb-2">{{ $proposal->annonce->getRealPrice()}} / jour</p>
-                <p class="text-sm font-semi-bold text-gray-600 mb-2">Soit un total pour la garde de <span class="font-semibold text-lg">{{ $proposal->finalPrice() }} </span> </p>
+                <p class="text-sm font-semi-bold text-gray-600 mb-2">{{ $proposal->annonce->getPrice()}} / jour</p>
+                <p class="text-sm font-semi-bold text-gray-600 mb-2">Soit un total pour la garde de <span class="font-semibold text-lg">{{ $proposal->getPriceProposal() }} </span> </p>
                 @if($proposal->validated === 0)
                     <p class="text-sm text-red-600 mb-2"> Demande refusée</p>
                 @endif

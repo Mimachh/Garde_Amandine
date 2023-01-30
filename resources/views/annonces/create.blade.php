@@ -184,7 +184,7 @@
             <input id="animalsCheckbox8" type="checkbox" value="8" name="autre">
             <label class="checkboxAnimalsForm" for="animalsCheckbox8">
                 <small class="italic">Autre</small> 
-                <img class="rounded-lg" src="{{ Vite::asset('public/storage/site_photos/Reptiles.jpg') }}" alt="">
+                <img class="rounded-lg" src="{{ Vite::asset('public/storage/site_photos/Abeilles.jpg') }}" alt="">
             </label>
         </div>  
     </div>

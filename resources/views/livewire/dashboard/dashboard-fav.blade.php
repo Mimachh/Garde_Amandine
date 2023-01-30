@@ -58,7 +58,7 @@
               <li class="pb-1">{{ $annonce->ferme ? ' Animaux de la ferme' : ''}}</li>
             @endif
             </ul>
-        <p class="text-sm text-gray-600 pb-2">Prix : <span class="text-sm text-gray-800">{{ $annonce->getRealPrice() }}/ jour.</span></p>     
+        <p class="text-sm text-gray-600 pb-2">Prix : <span class="text-sm text-gray-800">{{ $annonce->getPrice() }}/ jour.</span></p>     
         <div class="flex items-center">
             <span class="h-2 w-2 bg-green-600 rounded-full mr-1"></span>
             <a class="text-sm" href="{{ route('annonces.show', $annonce) }}">Voir l'annonce</a>

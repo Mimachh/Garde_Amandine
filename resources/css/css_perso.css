@@ -78,7 +78,13 @@
   
     /* Css Text Landing Page*/
   
-      
+    #bg-main-img {
+      background-image: url("/public/storage/site_photos/mainpage.png");
+      background-size: 100%;
+      width: 100%;
+      background-repeat: no-repeat;
+      background-color: rgb(62, 15, 15);
+    }
   
       body{
           font-family: 'Montserrat', sans-serif;
@@ -279,3 +285,4 @@ background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 #adMap {
   height: 400px;
 }
+
