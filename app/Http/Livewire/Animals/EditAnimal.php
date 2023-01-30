@@ -109,7 +109,7 @@ public function oldValuesAnimals(Animal $animal)
     $this->chats = $animals->male_cats;
     $this->chattes = $animals->female_cats;
     $this->rongeurs = $animals->male_rongeurs;
-    $this->rongeuses = $animals->female_rongeuses;
+    $this->rongeuses = $animals->female_rongeurs;
     $this->birds = $animals->birds;
     $this->reptiles = $animals->reptiles;
 
@@ -142,14 +142,14 @@ public function update()
             'personnalité' => 'required|max:255',
             'espece' => 'required|integer',
             'race' => 'required|integer',
-            'chiens' => 'nullable|integer',
-            'chiennes' => 'nullable|integer',
-            'chats' => 'nullable|integer',
-            'chattes' => 'nullable|integer',
-            'rongeurs' => 'nullable|integer',
-            'rongeuses' => 'nullable|integer',
-            'birds' => 'nullable|integer',
-            'reptiles' => 'nullable|integer',
+            'chiens' => 'nullable|boolean',
+            'chiennes' => 'nullable|boolean',
+            'chats' => 'nullable|boolean',
+            'chattes' => 'nullable|boolean',
+            'rongeurs' => 'nullable|boolean',
+            'rongeuses' => 'nullable|boolean',
+            'birds' => 'nullable|boolean',
+            'reptiles' => 'nullable|boolean',
             'photo' => 'nullable|image|max:2048|mimes:jpg,jpeg,png',
             'age' => 'required|integer',
           
