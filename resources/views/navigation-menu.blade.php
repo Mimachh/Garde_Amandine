@@ -156,32 +156,10 @@
                
                     @guest
                         @if (Route::has('register'))
-                        <div class="dropdown relative">
-                            <a class="dropdown-toggle flex items-center hidden-arrow"
-                                href="#" id="dropdownMenuButton2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <svg viewBox="0 0 24 24" class="w-7 h-7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_iconCarrier"> 
-                                        <path d="M16.5 22.5H18.75C19.1478 22.5 19.5294 22.342 19.8107 22.0607C20.092 21.7794 20.25 21.3978 20.25 21V13.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> 
-                                        <path d="M7.5 22.5H5.25C4.85218 22.5 4.47064 22.342 4.18934 22.0607C3.90804 21.7794 3.75 21.3978 3.75 21V13.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> 
-                                        <path d="M0.75 12.129L10.939 1.939C11.0783 1.79961 11.2437 1.68904 11.4258 1.61359C11.6078 1.53815 11.8029 1.49932 12 1.49932C12.1971 1.49932 12.3922 1.53815 12.5742 1.61359C12.7563 1.68904 12.9217 1.79961 13.061 1.939L23.122 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> 
-                                        <path d="M12 12C13.2426 12 14.25 10.9926 14.25 9.75C14.25 8.50736 13.2426 7.5 12 7.5C10.7574 7.5 9.75 8.50736 9.75 9.75C9.75 10.9926 10.7574 12 12 12Z" stroke="gray" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> 
-                                        <path d="M12 13.5C11.0054 13.5 10.0516 13.8951 9.34835 14.5983C8.64509 15.3016 8.25 16.2554 8.25 17.25V18H9.75L10.5 22.5H13.5L14.25 18H15.75V17.25C15.75 16.2554 15.3549 15.3016 14.6517 14.5983C13.9484 13.8951 12.9946 13.5 12 13.5Z" stroke="gray" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g>
-                                </svg>                    
-                            </a>
-                            <ul class="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none left-auto right-0"
-                                aria-labelledby="dropdownMenuButton2">
-                                <li>
-                                    <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100"
-                                    href="{{ route('login') }}">Se connecter
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100"
-                                    href="{{ route('register') }}">S'inscrire
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        <div class="space-x-2">
+                            <a href="{{ route('login') }}">Se connecter</a>
+                            <a href="{{ route('register') }}">S'inscrire</a>
+                        </div>    
                         @endif
                     @endguest
                 </div>
