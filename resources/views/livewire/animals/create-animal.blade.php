@@ -10,7 +10,6 @@
 </x-slot>
 
 <main class="bg-gray-100">
-
         <div class="py-5">
             <h2 class="text-center font-bold">Créer la fiche de mon animal</h2>
             <p class="text-center mb-10 py-5">Ces informations permettront au Pet-Sitter d'en savoir plus sur votre animal. <br>

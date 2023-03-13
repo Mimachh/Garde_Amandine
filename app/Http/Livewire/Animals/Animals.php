@@ -47,7 +47,8 @@ class Animals extends Component
      */
     public function create()
     {
-        return view('animals.create');
+        $oldUrl = $_SERVER['HTTP_REFERER'];
+        return view('animals.create', ['oldUrl' => $oldUrl]);
     }
 
     /**

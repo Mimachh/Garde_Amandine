@@ -42,7 +42,7 @@ class CreateAnimal extends Component
 public $nom;
 
 public $personnalité;
-
+public $oldUrl;
 public $chiens;
 public $chiennes;
 
@@ -87,7 +87,7 @@ public function updatedEspece($newValue)
 
 public function store(Request  $request)
 {
-   
+
 
    $validated = $this->validate(
     [
@@ -161,12 +161,9 @@ public function store(Request  $request)
         'photo' => $name_file,
         
     ]);
-
     self::message('success', 'La fiche de ton animal est bien enregistrée !.');
-    return redirect()->route('animals.show', $animals->id);
-
-   
- 
+    // return redirect()->route('animals.show', $animals->id);
+    return redirect($this->oldUrl);
     }
 
     public function render()
