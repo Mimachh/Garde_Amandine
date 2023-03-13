@@ -39,4 +39,9 @@ class Animal extends Model
     {
         return $this->hasMany('App\Models\Demande');
     }
+
+    public function sexe()
+    {
+        return $this->belongsTo('App\Models\Sexe');
+    }
 }

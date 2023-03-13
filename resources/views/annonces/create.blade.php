@@ -21,7 +21,7 @@
                 Date de début
             </label>
             <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            name="start_watch" type="date">
+            name="start_watch" type="date" value="{{ old('start_watch') }}">
             @error('start_watch') <small class="text-red-600 italic"> {{ $errors->first('start_watch') }}</small>@enderror
         </div>
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -30,7 +30,7 @@
                 Date de fin
             </label>
             <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            name="end_watch" type="date">
+            name="end_watch" type="date" value="{{ old('end_watch') }}">
             @error('end_watch') <small class="text-red-600 italic"> {{ $errors->first('end_watch') }}</small>@enderror
         </div>
     </div>
@@ -46,10 +46,12 @@
                 Type de garde 
             </label>
             <div class="relative">
-                <select name="garde_id" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                <select name="garde_id" class="block appearance-none w-full bg-gray-200 border border-gray-200 
+                    text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none 
+                    focus:bg-white focus:border-gray-500">
                     <option value="">Choisir une option</option>
                     @foreach($gardes as $garde)
-                        <option value="{{ $garde->id }}">{{ $garde->garde }}</option>
+                        <option {{ old('garde_id') == $garde->id ? "selected" : "" }} value="{{ $garde->id }}">{{ $garde->garde }}</option>
                     @endforeach
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -67,7 +69,7 @@
                 <select name="habitation_id" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                     <option value="">Choisir une option</option>
                     @foreach($habitations as $habitation)
-                        <option value="{{ $habitation->id }}">{{ $habitation->hab }}</option>
+                        <option {{ old('habitation_id') == $habitation->id ? "selected" : "" }} value="{{ $habitation->id }}">{{ $habitation->hab }}</option>
                     @endforeach
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -85,7 +87,7 @@
                 <select name="exterieur_id" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                     <option value="">Choisir une option</option>
                     @foreach($exterieurs as $exterieur)
-                        <option value="{{ $exterieur->id }}">{{ $exterieur->ext }}</option>
+                        <option {{ old('exterieur_id') == $exterieur->id ? "selected" : "" }} value="{{ $exterieur->id }}">{{ $exterieur->ext }}</option>
                     @endforeach
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -106,7 +108,7 @@
             Code Postal
         </label>
         <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-        name="zipcode" id="zipcode"type="text" placeholder="72500">
+        name="zipcode" id="zipcode" type="text" placeholder="72500">
         <small class="text-red-600 italic" id="error-message"></small>
         </div>
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -115,7 +117,8 @@
                 Commune
             </label>
             <div class="relative">
-                <select name="city_code" id="city_code" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                <select name="city_code" id="city_code" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 
+                rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>

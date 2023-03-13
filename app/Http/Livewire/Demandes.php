@@ -12,6 +12,7 @@ use Livewire\Component;
 use App\Models\Proposal;
 use App\Notifications\ProposalRecieved;
 use App\View\Components\Flash;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Request;
 
 class Demandes extends Component
@@ -50,6 +51,7 @@ class Demandes extends Component
         
     public function store()
     { 
+        $now = now();
         /* Contenu par défaut */
             $this->content = 'Bonjour '. $this->annonce->name . " acceptes-tu de garder : ";   
         /* Boucle pour calculer le nombre d'animaux */
@@ -90,8 +92,8 @@ class Demandes extends Component
             $this->validate(
             [
                 'content' => 'required',
-                'start_date' => 'required|date',
-                'end_date' => 'required|date',
+                'start_date' => 'required|date|before_or_equal:end_date',
+                'end_date' => 'required|date|after_or_equal:start_date',
                 'garde_id' => 'required|integer',
                 'first_animal_id' => 'required|integer',
                 'second_animal_id' => 'nullable|integer',

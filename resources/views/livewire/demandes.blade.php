@@ -18,7 +18,7 @@
                     <!-- Type de garde -->
                         <div class="col-span-6 sm:col-span-3">
                             <label for="last-name" class="block text-sm font-medium text-gray-700">Type de garde</label>
-                            <select wire:model='garde_id' class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            <select id="gardeType" wire:model='garde_id' class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                 <option value="">--Choisissez un type de garde--</option>
                                 @foreach($gardes as $g) 
                                     <option value="{{ $g->id }}">{{ $g->garde }}</option>
@@ -32,9 +32,9 @@
                             
                         </div>
 
-                        <div class="col-span-6 sm:col-span-6">
-                            <label class="block text-sm font-medium text-gray-700" for="number_visit">
-                                Nombre de visite par jour (en cas de garde à votre domicile :
+                        <div id="numberDiv" class="col-span-6 sm:col-span-6">
+                            <label  class="block text-sm font-medium text-gray-700" for="number_visit">
+                                Nombre de <span id="visitOrAway"></span> par jour : 
                             </label>
                             <select wire:model="number_visit" name="number_visit" id="number_visit">
                                 <option value=""> -- </option>
@@ -184,4 +184,21 @@
         <div class="border-t border-gray-200"></div>
     </div>
     </div>
+
+    <script>
+        let gardeType = document.querySelector('#gardeType');
+        let text = document.querySelector('#visitOrAway');
+        let numberDiv = document.getElementById('numberDiv');
+
+        gardeType.addEventListener("change", (event) => {
+            const result = `${event.target.value}`;
+            if (result == 1)
+            {
+                console.log(1)
+                numberDiv.classList.remove('hidden');
+                text.innerHTML = 'sortie';
+            }
+          
+        });
+</script>
 </main>

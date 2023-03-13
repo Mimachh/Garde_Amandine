@@ -185,7 +185,7 @@
             </div>
             <div class="md:ml-24 col-span-2 space-y-4">
                 <div class="aspect-w-1 aspect-h-1">
-                    <img class="rounded-md  w-full h-80 md:w-3/4 object-cover object-center group-hover:opacity-75 " src="{{ asset('storage/annonces_photos/' . $annonce->photo) }}">
+                    <img class="rounded-md  w-full h-80 md:w-3/4 object-cover object-center group-hover:opacity-75 " src="{{ asset('storage/animals_photos/' . $animal->photo) }}">
                 </div>
                 <div class="space-y-4 ml-2 md:ml-0">
                     <hr>
@@ -193,7 +193,7 @@
                     <div>
                         <div class="flex items-center justify-between">
                             <h2 class="text-lg md:text-xl font-bold">{{ $animal->animal_name }}</h2>
-                            @if($annonce->user_id === auth()->user()->id)
+                            @if($animal->user_id === auth()->user()->id)
                                 <div class="flex mr-8 space-x-4">
                                     @can('update', $animal)
                                     <a href="{{ route('animals.edit', $animal) }}">
@@ -231,6 +231,20 @@
                         </div>      
                     </div>
                     <hr>
+                    @if($animal->sexe)
+                    <!-- Sexe -->
+                    <div>
+                        <div class="flex">
+                            @if($animal->sexe_id === 1 )
+                                <svg class="h-6 w-6" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--noto" preserveAspectRatio="xMidYMid meet" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M106.7 6.9H76.53c-2.23 0-4.06 1.83-4.06 4.06v8.13c0 2.23 1.83 4.06 4.06 4.06h16.26c.91 0 1.32 1.12.71 1.73L71.25 46.03c-17.06-11.58-40.83-9.34-55.35 6.6c-15.03 16.36-14.83 41.85.3 58c16.56 17.57 44.28 17.88 61.24.91c14.73-14.73 16.45-37.48 5.18-54.03l22.25-21.15c.61-.61 1.73-.2 1.73.71v16.26c0 2.23 1.83 4.06 4.06 4.06h8.13c2.23 0 4.06-1.83 4.06-4.06V10.96c0-2.23-1.83-4.06-4.06-4.06H106.7zM65.46 99.45c-9.95 9.95-26.2 9.95-36.26 0s-9.95-26.2 0-36.16s26.2-9.95 36.26 0s9.95 26.21 0 36.16z" fill="#171879"></path><linearGradient id="IconifyId17ecdb2904d178eab10096" gradientUnits="userSpaceOnUse" x1="63.803" y1="-1538.156" x2="63.803" y2="-1653.779" gradientTransform="matrix(1 0 0 -1 0 -1534)"><stop offset="0" stop-color="#bf6e26"></stop><stop offset=".705" stop-color="#00b29a"></stop><stop offset="1" stop-color="#00ab94"></stop></linearGradient><path d="M106.71 3.87H76.54c-2.23 0-4.06 1.83-4.06 4.06v7.09c0 2.23 1.83 4.06 4.06 4.06H92.8c.91 0 2.27 1.28.71 2.76L71.26 43c-17.06-11.58-40.83-9.34-55.35 6.6c-15.03 16.35-14.83 40.81.3 56.96c16.56 17.57 44.28 17.88 61.24.91c14.73-14.73 15.58-37.54 4.31-54.1l22.49-21.24c1.35-1.2 2.56.62 2.36 1.9v15.22c0 2.23 1.83 4.06 4.06 4.06h8.13c2.23 0 4.06-1.83 4.06-4.06V7.94c0-2.23-1.83-4.06-4.06-4.06c.1-.01-12.09-.01-12.09-.01zM65.47 96.43c-9.95 9.95-26.2 9.95-36.26 0s-9.95-27.24 0-37.19s26.2-9.95 36.26 0s9.95 27.23 0 37.19z" fill="url(#IconifyId17ecdb2904d178eab10096)"></path><path d="M86.19 7.33c0-.91-.61-1.22-4.27-1.02c-3.05.1-4.47.51-5.38 1.52s-1.12 3.35-1.22 5.99c0 1.93 0 3.66 1.02 3.66c1.42 0 1.42-3.15 2.44-4.88c2.03-3.34 7.41-4.05 7.41-5.27z" opacity=".3" fill="#ffffff"></path><path d="M109.1 40.59c-.91 0-1.22.61-1.02 4.27c.1 3.05.51 4.47 1.52 5.38s3.35 1.12 5.99 1.22c1.93 0 3.66 0 3.66-1.02c0-1.42-3.15-1.42-4.88-2.44c-3.34-2.02-4.05-7.41-5.27-7.41z" opacity=".3" fill="#ffffff"></path><path d="M17.07 53.61c3.82-5.8 11.93-11.96 20.77-13.45c2.19-.4 4.37-.5 6.26.2c1.39.5 2.58 1.89 1.79 3.38c-.6 1.19-4.23 1.07-5.53 1.46c-4.54 1.16-8.26 2.51-11.22 4.41c-3.94 2.53-7.68 7.07-9.36 10.04c-3.19 5.63-4.27 10.71-6.85 8.82c-2.48-1.7.32-9.05 4.14-14.86z" opacity=".3" fill="#ffffff"></path></g></svg>
+                            @elseif($animal->sexe_id === 2)
+                                <svg class="h-6 w-6" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--noto" preserveAspectRatio="xMidYMid meet" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M101.49 44.51c0-21.5-17.87-38.91-39.55-38.1c-19.68.82-35.73 16.69-36.64 36.38c-.91 19.32 12.7 35.65 30.84 39.18v11.64H40.36c-2 0-3.63 1.63-3.63 3.63v7.26c0 2 1.63 3.63 3.63 3.63h15.78v12.85c0 2 1.63 3.63 3.63 3.63h7.26c2 0 3.63-1.63 3.63-3.63v-12.85h15.78c2 0 3.63-1.63 3.63-3.63v-7.26c0-2-1.63-3.63-3.63-3.63H70.65V81.88c17.6-3.35 30.84-18.77 30.84-37.37zm-61.22-.41c.19-16.02 12.77-22.66 23.13-22.45c12.77.26 23.09 9.27 22.86 22.86c-.22 12.61-10.25 22.86-22.86 22.86S40.1 58.25 40.27 44.1z" fill="#1070c4"></path><path d="M101.5 41.24c0-21.5-17.87-38.91-39.55-38.1c-19.68.82-35.74 16.7-36.64 36.38C24.4 58.84 38 73.17 56.15 76.71v13.64H40.37c-2 0-3.63 1.63-3.63 3.63v6.26c0 2 1.71 3.15 3.7 3.15h15.78l-.07 13.33c0 2 1.63 3.63 3.63 3.63h7.26c2 0 3.63-1.63 3.63-3.63l.07-13.33h15.78c2 0 3.56-1.16 3.56-3.15v-6.26c0-2-1.63-3.63-3.63-3.63H70.66V76.61c17.6-3.35 30.84-16.77 30.84-35.37zm-61.23-.41c-.01-14.91 10-23.9 23.02-23.9c14.73 0 23.34 11.57 23.07 24.97c-.24 12.61-10.35 22.2-22.96 22.2s-23.12-9.12-23.13-23.27z" fill="#fe70ff"></path><path d="M36.99 18.34c4.03-4.9 11.42-10.36 19.56-11.31c2.01-.26 4.01-.25 5.7.47c1.25.52 2.27 1.84 1.48 3.16c-.6 1.06-3.14 1.72-4.33 2.03c-4.19.85-7.65 1.91-10.44 3.5c-3.71 2.12-7.33 6.09-8.99 8.72c-3.16 4.99-5.16 8.63-7.42 6.78c-2.2-1.66.32-8.35 4.44-13.35z" opacity=".3" fill="#ffffff"></path><path d="M48.37 92.81c0-.74-.45-.99-3.13-.82c-2.23.08-4.83.41-5.5 1.24c-.67.91-.82 2.72-.89 4.86c0 1.57 0 2.97.74 2.97c1.04 0 1.04-2.55 1.79-3.95c1.49-2.65 6.99-3.31 6.99-4.3z" opacity=".3" fill="#ffffff"></path><path d="M58.64 109.25c-.82 0-1.09.46-.91 3.25c.09 2.32.27 4.25 1.18 4.95c1 .7 3.18.81 5.53.89c1.72 0 2.52.04 2.52-.73c0-1.08-1.51-.26-4.23-2.44c-2.71-2.17-3.09-5.92-4.09-5.92z" opacity=".3" fill="#ffffff"></path></g></svg>
+                            @endif
+                            <label for="sexe" class="ml-2 my-1 font-medium">Son sexe : <span class="font-normal">{{ $animal->sexe->sexe}}</span></label>   
+                        </div>      
+                    </div>
+                    <hr>
+                    @endif
                     <!-- Animals -->
                     <div>
                         <p class="font-medium">S'entend bien avec :

@@ -13,21 +13,16 @@
         </div>
     </section>
 
-    <section id="tuto" class="min-h-screen md:grid md:grid-cols-3">
+    <section id="tuto" class="min-h-screen md:grid md:grid-cols-3 mt-4">
     <div class="bg-perso md:col-span-2">
         <div>
             <h2 class="font-medium text-lg">Comment faire garder son animal?</h2>
         </div>
     </div>
-    <div class="bg-white">
-        <div class="md:ml-12 bg-red-400">
-            PHOTO ICI
-        </div>
+    <div class="bg-white mt-4" id="bg-man-cat">
+        <!-- <img src="{{ asset('storage/site_photos/man-with_cat.png') }}" alt="">    -->
     </div>
-    <div>
-        <div class="md:ml-12 bg-red-400">
-            PHOTO 2 ICI
-        </div>
+    <div id="bg-woman-dog" class="mb-4">
     </div>
     <div class="bg-perso md:col-span-2">
         <div>

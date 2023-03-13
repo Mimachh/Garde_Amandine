@@ -10,6 +10,10 @@
         @livewire('previous-page')
     </x-slot>
 
-<livewire:demandes :annonce="$annonce"/>
+    <div>
+        <livewire:demandes :annonce="$annonce"/>
+    </div>
+
+
 
 </x-app-layout>
