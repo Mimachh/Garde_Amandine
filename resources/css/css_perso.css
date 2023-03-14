@@ -76,32 +76,7 @@
   
 
   
-    /* Css Text Landing Page*/
-  
-    #bg-main-img {
-      background-image: url("/public/storage/site_photos/mainpage.png");
-      background-size: 100%;
-      width: 100%;
-      background-repeat: no-repeat;
-      background-color: rgb(62, 15, 15);
-    }
-
-    #bg-man-cat {
-      background-image: url("/public/storage/site_photos/man-with_cat.png");
-      background-size: 100%;
-      width: 100%;
-      background-repeat: no-repeat;
-      background-color: white;
-    }
-
-    #bg-woman-dog {
-      background-image: url("/public/storage/site_photos/woman_with_dog.png");
-      background-size: 100%;
-      width: 100%;
-      background-repeat: no-repeat;
-      background-color: white;
-    }
-  
+    
       body{
           font-family: 'Montserrat', sans-serif;
         background:ivory;

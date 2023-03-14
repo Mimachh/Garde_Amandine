@@ -1,0 +1,121 @@
+
+$navbarDuration: 0.8s;
+$heroDuration: 1s;
+/* NAV BAR ANIMATION */
+  nav {
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    border-bottom: none;
+  }
+  nav > div {
+    animation: navbarFadeIn $navbarDuration ease-in-out forwards;
+  }
+
+  @keyframes navbarFadeIn {
+    0% {
+      transform: translateY(-30%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+  }
+
+/* BACKGROUND IMG */
+  
+#bg-main-img {
+  background-image: url("/public/storage/site_photos/mainpage.png");
+  background-size: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-color: rgb(62, 15, 15);
+}
+
+#bg-man-cat {
+  background-image: url("/public/storage/site_photos/man-with_cat.png");
+  background-size: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-color: white;
+}
+
+#bg-woman-dog {
+  background-image: url("/public/storage/site_photos/woman_with_dog.png");
+  background-size: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-color: white;
+}
+.bg-perso {
+  background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+  }
+
+
+.hero {
+  text-align: center;
+  padding: 5vw 0;
+  
+  h1 {
+    color: transparent;
+    font-weight: 450;
+    margin: 0;
+    text-transform: uppercase;
+    padding: 9px;
+    overflow: hidden;
+    line-height: 0.6;
+    font-size: calc(9000vw / 1018);
+    text-shadow: -1px -1px 0 white, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    
+    span {
+      display: inline-block;
+      animation: titleFadeLeft $heroDuration ease-in-out forwards;
+      animation-delay: $navbarDuration - 300ms;
+      transform: translateY(150%);
+      z-index: 1;
+    }
+
+    &:last-child {
+      color: transparent;
+      background-color: transparent;
+      -webkit-text-stroke: calc(300vw / 745);
+
+      span {
+        animation: titleFadeIn $heroDuration ease-in-out forwards;
+        animation-delay: $navbarDuration + $heroDuration / 2 - 300ms;
+      }
+    }
+  }
+  
+}
+@keyframes titleFadeIn {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+@keyframes titleFadeLeft {
+  0% {
+    transform: translateX(-400%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+/* .title-site {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 6rem;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  animation: mainTitle 1s ease-in-out forwards;
+  line-height: 60px;
+  
+} */
+
+

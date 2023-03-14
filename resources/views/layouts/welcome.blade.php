@@ -55,7 +55,6 @@
                     @include ('partials.messages')  
                 <!-- Fin Messages flash -->
 
-                {{ $slot }}
                 @yield('content')      
             </main>
             @livewire('footer')

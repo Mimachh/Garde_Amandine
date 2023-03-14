@@ -1,7 +1,7 @@
 <nav x-data="{ open: false }" class="py-2 dark:bg-gray-800 border-b border-gray-800 shadow">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16 text-sm font-light tracking-wide text-gray-400">
+        <div class="flex justify-between h-16 text-sm font-light tracking-wide text-white">
 
             <!-- Navbar pour tous -->
             <div class="flex space-x-10">
@@ -62,23 +62,27 @@
                 <!-- Notifications -->
                     @auth
                         @if(auth()->user()->unreadNotifications->count() > 0)
-                            <div class="dropdown relative">
-                                <a class="text-white opacity-60 hover:opacity-80 focus:opacity-80 mr-4 dropdown-toggle hidden-arrow flex items-center"
-                                    href="#" id="dropdownMenuButton1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                                    </svg>
-                                    <span class="text-white bg-red-500 absolute rounded-full text-md font-medium -mt-4 ml-4 py-0 px-1.5">
-                                        {{auth()->user()->unreadNotifications->count()}}
-                                    </span>
-                                </a>
-                                <ul class="dropdown-menu min-w-max absolute hidden bg-gray-700 text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none left-auto right-0"
-                                aria-labelledby="dropdownMenuButton1">
-                                    <li>
-                                        <livewire:notification-proposal>
-                                    </li>
-                                </ul>
-                            </div>
+
+                        <div class="ml-4 relative">
+                            <x-jet-dropdown align="right" width="48" >
+                                <x-slot name="trigger" >
+                                    <button class="relative opacity-70">
+                                        <div class="flex items-center">
+                                        <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                                        </svg>
+                                        <span class="text-white bg-red-500 absolute rounded-full text-md font-medium -mt-4 ml-4 py-0 px-1.5">
+                                            {{auth()->user()->unreadNotifications->count()}}
+                                        </span>
+                                        </div> 
+                                    </button> 
+                                </x-slot>
+                                <x-slot name="content">
+                                    <livewire:notification-proposal>
+                                </x-slot>
+                            </x-jet-dropdown>
+                        </div>
+                           
                         @endif
                     @endauth
                 <!-- Fin notifications -->
@@ -156,7 +160,7 @@
                
                     @guest
                         @if (Route::has('register'))
-                        <div class="space-x-2">
+                        <div class="space-x-2 font-medium">
                             <a href="{{ route('login') }}">Se connecter</a>
                             <a href="{{ route('register') }}">S'inscrire</a>
                         </div>    
@@ -173,23 +177,25 @@
                 <!-- Notifications -->
                     @auth
                         @if(auth()->user()->unreadNotifications->count() > 0)
-                            <div class="dropdown relative">
-                                <a class="text-white opacity-60 hover:opacity-80 focus:opacity-80 mr-4 dropdown-toggle hidden-arrow flex items-center"
-                                    href="#" id="dropdownMenuButton1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                                    </svg>
-                                    <span class="text-white bg-red-500 absolute rounded-full text-md font-medium -mt-4 ml-4 py-0 px-1.5">
-                                        {{auth()->user()->unreadNotifications->count()}}
-                                    </span>
-                                </a>
-                                <ul class="dropdown-menu min-w-max absolute hidden bg-gray-700 text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none left-auto right-0"
-                                aria-labelledby="dropdownMenuButton1">
-                                    <li>
-                                        <livewire:notification-proposal>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="ml-4 relative">
+                            <x-jet-dropdown align="right" width="48" >
+                                <x-slot name="trigger" >
+                                    <button class="relative opacity-70">
+                                        <div class="flex items-center">
+                                        <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                                        </svg>
+                                        <span class="text-white bg-red-500 absolute rounded-full text-md font-medium -mt-4 ml-4 py-0 px-1.5">
+                                            {{auth()->user()->unreadNotifications->count()}}
+                                        </span>
+                                        </div> 
+                                    </button> 
+                                </x-slot>
+                                <x-slot name="content">
+                                    <livewire:notification-proposal>
+                                </x-slot>
+                            </x-jet-dropdown>
+                        </div>
                         @endif
                     @endauth
                 <!-- Fin notifications -->

@@ -1,7 +1,11 @@
 <x-app-layout>
-    <section class="min-h-screen relative" id="bg-main-img">
-        <h1 class="font-bold text-3xl text-center">NOM DU SITE</h1>
-        <p class="font-normal text-lg text-center">Sous-titre</p>
+@vite('resources/css/welcome_page.scss')
+    <section class="min-h-screen relative bg-perso -top-2">
+        <div class="hero">
+            <h1><span>Gard'</span></h1>
+            <h1><span>Animaux</span></h1>
+        </div>
+        <p class="text-center">Sous-titre</p>
         
         <!-- BUTTON DOWN -->
         <div class="absolute bottom-0 left-0 right-0">
