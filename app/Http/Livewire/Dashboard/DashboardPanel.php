@@ -47,6 +47,11 @@ class DashboardPanel extends Component
             $this->currentPage = 6;
         }
 
+        public function goToPageGardeSentRealised()
+        {
+            $this->currentPage = 7;
+        }
+
         public function goToPageGardeReceivedWait()
         {
           $this->currentPage = 8;
@@ -63,6 +68,10 @@ class DashboardPanel extends Component
             $this->currentPage = 10;
         }
         
+        public function goToPageGardeReceivedRealised()
+        {
+            $this->currentPage = 11;
+        }
         
         public function goToPageFav()
         {

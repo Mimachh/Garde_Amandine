@@ -139,7 +139,7 @@
                       </button>
                     </li>
                     <li>
-                      <button type="button" class="w-full relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                      <button wire:click="goToPageGardeSentRealised" type="button" class="w-full relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                         <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
                         <svg class="w-4 h-4" fill="white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 489.2 489.2" style="enable-background:new 0 0 489.2 489.2;" xml:space="preserve">
                           <g>
@@ -244,7 +244,7 @@
                       </button>
                     </li>
                     <li>
-                      <button type="button" class="w-full relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                      <button wire:click="goToPageGardeReceivedRealised" type="button" class="w-full relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                         <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
                         <svg class="w-4 h-4" fill="white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 489.2 489.2" style="enable-background:new 0 0 489.2 489.2;" xml:space="preserve">
                           <g>
@@ -491,6 +491,12 @@
         </div>
       @endif
 
+      @if($currentPage === 7)
+        <div class="mt-2">
+          @livewire('dashboard.dashboard-garde-sent-realised')
+        </div>
+      @endif
+
       @if($currentPage === 8)
         <div class="mt-2">
           @livewire('dashboard.dashboard-garde-received-wait')
@@ -506,6 +512,12 @@
       @if($currentPage === 10)
         <div class="mt-2">
           @livewire('dashboard.dashboard-garde-received-declined')
+        </div>
+      @endif
+
+      @if($currentPage === 11)
+        <div class="mt-2">
+          @livewire('dashboard.dashboard-garde-received-realised')
         </div>
       @endif
 

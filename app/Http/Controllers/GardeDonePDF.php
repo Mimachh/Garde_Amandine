@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Paid;
+use App\Models\Proposal;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -10,9 +11,10 @@ use Barryvdh\DomPDF\Facade as PDF;
 class GardeDonePDF extends Controller
 {
     public $start_watch;
-    public function generateGardeDonePDF(Paid $paid)
+    public function generateGardeDonePDF($id)
     {       
-    
+        $p = Proposal::where('id', $id)->first();
+        dd($p->demande);
         $data = [
             'title' => 'Récapitulatif de la garde',
             'start_watch' => $paid->start_watch,

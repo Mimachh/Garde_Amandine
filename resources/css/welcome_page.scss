@@ -10,17 +10,6 @@ $heroDuration: 1s;
     animation: navbarFadeIn $navbarDuration ease-in-out forwards;
   }
 
-  @keyframes navbarFadeIn {
-    0% {
-      transform: translateY(-30%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0%);
-      opacity: 1;
-    }
-  }
-
 /* BACKGROUND IMG */
   
 #bg-main-img {
@@ -63,15 +52,14 @@ $heroDuration: 1s;
     padding: 9px;
     overflow: hidden;
     line-height: 0.6;
-    font-size: calc(9000vw / 1018);
-    text-shadow: -1px -1px 0 white, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    font-size: calc(8000vw / 1018);
+    text-shadow: -2px -2px 0 whitesmoke, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     
     span {
       display: inline-block;
       animation: titleFadeLeft $heroDuration ease-in-out forwards;
       animation-delay: $navbarDuration - 300ms;
       transform: translateY(150%);
-      z-index: 1;
     }
 
     &:last-child {
@@ -107,15 +95,14 @@ $heroDuration: 1s;
     opacity: 1;
   }
 }
-/* .title-site {
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 6rem;
-  color: white;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-  animation: mainTitle 1s ease-in-out forwards;
-  line-height: 60px;
-  
-} */
-
+@keyframes navbarFadeIn {
+  0% {
+    transform: translateY(-30%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
 
